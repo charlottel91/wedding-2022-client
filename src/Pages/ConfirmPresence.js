@@ -1,55 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Typography } from '@material-ui/core';
-
-const currencies = [
-    {
-        value: 0,
-        label: '0',
-    },
-    {
-        value: 1,
-        label: '1',
-    },
-    {
-        value: 2,
-        label: '2',
-    },
-    {
-        value: 3,
-        label: '3',
-    },
-    {
-        value: 4,
-        label: '4',
-    },
-    {
-        value: 5,
-        label: '5',
-    },
-    {
-        value: 6,
-        label: '6',
-    },
-    {
-        value: 7,
-        label: '7',
-    },
-    {
-        value: 8,
-        label: '8',
-    },
-    {
-        value: 9,
-        label: '9',
-    },
-    {
-        value: 10,
-        label: '10',
-    },
-];
+import { ArrowBack, AddCircle } from '@material-ui/icons';
+import { Box, Typography } from '@material-ui/core';
+import { Link } from 'react-router-dom';
+import { SimpleCard, SpringModal } from '../Components';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -69,64 +23,88 @@ const useStyles = makeStyles((theme) => ({
         color: 'black',
         display: 'flex',
 
+    },
+    containerUsers: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    card: {
+        margin: '1rem',
     }
 }));
 
 export default function ConfirmPresence() {
     const classes = useStyles();
-    const [adult, setAdult] = React.useState(0);
-    const [child, setChild] = React.useState(0);
+    const [user, setUser] = React.useState({
+        fisrtName: '',
+        lastName: '',
+        child: false,
+        vegetarian: false,
+        brunch: true
+    });
+    const [allUser, setAllUser] = React.useState([]);
+    const [open, setOpen] = React.useState(false);
+    console.log(open)
 
-    const handleChangeAdult = (event) => {
-        setAdult(event.target.value);
+    const handleOpen = () => {
+        setOpen(true);
     };
 
-    const handleChangeAChild = (event) => {
-        setChild(event.target.value);
+    const handleClose = () => {
+        setOpen(false);
     };
+
+    const handleChangeChild = (event) => {
+        setUser({ ...user, child: event.target.value });
+    };
+
+    const handleChangeVegetarian = (event) => {
+        setUser({ ...user, vegetarian: event.target.value });
+    };
+
+    const handleChangeBrunch = (event) => {
+        setUser({ ...user, brunch: event.target.value });
+    };
+
 
     return (
         <div className={classes.container}>
             <div className={classes.back}>
-                <i className="fas fa-arrow-left"></i>
-                <Typography variant="h5">retour</Typography>
+                <Link to="/">
+                    <ArrowBack />
+                </Link>
             </div>
             <Typography variant="h3" className={classes.title}>Confirmer votre présence</Typography>
-            <form className={classes.root} noValidate autoComplete="off">
-                <div>
-                    <TextField
-                        id="outlined-select-currency"
-                        select
-                        label="Adulte"
-                        value={adult}
-                        onChange={handleChangeAdult}
-                        variant="outlined"
-                    >
-                        {currencies.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <TextField
-                        id="outlined-select-currency-native"
-                        select
-                        label="Enfant (-10 ans)"
-                        value={child}
-                        onChange={handleChangeAChild}
-                        SelectProps={{
-                            native: true,
-                        }}
-                        variant="outlined"
-                    >
-                        {currencies.map((option) => (
-                            <option key={option.value} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </TextField>
-                </div>
-            </form>
+            <div className={classes.containerUsers}>
+                {allUser.length === 0 ?
+                    <Box className={classes.card}>
+                        <SimpleCard
+                            title="Personne 1"
+                            child="Enfant ou adulte ?"
+                            vegetarian="Repas végétarien ?"
+                            brunch="Présent au brunch ?"
+                            onClickOpen={() => setOpen(true)} />
+                    </Box>
+                    : (allUser.map(user =>
+                        <Box className={classes.card}>
+                            <SimpleCard
+                                title={user.fisrtName}
+                                child={user.child ? 'Enfant' : 'Adult'}
+                                vegetarian={user.vegetarian ? 'Repas végétarien' : 'Repas normal'}
+                                brunch={user.brunch ? 'Présent au brunch' : 'Absent au brunch'}
+                                onClickOpen={handleOpen} />
+                        </Box>
+                    ))
+                }
+                <AddCircle className={classes.icon} />
+            </div>
+            <SpringModal
+                open={open}
+                handleClose={handleClose}
+                user
+                handleChangeChild={handleChangeChild}
+                handleChangeVegetarian={handleChangeVegetarian}
+                handleChangeBrunch={handleChangeBrunch} />
         </div>
     );
 }

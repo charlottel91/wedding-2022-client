@@ -8,7 +8,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Container from '@material-ui/core/Container';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Header } from '.';
+import { Button, Header } from '../Components';
 
 const useStyles = makeStyles({
     toolbar: {
@@ -51,7 +51,7 @@ HideOnScroll.propTypes = {
     window: PropTypes.func,
 };
 
-export default function HideAppBar(props) {
+export default function Home(props) {
     const classes = useStyles();
     return (
         <React.Fragment>

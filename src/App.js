@@ -1,13 +1,12 @@
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
-import { HideAppBar } from './Components';
-import { ConfirmPresence } from './Pages';
+import { ConfirmPresence, Home } from './Pages';
 
 function App() {
   return (
     <div className="App">
       <Switch >
-        <Route exact path="/" component={HideAppBar} />
+        <Route exact path="/" component={Home} />
         <Route path="/confirmation" component={ConfirmPresence} />
         {/* <Route path="/orders" component={Orders} /> */}
       </Switch>
