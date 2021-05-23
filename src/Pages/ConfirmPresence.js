@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ArrowBack, AddCircle } from '@material-ui/icons';
 import { Box, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { SimpleCard, SpringModal } from '../Components';
+import { Button, SimpleCard, SpringModal } from '../Components';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -27,9 +27,16 @@ const useStyles = makeStyles((theme) => ({
     containerUsers: {
         display: 'flex',
         alignItems: 'center',
+        flexWrap: 'wrap',
+        backgroundColor: 'orange'
     },
     card: {
-        margin: '1rem',
+        // padding: '1rem',
+        // mawWidth: '40em',
+        // heiht: '600px'
+    },
+    icon: {
+        fontSize: 60
     }
 }));
 
@@ -38,13 +45,14 @@ export default function ConfirmPresence() {
     const [user, setUser] = React.useState({
         fisrtName: '',
         lastName: '',
-        child: false,
-        vegetarian: false,
-        brunch: true
+        child: '',
+        vegetarian: '',
+        brunch: ''
     });
     const [allUser, setAllUser] = React.useState([]);
     const [open, setOpen] = React.useState(false);
-    console.log(open)
+    console.log(user)
+    console.log(allUser)
 
     const handleOpen = () => {
         setOpen(true);
@@ -52,6 +60,14 @@ export default function ConfirmPresence() {
 
     const handleClose = () => {
         setOpen(false);
+    };
+
+    const handleChangeFirstname = (event) => {
+        setUser({ ...user, fisrtName: event.target.value });
+    };
+
+    const handleChangeLastname = (event) => {
+        setUser({ ...user, lastName: event.target.value });
     };
 
     const handleChangeChild = (event) => {
@@ -66,6 +82,18 @@ export default function ConfirmPresence() {
         setUser({ ...user, brunch: event.target.value });
     };
 
+    const saveInAllUser = (e) => {
+        e.preventDefault();
+        setAllUser([...allUser, user]);
+        setUser({
+            fisrtName: '',
+            lastName: '',
+            child: '',
+            vegetarian: '',
+            brunch: ''
+        })
+        handleClose();
+    }
 
     return (
         <div className={classes.container}>
@@ -83,7 +111,7 @@ export default function ConfirmPresence() {
                             child="Enfant ou adulte ?"
                             vegetarian="Repas végétarien ?"
                             brunch="Présent au brunch ?"
-                            onClickOpen={() => setOpen(true)} />
+                            onClickOpen={handleOpen} />
                     </Box>
                     : (allUser.map(user =>
                         <Box className={classes.card}>
@@ -96,15 +124,23 @@ export default function ConfirmPresence() {
                         </Box>
                     ))
                 }
-                <AddCircle className={classes.icon} />
+                <Box className={classes.card}>
+                    <AddCircle className={classes.icon} onClick={handleOpen} />
+                </Box>
             </div>
+            <Box>
+                <Button text='Enregistrer' />
+            </Box>
             <SpringModal
                 open={open}
                 handleClose={handleClose}
                 user
+                handleChangeFirstname={handleChangeFirstname}
+                handleChangeLastname={handleChangeLastname}
                 handleChangeChild={handleChangeChild}
                 handleChangeVegetarian={handleChangeVegetarian}
-                handleChangeBrunch={handleChangeBrunch} />
+                handleChangeBrunch={handleChangeBrunch}
+                handleChangeSubmit={saveInAllUser} />
         </div>
     );
 }

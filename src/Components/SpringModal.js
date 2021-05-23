@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MenuItem, Modal, TextField } from '@material-ui/core';
+import { FormControl, MenuItem, Modal, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -69,7 +69,15 @@ const presence = [
     },
 ];
 
-export default function SpringModal({ user, open, handleClose, handleChangeChild, handleChangeVegetarian, handleChangeBrunch }) {
+export default function SpringModal({ user,
+    open,
+    handleClose,
+    handleChangeFirstname,
+    handleChangeLastname,
+    handleChangeChild,
+    handleChangeVegetarian,
+    handleChangeBrunch,
+    handleChangeSubmit }) {
     const classes = useStyles();
 
     return (
@@ -88,21 +96,23 @@ export default function SpringModal({ user, open, handleClose, handleChangeChild
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <form className={classes.root} noValidate autoComplete="off">
+                        <FormControl className={classes.root} noValidate autoComplete="off">
                             <TextField
                                 className={classes.textfield}
-                                id="outlined-password-input"
+                                // id="outlined-password-input"
                                 label="Prénom"
                                 type="firstname"
-                                autoComplete="current-password"
+                                value={user.firstname}
+                                onChange={handleChangeFirstname}
                                 variant="outlined"
                             />
                             <TextField
                                 className={classes.textfield}
-                                id="outlined-password-input"
+                                // id="outlined-password-input"
                                 label="Nom"
                                 type="lastname"
-                                autoComplete="current-password"
+                                value={user.lastname}
+                                onChange={handleChangeLastname}
                                 variant="outlined"
                             />
                             <TextField
@@ -110,6 +120,7 @@ export default function SpringModal({ user, open, handleClose, handleChangeChild
                                 id="outlined-select-currency"
                                 select
                                 label="Enfant (-10 ans)"
+                                defaultValue=''
                                 value={user.child}
                                 onChange={handleChangeChild}
                                 variant="outlined"
@@ -125,6 +136,7 @@ export default function SpringModal({ user, open, handleClose, handleChangeChild
                                 id="outlined-select-currency"
                                 select
                                 label="Repas végétarien"
+                                defaultValue=''
                                 value={user.vegetarian}
                                 onChange={handleChangeVegetarian}
                                 variant="outlined"
@@ -140,6 +152,7 @@ export default function SpringModal({ user, open, handleClose, handleChangeChild
                                 id="outlined-select-currency"
                                 select
                                 label="Présence au brunch"
+                                defaultValue=''
                                 value={user.brunch}
                                 onChange={handleChangeBrunch}
                                 variant="outlined"
@@ -150,8 +163,8 @@ export default function SpringModal({ user, open, handleClose, handleChangeChild
                                     </MenuItem>
                                 ))}
                             </TextField>
-                            <Button text='Valider' />
-                        </form>
+                            <Button text='Valider' onClick={handleChangeSubmit} />
+                        </FormControl>
                     </div>
                 </Fade>
             </Modal>

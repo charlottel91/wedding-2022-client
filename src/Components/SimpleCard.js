@@ -1,14 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
 import { Button } from './index';
 
 const useStyles = makeStyles({
     root: {
+        width: '100%',
+        height: '100%'
         // maxWidth: 500,
+        // flexBasis: 'calc(33.33333% - 0.83333rem)',
+        // minHeight: '5rem',
+        // margin: '0.625rem 0'
+
     },
     bullet: {
         display: 'inline-block',
@@ -40,7 +43,7 @@ export default function SimpleCard({ title, child, vegetarian, brunch, onClickOp
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button text='Compléter' onClickOpen={onClickOpen} />
+                <Button text='Compléter' onClick={onClickOpen} />
             </CardActions>
         </Card>
     );
