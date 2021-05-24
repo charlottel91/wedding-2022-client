@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControl, MenuItem, Modal, TextField } from '@material-ui/core';
+import { FormControl, MenuItem, Modal, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
 import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is required for IE 11 support
@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     },
     textfield: {
         margin: 5,
+    },
+    textError: {
+        color: 'red'
     }
 }));
 
@@ -69,14 +72,22 @@ const presence = [
     },
 ];
 
-export default function SpringModal({ user,
+export default function SpringModal({
+    user,
     open,
+    errorText,
+    errorFirstname,
+    errorLastname,
+    errorChild,
+    errorVegetarian,
+    errorBrunch,
     handleClose,
-    handleChangeFirstname,
-    handleChangeLastname,
-    handleChangeChild,
-    handleChangeVegetarian,
-    handleChangeBrunch,
+    handleChange,
+    handleBlurFirstname,
+    handleBlurLastname,
+    handleBlurChild,
+    handleBlurVegetarian,
+    handleBlurBrunch,
     handleChangeSubmit }) {
     const classes = useStyles();
 
@@ -98,32 +109,40 @@ export default function SpringModal({ user,
                     <div className={classes.paper}>
                         <FormControl className={classes.root} noValidate autoComplete="off">
                             <TextField
+                                error={errorFirstname}
                                 className={classes.textfield}
-                                // id="outlined-password-input"
                                 label="Prénom"
-                                type="firstname"
+                                name="firstname"
                                 value={user.firstname}
-                                onChange={handleChangeFirstname}
+                                onBlur={handleBlurFirstname}
+                                onChange={handleChange}
                                 variant="outlined"
+                                helperText={errorFirstname ? 'Champ requis' : null}
                             />
                             <TextField
+                                error={!!errorLastname}
                                 className={classes.textfield}
-                                // id="outlined-password-input"
                                 label="Nom"
-                                type="lastname"
+                                name="lastname"
                                 value={user.lastname}
-                                onChange={handleChangeLastname}
+                                onChange={handleChange}
+                                onBlur={handleBlurLastname}
                                 variant="outlined"
+                                helperText={errorLastname ? 'Champ requis' : null}
                             />
                             <TextField
+                                error={!!errorChild}
                                 className={classes.textfield}
                                 id="outlined-select-currency"
                                 select
                                 label="Enfant (-10 ans)"
+                                name='child'
                                 defaultValue=''
                                 value={user.child}
-                                onChange={handleChangeChild}
+                                onChange={handleChange}
+                                onBlur={handleBlurChild}
                                 variant="outlined"
+                                helperText={errorLastname ? 'Champ requis' : null}
                             >
                                 {presence.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -132,14 +151,18 @@ export default function SpringModal({ user,
                                 ))}
                             </TextField>
                             <TextField
+                                error={!!errorVegetarian}
                                 className={classes.textfield}
                                 id="outlined-select-currency"
                                 select
                                 label="Repas végétarien"
+                                name='vegetarian'
                                 defaultValue=''
                                 value={user.vegetarian}
-                                onChange={handleChangeVegetarian}
+                                onChange={handleChange}
+                                onBlur={handleBlurVegetarian}
                                 variant="outlined"
+                                helperText={errorLastname ? 'Champ requis' : null}
                             >
                                 {presence.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -148,14 +171,18 @@ export default function SpringModal({ user,
                                 ))}
                             </TextField>
                             <TextField
+                                error={!!errorBrunch}
                                 className={classes.textfield}
                                 id="outlined-select-currency"
                                 select
                                 label="Présence au brunch"
+                                name='brunch'
                                 defaultValue=''
                                 value={user.brunch}
-                                onChange={handleChangeBrunch}
+                                onChange={handleChange}
+                                onBlur={handleBlurBrunch}
                                 variant="outlined"
+                                helperText={errorLastname ? 'Champ requis' : null}
                             >
                                 {presence.map((option) => (
                                     <MenuItem key={option.value} value={option.value}>
@@ -163,6 +190,7 @@ export default function SpringModal({ user,
                                     </MenuItem>
                                 ))}
                             </TextField>
+                            {errorText && <Typography className={classes.textError}>{errorText}</Typography>}
                             <Button text='Valider' onClick={handleChangeSubmit} />
                         </FormControl>
                     </div>

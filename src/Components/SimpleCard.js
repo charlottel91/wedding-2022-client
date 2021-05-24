@@ -1,17 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
 import { Button } from './index';
 
 const useStyles = makeStyles({
     root: {
-        width: '100%',
-        height: '100%'
+        padding: '1rem',
+        // width: '100%',
+        // height: '100%'
         // maxWidth: 500,
         // flexBasis: 'calc(33.33333% - 0.83333rem)',
         // minHeight: '5rem',
         // margin: '0.625rem 0'
-
     },
     bullet: {
         display: 'inline-block',
@@ -21,13 +22,17 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
+    crossIcon: {
+        float: 'right',
+    }
 });
 
-export default function SimpleCard({ title, child, vegetarian, brunch, onClickOpen }) {
+export default function SimpleCard({ title, child, vegetarian, brunch, onClickModify, deleteUser }) {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
+            <CancelIcon className={classes.crossIcon} onClick={deleteUser} />
             <CardContent>
                 <Typography variant="h5" component="h2" gutterBottom>
                     {title}
@@ -43,7 +48,7 @@ export default function SimpleCard({ title, child, vegetarian, brunch, onClickOp
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button text='Compléter' onClick={onClickOpen} />
+                <Button text='Modifier' onClick={onClickModify} />
             </CardActions>
         </Card>
     );
