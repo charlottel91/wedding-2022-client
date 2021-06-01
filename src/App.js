@@ -1,13 +1,13 @@
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
-import { ConfirmPresence, Home } from './Pages';
+import {Switch, Route} from 'react-router-dom';
+import {ConfirmPresence, Home} from './Pages';
 
 function App() {
   return (
     <div className="App">
-      <Switch >
+      <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/confirmation" component={ConfirmPresence} />
+        <Route path="/registration" component={ConfirmPresence} />
         {/* <Route path="/orders" component={Orders} /> */}
       </Switch>
     </div>
