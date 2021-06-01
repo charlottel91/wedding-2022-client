@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ConfirmPresence() {
   const classes = useStyles();
-  const [user, setUser] = useState({
+  const [guest, setGuest] = useState({
     firstname: '',
     lastname: '',
     child: '',
@@ -52,7 +52,7 @@ export default function ConfirmPresence() {
     brunch: '',
     registered: null,
   });
-  const [allUser, setAllUser] = useState([]);
+  const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [errorFirstname, setErrorFirstname] = useState(false);
@@ -62,7 +62,8 @@ export default function ConfirmPresence() {
   const [errorBrunch, setErrorBrunch] = useState(false);
   const [errorText, setErrorText] = useState(null);
   const [index, setIndex] = useState();
-  const [errorSaveAllUsers, setErrorSaveAllUsers] = useState(false);
+  const [errorSaveAllGuests, setErrorSaveAllGuests] = useState(false);
+  console.log(allGuests);
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -74,8 +75,8 @@ export default function ConfirmPresence() {
     setOpenDialog(true);
   };
 
-  const deleteUser = () => {
-    allUser.splice(index, 1);
+  const deleteGuest = () => {
+    allGuests.splice(index, 1);
     handleCloseDialog();
   };
 
@@ -95,12 +96,12 @@ export default function ConfirmPresence() {
 
   const handleChange = (e) => {
     if (e.target.name === 'firstname' || e.target.name === 'lastname') {
-      setUser({...user, [e.target.name]: e.target.value.trim()});
-    } else setUser({...user, [e.target.name]: e.target.value});
+      setGuest({...guest, [e.target.name]: e.target.value.trim()});
+    } else setGuest({...guest, [e.target.name]: e.target.value});
   };
 
   const handleBlurFirstname = () => {
-    if (user.firstname.length <= 0) {
+    if (guest.firstname.length <= 0) {
       setErrorFirstname(true);
     } else {
       setErrorFirstname(false);
@@ -108,7 +109,7 @@ export default function ConfirmPresence() {
   };
 
   const handleBlurLastname = () => {
-    if (user.lastname.length <= 0) {
+    if (guest.lastname.length <= 0) {
       setErrorLastname(true);
     } else {
       setErrorLastname(false);
@@ -116,7 +117,7 @@ export default function ConfirmPresence() {
   };
 
   const handleBlurChild = () => {
-    if (user.child.length <= 0) {
+    if (guest.child.length <= 0) {
       setErrorChild(true);
     } else {
       setErrorChild(false);
@@ -124,7 +125,7 @@ export default function ConfirmPresence() {
   };
 
   const handleBlurVegetarian = () => {
-    if (user.child.length <= 0) {
+    if (guest.child.length <= 0) {
       setErrorVegetarian(true);
     } else {
       setErrorVegetarian(false);
@@ -132,42 +133,42 @@ export default function ConfirmPresence() {
   };
 
   const handleBlurBrunch = () => {
-    if (user.child.length <= 0) {
+    if (guest.child.length <= 0) {
       setErrorBrunch(true);
     } else {
       setErrorBrunch(false);
     }
   };
 
-  const handleModifyUser = (i) => {
+  const handleModifyGuest = (i) => {
     setIndex(i);
-    setUser({
-      ...user,
-      firstname: allUser[i].firstname,
-      lastname: allUser[i].lastname,
-      child: allUser[i].child,
-      vegetarian: allUser[i].vegetarian,
-      brunch: allUser[i].brunch,
-      registered: allUser[i].registered,
+    setGuest({
+      ...guest,
+      firstname: allGuests[i].firstname,
+      lastname: allGuests[i].lastname,
+      child: allGuests[i].child,
+      vegetarian: allGuests[i].vegetarian,
+      brunch: allGuests[i].brunch,
+      registered: allGuests[i].registered,
     });
     setOpenForm(true);
   };
 
-  const saveInArrayAllUser = (e) => {
+  const saveInArrayAllGuests = (e) => {
     e.preventDefault();
     if (
-      user.firstname.length > 0 &&
-      user.lastname.length > 0 &&
-      typeof user.child === 'boolean' &&
-      typeof user.vegetarian === 'boolean' &&
-      typeof user.brunch === 'boolean'
+      guest.firstname.length > 0 &&
+      guest.lastname.length > 0 &&
+      typeof guest.child === 'boolean' &&
+      typeof guest.vegetarian === 'boolean' &&
+      typeof guest.brunch === 'boolean'
     ) {
       if (index) {
-        allUser.splice(index, 1, user);
+        allGuests.splice(index, 1, guest);
       } else {
-        setAllUser([...allUser, user]);
+        setAllGuests([...allGuests, guest]);
       }
-      setUser({
+      setGuest({
         firstname: '',
         lastname: '',
         child: '',
@@ -181,18 +182,18 @@ export default function ConfirmPresence() {
     }
   };
 
-  const saveUserInServer = () => {
-    allUser.forEach((user) => {
+  const saveGuestInServer = () => {
+    allGuests.forEach((el) => {
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/registration`, user)
+        .post(`${process.env.REACT_APP_SERVER_URL}/registration`, el)
         .then((res) => {
-          user.registered = true;
+          el.registered = true;
           console.log(res.body, 'res');
         })
         .catch((error) => {
           if (error.response.status === 409) {
-            user.registered = false;
-          } else setErrorSaveAllUsers(true);
+            el.registered = false;
+          } else setErrorSaveAllGuests(true);
         });
     });
   };
@@ -208,30 +209,29 @@ export default function ConfirmPresence() {
         Confirmer votre présence
       </Typography>
       <div className={classes.containerUsers}>
-        {allUser.map((user, i) => (
+        {allGuests.map((el, i) => (
           <div key={i}>
             <SimpleCard
-              title={user.firstname}
-              child={user.child ? 'Enfant' : 'Adulte'}
-              vegetarian={user.vegetarian ? 'Repas végétarien' : 'Repas normal'}
-              brunch={user.brunch ? 'Présent au brunch' : 'Absent au brunch'}
-              onClickModify={() => handleModifyUser(i)}
-              deleteUser={() => handleOpenDialog(i)}
-              registered={user.registered}
+              title={el.firstname}
+              child={el.child ? 'Enfant' : 'Adulte'}
+              vegetarian={el.vegetarian ? 'Repas végétarien' : 'Repas normal'}
+              brunch={el.brunch ? 'Présent au brunch' : 'Absent au brunch'}
+              onClickModify={() => handleModifyGuest(i)}
+              deleteGuest={() => handleOpenDialog(i)}
+              registered={el.registered}
             />
-            <Typography>
-              {user.registered ? 'Enregistré.e' : 'Déjà enregitré.e'}
-            </Typography>
+            {el.registered === true && <Typography>Enregistré</Typography>}
+            {el.registered === false && <Typography>Enregistré</Typography>}
           </div>
         ))}
         <AddCircle className={classes.icon} onClick={handleOpenForm} />
       </div>
       <Box>
-        <Button text="Enregistrer" onClick={() => saveUserInServer()} />
+        <Button text="Enregistrer" onClick={() => saveGuestInServer()} />
       </Box>
       <SpringModal
         open={openForm}
-        user={user}
+        guest={guest}
         errorText={errorText}
         errorFirstname={errorFirstname}
         errorLastname={errorLastname}
@@ -245,15 +245,15 @@ export default function ConfirmPresence() {
         handleBlurChild={handleBlurChild}
         handleBlurVegetarian={handleBlurVegetarian}
         handleBlurBrunch={handleBlurBrunch}
-        handleChangeSubmit={saveInArrayAllUser}
+        handleChangeSubmit={saveInArrayAllGuests}
       />
       <ResponsiveDialog
         open={openDialog}
         handleClose={handleCloseDialog}
-        deleteUser={deleteUser}
-        text={`Êtes-vous sûr de vouloir supprimer ${allUser[index]?.firstname} ?`}
+        openDialogToDeleteGuest={deleteGuest}
+        text={`Êtes-vous sûr de vouloir supprimer ${allGuests[index]?.firstname} ?`}
       />
-      {errorSaveAllUsers && (
+      {errorSaveAllGuests && (
         <Notification text="Une erreur s'est produite !" type="error" />
       )}
     </div>

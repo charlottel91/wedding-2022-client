@@ -73,7 +73,7 @@ const presence = [
 ];
 
 export default function SpringModal({
-  user,
+  guest,
   open,
   errorText,
   errorFirstname,
@@ -114,7 +114,7 @@ export default function SpringModal({
                 className={classes.textfield}
                 label="Prénom"
                 name="firstname"
-                value={user.firstname}
+                value={guest.firstname}
                 onBlur={handleBlurFirstname}
                 onChange={handleChange}
                 variant="outlined"
@@ -125,7 +125,7 @@ export default function SpringModal({
                 className={classes.textfield}
                 label="Nom"
                 name="lastname"
-                value={user.lastname}
+                value={guest.lastname}
                 onChange={handleChange}
                 onBlur={handleBlurLastname}
                 variant="outlined"
@@ -139,7 +139,7 @@ export default function SpringModal({
                 label="Enfant (-10 ans)"
                 name="child"
                 defaultValue=""
-                value={user.child}
+                value={guest.child}
                 onChange={handleChange}
                 onBlur={handleBlurChild}
                 variant="outlined"
@@ -159,7 +159,7 @@ export default function SpringModal({
                 label="Repas végétarien"
                 name="vegetarian"
                 defaultValue=""
-                value={user.vegetarian}
+                value={guest.vegetarian}
                 onChange={handleChange}
                 onBlur={handleBlurVegetarian}
                 variant="outlined"
@@ -179,7 +179,7 @@ export default function SpringModal({
                 label="Présence au brunch"
                 name="brunch"
                 defaultValue=""
-                value={user.brunch}
+                value={guest.brunch}
                 onChange={handleChange}
                 onBlur={handleBlurBrunch}
                 variant="outlined"

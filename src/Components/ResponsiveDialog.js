@@ -4,7 +4,12 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {useTheme} from '@material-ui/core/styles';
 import {Button} from './index';
 
-export default function ResponsiveDialog({open, deleteUser, handleClose, text}) {
+export default function ResponsiveDialog({
+  open,
+  openDialogToDeleteGuest,
+  handleClose,
+  text,
+}) {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -21,7 +26,12 @@ export default function ResponsiveDialog({open, deleteUser, handleClose, text}) 
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary" text="Non" />
-          <Button onClick={deleteUser} color="primary" autoFocus text="Oui" />
+          <Button
+            onClick={openDialogToDeleteGuest}
+            color="primary"
+            autoFocus
+            text="Oui"
+          />
         </DialogActions>
       </Dialog>
     </div>

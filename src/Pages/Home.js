@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -12,6 +12,7 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Header} from '../Components';
 import {Link} from 'react-router-dom';
+import {authContext} from '../context/AuthContext';
 
 const useStyles = makeStyles({
   toolbar: {
@@ -56,6 +57,12 @@ HideOnScroll.propTypes = {
 
 export default function Home(props) {
   const classes = useStyles();
+  const {setAuthData} = useContext(authContext);
+
+  const onLogOut = () => {
+    setAuthData(null);
+  }; //clearing the context
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -70,6 +77,9 @@ export default function Home(props) {
             </Typography>
             <Typography className={classes.section} variant="h6">
               Se loger
+            </Typography>
+            <Typography className={classes.section} variant="h6" onClick={onLogOut}>
+              Se déconnecter
             </Typography>
           </Toolbar>
         </AppBar>

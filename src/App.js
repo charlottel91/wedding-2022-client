@@ -1,16 +1,18 @@
 import './App.css';
-import {Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {ConfirmPresence, Home} from './Pages';
+import PrivateRoute from './Components/PrivateRoute';
+import SignIn from './Pages/connection/SignIn';
 
 function App() {
   return (
-    <div className="App">
+    <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/registration" component={ConfirmPresence} />
-        {/* <Route path="/orders" component={Orders} /> */}
+        <Route path="/sign-in" component={SignIn} />
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute path="/registration" component={ConfirmPresence} />
       </Switch>
-    </div>
+    </BrowserRouter>
   );
 }
 

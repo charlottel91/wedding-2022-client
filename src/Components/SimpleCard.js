@@ -34,14 +34,14 @@ export default function SimpleCard({
   brunch,
   registered,
   onClickModify,
-  deleteUser,
+  deleteGuest,
 }) {
   const classes = useStyles();
   console.log(registered);
 
   return (
     <Card className={classes.root}>
-      <CancelIcon className={classes.crossIcon} onClick={deleteUser} />
+      <CancelIcon className={classes.crossIcon} onClick={deleteGuest} />
       <CardContent>
         <Typography variant="h5" component="h2" gutterBottom>
           {title}
