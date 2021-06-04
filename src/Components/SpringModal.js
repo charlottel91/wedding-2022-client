@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FormControl, MenuItem, Modal, TextField, Typography} from '@material-ui/core';
+import {
+  Backdrop,
+  FormControl,
+  MenuItem,
+  Modal,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import Backdrop from '@material-ui/core/Backdrop';
 import {useSpring, animated} from 'react-spring/web.cjs';
 import {Button} from './index';
 

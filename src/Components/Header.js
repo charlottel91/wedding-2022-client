@@ -1,7 +1,7 @@
-import {Typography} from '@material-ui/core';
 import React from 'react';
-import {Countdown} from '.';
 import {makeStyles} from '@material-ui/core/styles';
+import {Typography} from '@material-ui/core';
+import {Countdown} from '.';
 
 const useStyles = makeStyles({
   container: {

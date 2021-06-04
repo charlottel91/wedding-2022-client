@@ -10,7 +10,7 @@ import {
   ResponsiveDialog,
   SimpleCard,
   SpringModal,
-} from '../Components';
+} from '../components';
 
 const useStyles = makeStyles((theme) => ({
   container: {

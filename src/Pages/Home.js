@@ -10,7 +10,7 @@ import {
   Slide,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {Button, Header} from '../Components';
+import {Button, Header} from '../components';
 import {Link} from 'react-router-dom';
 import {authContext} from '../context/AuthContext';
 
@@ -55,7 +55,7 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-export default function Home(props) {
+function Home(props) {
   const classes = useStyles();
   const {setAuthData} = useContext(authContext);
 
@@ -102,3 +102,5 @@ export default function Home(props) {
     </React.Fragment>
   );
 }
+
+export default Home;

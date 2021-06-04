@@ -1,6 +1,11 @@
 import React from 'react';
-import {Dialog, DialogActions, DialogContent, DialogContentText} from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  useMediaQuery,
+} from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
 import {Button} from './index';
 

@@ -1,4 +1,5 @@
 import ConfirmPresence from './ConfirmPresence';
 import Home from './Home';
+import SignIn from './SignIn';
 
-export {Home, ConfirmPresence};
+export {ConfirmPresence, Home, SignIn};
