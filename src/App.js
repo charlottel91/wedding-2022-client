@@ -1,18 +1,15 @@
+import {useState} from 'react';
 import './App.css';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import {ConfirmPresence, Home} from './Pages';
-import PrivateRoute from './Components/PrivateRoute';
-import SignIn from './Pages/connection/SignIn';
+import Auth from './context/AuthContext';
+import Routes from './Routes';
+import {hasAuthenticated} from './services/AuthApi';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/sign-in" component={SignIn} />
-        <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute path="/registration" component={ConfirmPresence} />
-      </Switch>
-    </BrowserRouter>
+    <Auth.Provider value={{isAuthenticated, setIsAuthenticated}}>
+      <Routes />
+    </Auth.Provider>
   );
 }
 

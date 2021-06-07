@@ -12,7 +12,8 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 import {Button, Header} from '../components';
 import {Link} from 'react-router-dom';
-import {authContext} from '../context/AuthContext';
+import Auth from '../context/AuthContext';
+import {logout} from '../services/AuthApi';
 
 const useStyles = makeStyles({
   toolbar: {
@@ -57,10 +58,11 @@ HideOnScroll.propTypes = {
 
 function Home(props) {
   const classes = useStyles();
-  const {setAuthData} = useContext(authContext);
+  const {setIsAuthenticated} = useContext(Auth);
 
-  const onLogOut = () => {
-    setAuthData(null);
+  const handleLogOut = () => {
+    logout();
+    setIsAuthenticated(false);
   }; //clearing the context
 
   return (
@@ -78,7 +80,7 @@ function Home(props) {
             <Typography className={classes.section} variant="h6">
               Se loger
             </Typography>
-            <Typography className={classes.section} variant="h6" onClick={onLogOut}>
+            <Typography className={classes.section} variant="h6" onClick={handleLogOut}>
               Se déconnecter
             </Typography>
           </Toolbar>

@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react';
-import {authContext} from '../context/AuthContext';
+import React, {useState, useContext, useEffect} from 'react';
+import Auth from '../context/AuthContext';
 import {
   Avatar,
   Button,
@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
-import axios from 'axios';
+import {login} from '../services/AuthApi';
 
 function Copyright() {
   return (
@@ -49,20 +49,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({history}) {
   const classes = useStyles();
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
-  const {setAuthData, authData} = useContext(authContext);
-  console.log({authData});
+  const [user, setUser] = useState({
+    name: '',
+    password: '',
+  });
+  const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
+  console.log(user);
 
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    // setAuthData(name);
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/signIn`, {name, password})
-      .then((res) => setAuthData(res.data))
-      .catch((err) => console.log(err));
-    history.replace('/');
+  const handleChange = ({target}) => {
+    const {name, value} = target;
+    setUser({...user, [name]: value});
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await login(user);
+      setIsAuthenticated(response);
+      history.replace('/');
+      console.log(response);
+    } catch ({response}) {
+      console.log(response);
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.replace('/');
+    }
+  }, [history, isAuthenticated]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -74,7 +89,7 @@ export default function SignIn({history}) {
         <Typography component="h1" variant="h5">
           Connectez-vous
         </Typography>
-        <form className={classes.form} noValidate onSubmit={onFormSubmit}>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -85,9 +100,7 @@ export default function SignIn({history}) {
             name="name"
             autoComplete="name"
             autoFocus
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
+            onChange={handleChange}
           />
           <TextField
             variant="outlined"
@@ -99,9 +112,7 @@ export default function SignIn({history}) {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={handleChange}
           />
           <Button
             type="submit"
