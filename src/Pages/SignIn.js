@@ -53,7 +53,7 @@ export default function SignIn({history}) {
     name: '',
     password: '',
   });
-  const {isAuthenticated, setIsAuthenticated} = useContext(Auth);
+  const {isAuthenticatedUser, setIsAuthenticatedUser} = useContext(Auth);
   console.log(user);
 
   const handleChange = ({target}) => {
@@ -65,19 +65,23 @@ export default function SignIn({history}) {
     e.preventDefault();
     try {
       const response = await login(user);
-      setIsAuthenticated(response);
+      setIsAuthenticatedUser({
+        ...isAuthenticatedUser,
+        isAuthenticated: response.isAuthenticated,
+        name: response.user.name,
+        _id: response.user._id,
+      });
       history.replace('/');
-      console.log(response);
     } catch ({response}) {
       console.log(response);
     }
   };
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticatedUser.isAuthenticated) {
       history.replace('/');
     }
-  }, [history, isAuthenticated]);
+  }, [history, isAuthenticatedUser.isAuthenticated]);
 
   return (
     <Container component="main" maxWidth="xs">

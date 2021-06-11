@@ -16,11 +16,11 @@ export function login(credentials) {
   console.log(credentials, 'in login');
   return axios
     .post(`${process.env.REACT_APP_SERVER_URL}/signIn`, credentials)
-    .then((response) => response.data.token)
-    .then((token) => {
-      addItem('token', token);
+    .then((response) => response.data)
+    .then((data) => {
+      addItem('token', data.token);
 
-      return true;
+      return {isAuthenticated: true, user: data.user};
     })
     .catch((err) => console.log(err));
 }

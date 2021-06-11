@@ -5,9 +5,13 @@ import Routes from './Routes';
 import {hasAuthenticated} from './services/AuthApi';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
+  const [isAuthenticatedUser, setIsAuthenticatedUser] = useState({
+    isAuthenticated: hasAuthenticated(),
+    name: '',
+    _id: '',
+  });
   return (
-    <Auth.Provider value={{isAuthenticated, setIsAuthenticated}}>
+    <Auth.Provider value={{isAuthenticatedUser, setIsAuthenticatedUser}}>
       <Routes />
     </Auth.Provider>
   );

@@ -58,11 +58,11 @@ HideOnScroll.propTypes = {
 
 function Home(props) {
   const classes = useStyles();
-  const {setIsAuthenticated} = useContext(Auth);
+  const {isAuthenticatedUser, setIsAuthenticatedUser} = useContext(Auth);
 
   const handleLogOut = () => {
     logout();
-    setIsAuthenticated(false);
+    setIsAuthenticatedUser({...isAuthenticatedUser, isAuthenticated: false});
   }; //clearing the context
 
   return (
