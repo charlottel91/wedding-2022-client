@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -10,10 +10,9 @@ import {
   Slide,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {Button, Header} from '../components';
 import {Link} from 'react-router-dom';
-import Auth from '../context/AuthContext';
-import {logout} from '../services/AuthApi';
+import {Button, Header} from '../components';
+import {AuthContext} from '../context';
 
 const useStyles = makeStyles({
   toolbar: {
@@ -56,14 +55,20 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-function Home(props) {
+const Home = (props, {history}) => {
   const classes = useStyles();
-  const {isAuthenticatedUser, setIsAuthenticatedUser} = useContext(Auth);
+  const {dispatch} = useContext(AuthContext);
 
   const handleLogOut = () => {
-    logout();
-    setIsAuthenticatedUser({...isAuthenticatedUser, isAuthenticated: false});
+    dispatch.logoutData();
+    history.replace('/login');
   }; //clearing the context
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      history.replace('/login');
+    }
+  }, [history]);
 
   return (
     <React.Fragment>
@@ -94,7 +99,7 @@ function Home(props) {
         Programme bsjhkvvdklcn:ejbchjvekdh,bcevgrvfckaebfcnjaksgdjcvj sjdb
       </Container>
       <div className={classes.container}>
-        <Link to="/registration">
+        <Link to="/register">
           <Button text="Confirmer ma présence" />
         </Link>
       </div>
@@ -103,6 +108,6 @@ function Home(props) {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default Home;

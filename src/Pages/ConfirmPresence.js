@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ConfirmPresence() {
+const ConfirmPresence = () => {
   const classes = useStyles();
   const [guest, setGuest] = useState({
     firstname: '',
@@ -258,4 +258,6 @@ export default function ConfirmPresence() {
       )}
     </div>
   );
-}
+};
+
+export default ConfirmPresence;

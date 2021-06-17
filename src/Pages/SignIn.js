@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import Auth from '../context/AuthContext';
+import {AuthContext} from '../context';
 import {
   Avatar,
   Button,
@@ -12,7 +12,8 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
-import {login} from '../services/AuthApi';
+import axios from 'axios';
+import {Notification} from '../components';
 
 function Copyright() {
   return (
@@ -49,12 +50,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({history}) {
   const classes = useStyles();
+  const {dispatch} = useContext(AuthContext);
   const [user, setUser] = useState({
     name: '',
     password: '',
   });
-  const {isAuthenticatedUser, setIsAuthenticatedUser} = useContext(Auth);
-  console.log(user);
+  const [error, setError] = useState('');
 
   const handleChange = ({target}) => {
     const {name, value} = target;
@@ -64,24 +65,24 @@ export default function SignIn({history}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(user);
-      setIsAuthenticatedUser({
-        ...isAuthenticatedUser,
-        isAuthenticated: response.isAuthenticated,
-        name: response.user.name,
-        _id: response.user._id,
-      });
-      history.replace('/');
+      let response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/signin`,
+        user
+      );
+      if (response) {
+        dispatch.loginData(response.data);
+        history.replace('/');
+      }
     } catch ({response}) {
-      console.log(response);
+      setError(response.status);
     }
   };
 
   useEffect(() => {
-    if (isAuthenticatedUser.isAuthenticated) {
+    if (localStorage.getItem('token')) {
       history.replace('/');
     }
-  }, [history, isAuthenticatedUser.isAuthenticated]);
+  }, [history]);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -128,6 +129,14 @@ export default function SignIn({history}) {
             Se connecter
           </Button>
         </form>
+        {error === 500 && <Notification type="error" text="Une erreur est survenue." />}
+        {error === 404 && <Notification type="warning" text="Ce compte n'existe pas." />}
+        {error === 400 && (
+          <Notification
+            type="warning"
+            text="L'identifiant et/ou le mot de passe sont invalides."
+          />
+        )}
       </div>
       <Box mt={8}>
         <Copyright />
