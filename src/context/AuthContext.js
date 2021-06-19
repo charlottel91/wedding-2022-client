@@ -15,13 +15,14 @@ const AuthProvider = ({children}) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
   const loginData = (data) => {
     localStorage.setItem('token', data.token);
+    localStorage.setItem('id', data.user._id);
     dispatch({
       type: 'LOGIN',
       payload: data.user,
     });
   };
   const logoutData = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('token', 'id');
     dispatch({
       type: 'LOGOUT',
     });

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {ArrowBack, AddCircle} from '@material-ui/icons';
 import {Box, Typography} from '@material-ui/core';
@@ -11,6 +11,7 @@ import {
   SimpleCard,
   SpringModal,
 } from '../components';
+import {AuthContext} from '../context';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -44,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ConfirmPresence = () => {
   const classes = useStyles();
+  const {state} = useContext(AuthContext);
   const [guest, setGuest] = useState({
     firstname: '',
     lastname: '',
@@ -63,7 +65,7 @@ const ConfirmPresence = () => {
   const [errorText, setErrorText] = useState(null);
   const [index, setIndex] = useState();
   const [errorSaveAllGuests, setErrorSaveAllGuests] = useState(false);
-  console.log(allGuests);
+  console.log(state.user._id);
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -185,10 +187,15 @@ const ConfirmPresence = () => {
   const saveGuestInServer = () => {
     allGuests.forEach((el) => {
       axios
-        .post(`${process.env.REACT_APP_SERVER_URL}/registration`, el)
+        .put(
+          `${process.env.REACT_APP_SERVER_URL}/register/${
+            state.user._id || localStorage.getItem('id')
+          }`,
+          el
+        )
         .then((res) => {
           el.registered = true;
-          console.log(res.body, 'res');
+          console.log(res, 'res');
         })
         .catch((error) => {
           if (error.response.status === 409) {
