@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -55,20 +55,21 @@ HideOnScroll.propTypes = {
   window: PropTypes.func,
 };
 
-const Home = (props, {history}) => {
+const Home = (props) => {
   const classes = useStyles();
   const {dispatch} = useContext(AuthContext);
 
   const handleLogOut = () => {
-    dispatch.logoutData();
-    history.replace('/login');
+    dispatch({type: 'LOGOUT'});
+    localStorage.removeItem('token');
+    // history.push('/login');
   }; //clearing the context
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      history.replace('/login');
-    }
-  }, [history]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) {
+  //     history.replace('/login');
+  //   }
+  // }, [history]);
 
   return (
     <React.Fragment>

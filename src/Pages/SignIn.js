@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {AuthContext} from '../context';
 import {
   Avatar,
@@ -14,6 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
 import axios from 'axios';
 import {Notification} from '../components';
+import jwtDecode from 'jwt-decode';
 
 function Copyright() {
   return (
@@ -55,7 +56,8 @@ export default function SignIn({history}) {
     name: '',
     password: '',
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
+  console.log(error);
 
   const handleChange = ({target}) => {
     const {name, value} = target;
@@ -65,24 +67,21 @@ export default function SignIn({history}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let response = await axios.post(
+      const {data} = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/signin`,
         user
       );
-      if (response) {
-        dispatch.loginData(response.data);
-        history.replace('/');
-      }
-    } catch ({response}) {
-      setError(response.status);
-    }
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
+      localStorage.setItem('token', data.token);
+      const decodeToken = jwtDecode(data.token);
+      dispatch({type: 'LOGIN', payload: decodeToken.user});
       history.replace('/');
+    } catch ({response}) {
+      setError(response.data);
     }
-  }, [history]);
+    setTimeout(() => {
+      setError();
+    }, 3000);
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -129,14 +128,7 @@ export default function SignIn({history}) {
             Se connecter
           </Button>
         </form>
-        {error === 500 && <Notification type="error" text="Une erreur est survenue." />}
-        {error === 404 && <Notification type="warning" text="Ce compte n'existe pas." />}
-        {error === 400 && (
-          <Notification
-            type="warning"
-            text="L'identifiant et/ou le mot de passe sont invalides."
-          />
-        )}
+        {error && <Notification type="error" text={error} />}
       </div>
       <Box mt={8}>
         <Copyright />

@@ -1,16 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {ArrowBack, AddCircle} from '@material-ui/icons';
-import {Box, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import {
-  Button,
-  Notification,
-  ResponsiveDialog,
-  SimpleCard,
-  SpringModal,
-} from '../components';
+import {Notification, ResponsiveDialog, SimpleCard, SpringModal} from '../components';
 import {AuthContext} from '../context';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,14 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 const ConfirmPresence = () => {
   const classes = useStyles();
-  const {state} = useContext(AuthContext);
+  const {dispatch, state} = useContext(AuthContext);
   const [guest, setGuest] = useState({
     firstname: '',
     lastname: '',
-    child: '',
-    vegetarian: '',
-    brunch: '',
-    registered: null,
+    isChild: '',
+    isVegetarian: '',
+    presentBrunch: '',
   });
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
@@ -65,7 +58,6 @@ const ConfirmPresence = () => {
   const [errorText, setErrorText] = useState(null);
   const [index, setIndex] = useState();
   const [errorSaveAllGuests, setErrorSaveAllGuests] = useState(false);
-  console.log(state.user._id);
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
@@ -78,11 +70,24 @@ const ConfirmPresence = () => {
   };
 
   const deleteGuest = () => {
-    allGuests.splice(index, 1);
+    axios
+      .put(
+        `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/delete/guest`,
+        guest
+      )
+      .then((res) => console.log(res))
+      .catch((err) => err);
     handleCloseDialog();
   };
 
   const handleOpenForm = () => {
+    setGuest({
+      firstname: '',
+      lastname: '',
+      isChild: '',
+      isVegetarian: '',
+      presentBrunch: '',
+    });
     setOpenForm(true);
   };
 
@@ -119,7 +124,7 @@ const ConfirmPresence = () => {
   };
 
   const handleBlurChild = () => {
-    if (guest.child.length <= 0) {
+    if (guest.isChild.length <= 0) {
       setErrorChild(true);
     } else {
       setErrorChild(false);
@@ -127,7 +132,7 @@ const ConfirmPresence = () => {
   };
 
   const handleBlurVegetarian = () => {
-    if (guest.child.length <= 0) {
+    if (guest.isVegetarian.length <= 0) {
       setErrorVegetarian(true);
     } else {
       setErrorVegetarian(false);
@@ -135,7 +140,7 @@ const ConfirmPresence = () => {
   };
 
   const handleBlurBrunch = () => {
-    if (guest.child.length <= 0) {
+    if (guest.presentBrunch.length <= 0) {
       setErrorBrunch(true);
     } else {
       setErrorBrunch(false);
@@ -144,66 +149,60 @@ const ConfirmPresence = () => {
 
   const handleModifyGuest = (i) => {
     setIndex(i);
-    setGuest({
-      ...guest,
-      firstname: allGuests[i].firstname,
-      lastname: allGuests[i].lastname,
-      child: allGuests[i].child,
-      vegetarian: allGuests[i].vegetarian,
-      brunch: allGuests[i].brunch,
-      registered: allGuests[i].registered,
-    });
+    setGuest(allGuests[i]);
     setOpenForm(true);
   };
 
-  const saveInArrayAllGuests = (e) => {
+  const saveGuestInServer = async () => {
+    try {
+      const {data} = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/register/${state.user._id}`,
+        guest
+      );
+      dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
+      setAllGuests(data.guests);
+    } catch ({response}) {
+      setErrorSaveAllGuests(response.data);
+    }
+  };
+
+  const saveGuests = (e) => {
     e.preventDefault();
     if (
       guest.firstname.length > 0 &&
       guest.lastname.length > 0 &&
-      typeof guest.child === 'boolean' &&
-      typeof guest.vegetarian === 'boolean' &&
-      typeof guest.brunch === 'boolean'
+      typeof guest.isChild === 'boolean' &&
+      typeof guest.isVegetarian === 'boolean' &&
+      typeof guest.presentBrunch === 'boolean'
     ) {
-      if (index) {
-        allGuests.splice(index, 1, guest);
-      } else {
-        setAllGuests([...allGuests, guest]);
-      }
+      saveGuestInServer();
       setGuest({
         firstname: '',
         lastname: '',
-        child: '',
-        vegetarian: '',
-        brunch: '',
-        registered: null,
+        isChild: '',
+        isVegetarian: '',
+        presentBrunch: '',
       });
       handleCloseForm();
     } else {
       setErrorText('Tous les champs sont requis');
     }
+    setTimeout(() => {
+      setErrorSaveAllGuests();
+    }, 3000);
   };
 
-  const saveGuestInServer = () => {
-    allGuests.forEach((el) => {
-      axios
-        .put(
-          `${process.env.REACT_APP_SERVER_URL}/register/${
-            state.user._id || localStorage.getItem('id')
-          }`,
-          el
-        )
-        .then((res) => {
-          el.registered = true;
-          console.log(res, 'res');
-        })
-        .catch((error) => {
-          if (error.response.status === 409) {
-            el.registered = false;
-          } else setErrorSaveAllGuests(true);
-        });
-    });
-  };
+  useEffect(async () => {
+    try {
+      const {data} = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}`
+      );
+      dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
+      setAllGuests(data.guests);
+    } catch (err) {
+      return err;
+    }
+  }, []);
 
   return (
     <div className={classes.container}>
@@ -216,26 +215,22 @@ const ConfirmPresence = () => {
         Confirmer votre présence
       </Typography>
       <div className={classes.containerUsers}>
-        {allGuests.map((el, i) => (
-          <div key={i}>
-            <SimpleCard
-              title={el.firstname}
-              child={el.child ? 'Enfant' : 'Adulte'}
-              vegetarian={el.vegetarian ? 'Repas végétarien' : 'Repas normal'}
-              brunch={el.brunch ? 'Présent au brunch' : 'Absent au brunch'}
-              onClickModify={() => handleModifyGuest(i)}
-              deleteGuest={() => handleOpenDialog(i)}
-              registered={el.registered}
-            />
-            {el.registered === true && <Typography>Enregistré</Typography>}
-            {el.registered === false && <Typography>Enregistré</Typography>}
-          </div>
-        ))}
+        {allGuests &&
+          allGuests.map((el, i) => (
+            <div key={i}>
+              <SimpleCard
+                title={el.firstname}
+                child={el.isChild ? 'Enfant' : 'Adulte'}
+                vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
+                brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
+                onClickModify={() => handleModifyGuest(i)}
+                deleteGuest={() => handleOpenDialog(i)}
+                registered={el.registered}
+              />
+            </div>
+          ))}
         <AddCircle className={classes.icon} onClick={handleOpenForm} />
       </div>
-      <Box>
-        <Button text="Enregistrer" onClick={() => saveGuestInServer()} />
-      </Box>
       <SpringModal
         open={openForm}
         guest={guest}
@@ -252,7 +247,7 @@ const ConfirmPresence = () => {
         handleBlurChild={handleBlurChild}
         handleBlurVegetarian={handleBlurVegetarian}
         handleBlurBrunch={handleBlurBrunch}
-        handleChangeSubmit={saveInArrayAllGuests}
+        handleChangeSubmit={saveGuests}
       />
       <ResponsiveDialog
         open={openDialog}
@@ -260,9 +255,7 @@ const ConfirmPresence = () => {
         openDialogToDeleteGuest={deleteGuest}
         text={`Êtes-vous sûr de vouloir supprimer ${allGuests[index]?.firstname} ?`}
       />
-      {errorSaveAllGuests && (
-        <Notification text="Une erreur s'est produite !" type="error" />
-      )}
+      {errorSaveAllGuests && <Notification text={errorSaveAllGuests} type="error" />}
     </div>
   );
 };

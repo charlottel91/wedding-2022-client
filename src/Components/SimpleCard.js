@@ -32,12 +32,10 @@ export default function SimpleCard({
   child,
   vegetarian,
   brunch,
-  registered,
   onClickModify,
   deleteGuest,
 }) {
   const classes = useStyles();
-  console.log(registered);
 
   return (
     <Card className={classes.root}>
@@ -56,21 +54,9 @@ export default function SimpleCard({
           {brunch}
         </Typography>
       </CardContent>
-      {registered === null && (
-        <CardActions>
-          <Button text="Modifier" onClick={onClickModify} />
-        </CardActions>
-      )}
-      {registered === true && (
-        <CardActions>
-          <Typography>Déjà enregistré.e</Typography>
-        </CardActions>
-      )}
-      {registered === false && (
-        <CardActions>
-          <Typography>Enregistré.e</Typography>
-        </CardActions>
-      )}
+      <CardActions>
+        <Button text="Modifier" onClick={onClickModify} />
+      </CardActions>
     </Card>
   );
 }

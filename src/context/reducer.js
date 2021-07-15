@@ -1,20 +1,19 @@
-export const initialState = {
-  user: {},
-};
-
-export const AuthReducer = (initialState, action) => {
+export const AuthReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
       return {
-        ...initialState,
         user: action.payload,
       };
     case 'LOGOUT':
       return {
-        ...initialState,
         user: {},
       };
+    case 'UPDATE_GUESTS':
+      return {
+        ...state,
+        user: {...state.user, guests: action.payload},
+      };
     default:
-      throw new Error(`Unhandled action type: ${action.type}`);
+      state;
   }
 };

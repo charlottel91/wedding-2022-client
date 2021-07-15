@@ -143,9 +143,9 @@ export default function SpringModal({
                 id="outlined-select-currency"
                 select
                 label="Enfant (-10 ans)"
-                name="child"
+                name="isChild"
                 defaultValue=""
-                value={guest.child}
+                value={guest.isChild}
                 onChange={handleChange}
                 onBlur={handleBlurChild}
                 variant="outlined"
@@ -163,9 +163,9 @@ export default function SpringModal({
                 id="outlined-select-currency"
                 select
                 label="Repas végétarien"
-                name="vegetarian"
+                name="isVegetarian"
                 defaultValue=""
-                value={guest.vegetarian}
+                value={guest.isVegetarian}
                 onChange={handleChange}
                 onBlur={handleBlurVegetarian}
                 variant="outlined"
@@ -183,9 +183,9 @@ export default function SpringModal({
                 id="outlined-select-currency"
                 select
                 label="Présence au brunch"
-                name="brunch"
+                name="presentBrunch"
                 defaultValue=""
-                value={guest.brunch}
+                value={guest.presentBrunch}
                 onChange={handleChange}
                 onBlur={handleBlurBrunch}
                 variant="outlined"
