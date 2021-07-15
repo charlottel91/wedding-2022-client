@@ -65,12 +65,6 @@ const Home = (props) => {
     // history.push('/login');
   }; //clearing the context
 
-  // useEffect(() => {
-  //   if (!localStorage.getItem('token')) {
-  //     history.replace('/login');
-  //   }
-  // }, [history]);
-
   return (
     <React.Fragment>
       <CssBaseline />
