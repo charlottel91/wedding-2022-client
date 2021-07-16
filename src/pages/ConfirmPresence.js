@@ -7,10 +7,10 @@ import {makeStyles} from '@material-ui/core/styles';
 import {ArrowBack, AddCircle} from '@material-ui/icons';
 import {Typography} from '@material-ui/core';
 
-import Notification from '../components/Notification';
-import ResponsiveDialog from '../components/ResponsiveDialog';
-import SimpleCard from '../components/SimpleCard';
-import SpringModal from '../components/SpringModal';
+import Notification from '../component/Notification';
+import ResponsiveDialog from '../component/ResponsiveDialog';
+import SimpleCard from '../component/SimpleCard';
+import SpringModal from '../component/SpringModal';
 
 const useStyles = makeStyles((theme) => ({
   container: {

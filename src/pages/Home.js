@@ -14,8 +14,8 @@ import {
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 
-import Button from '../components/Button';
-import Header from '../components/Header';
+import Button from '../component/Button';
+import Header from '../component/Header';
 
 const useStyles = makeStyles({
   toolbar: {

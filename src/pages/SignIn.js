@@ -16,7 +16,7 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
 
-import Notification from '../components/Notification';
+import Notification from '../component/Notification';
 
 
 function Copyright() {
