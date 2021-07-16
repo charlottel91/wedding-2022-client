@@ -35,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= npm run build",
+    "build": "CI=npm run build",
     "test": "react-scripts test",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
