@@ -57,7 +57,6 @@ export default function SignIn({history}) {
     password: '',
   });
   const [error, setError] = useState(null);
-  console.log(error);
 
   const handleChange = ({target}) => {
     const {name, value} = target;
