@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Backdrop,
   FormControl,
@@ -9,7 +8,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {useSpring, animated} from 'react-spring/web.cjs';
 import {Button} from './index';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,37 +33,6 @@ const useStyles = makeStyles((theme) => ({
     color: 'red',
   },
 }));
-
-const Fade = React.forwardRef(function Fade(props, ref) {
-  const {in: open, children, onEnter, onExited, ...other} = props;
-  const style = useSpring({
-    from: {opacity: 0},
-    to: {opacity: open ? 1 : 0},
-    onStart: () => {
-      if (open && onEnter) {
-        onEnter();
-      }
-    },
-    onRest: () => {
-      if (!open && onExited) {
-        onExited();
-      }
-    },
-  });
-
-  return (
-    <animated.div ref={ref} style={style} {...other}>
-      {children}
-    </animated.div>
-  );
-});
-
-Fade.propTypes = {
-  children: PropTypes.element,
-  in: PropTypes.bool.isRequired,
-  onEnter: PropTypes.func,
-  onExited: PropTypes.func,
-};
 
 const presence = [
   {
@@ -112,98 +79,96 @@ export default function SpringModal({
           timeout: 500,
         }}
       >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <FormControl className={classes.root} noValidate autoComplete="off">
-              <TextField
-                error={errorFirstname}
-                className={classes.textfield}
-                label="Prénom"
-                name="firstname"
-                value={guest.firstname}
-                onBlur={handleBlurFirstname}
-                onChange={handleChange}
-                variant="outlined"
-                helperText={errorFirstname ? 'Champ requis' : null}
-              />
-              <TextField
-                error={!!errorLastname}
-                className={classes.textfield}
-                label="Nom"
-                name="lastname"
-                value={guest.lastname}
-                onChange={handleChange}
-                onBlur={handleBlurLastname}
-                variant="outlined"
-                helperText={errorLastname ? 'Champ requis' : null}
-              />
-              <TextField
-                error={!!errorChild}
-                className={classes.textfield}
-                id="outlined-select-currency"
-                select
-                label="Enfant (-10 ans)"
-                name="isChild"
-                defaultValue=""
-                value={guest.isChild}
-                onChange={handleChange}
-                onBlur={handleBlurChild}
-                variant="outlined"
-                helperText={errorLastname ? 'Champ requis' : null}
-              >
-                {presence.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                error={!!errorVegetarian}
-                className={classes.textfield}
-                id="outlined-select-currency"
-                select
-                label="Repas végétarien"
-                name="isVegetarian"
-                defaultValue=""
-                value={guest.isVegetarian}
-                onChange={handleChange}
-                onBlur={handleBlurVegetarian}
-                variant="outlined"
-                helperText={errorLastname ? 'Champ requis' : null}
-              >
-                {presence.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <TextField
-                error={!!errorBrunch}
-                className={classes.textfield}
-                id="outlined-select-currency"
-                select
-                label="Présence au brunch"
-                name="presentBrunch"
-                defaultValue=""
-                value={guest.presentBrunch}
-                onChange={handleChange}
-                onBlur={handleBlurBrunch}
-                variant="outlined"
-                helperText={errorLastname ? 'Champ requis' : null}
-              >
-                {presence.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-              {errorText && (
-                <Typography className={classes.textError}>{errorText}</Typography>
-              )}
-              <Button text="Valider" onClick={handleChangeSubmit} />
-            </FormControl>
-          </div>
-        </Fade>
+        <div className={classes.paper}>
+          <FormControl className={classes.root} noValidate autoComplete="off">
+            <TextField
+              error={errorFirstname}
+              className={classes.textfield}
+              label="Prénom"
+              name="firstname"
+              value={guest.firstname}
+              onBlur={handleBlurFirstname}
+              onChange={handleChange}
+              variant="outlined"
+              helperText={errorFirstname ? 'Champ requis' : null}
+            />
+            <TextField
+              error={!!errorLastname}
+              className={classes.textfield}
+              label="Nom"
+              name="lastname"
+              value={guest.lastname}
+              onChange={handleChange}
+              onBlur={handleBlurLastname}
+              variant="outlined"
+              helperText={errorLastname ? 'Champ requis' : null}
+            />
+            <TextField
+              error={!!errorChild}
+              className={classes.textfield}
+              id="outlined-select-currency"
+              select
+              label="Enfant (-10 ans)"
+              name="isChild"
+              defaultValue=""
+              value={guest.isChild}
+              onChange={handleChange}
+              onBlur={handleBlurChild}
+              variant="outlined"
+              helperText={errorLastname ? 'Champ requis' : null}
+            >
+              {presence.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              error={!!errorVegetarian}
+              className={classes.textfield}
+              id="outlined-select-currency"
+              select
+              label="Repas végétarien"
+              name="isVegetarian"
+              defaultValue=""
+              value={guest.isVegetarian}
+              onChange={handleChange}
+              onBlur={handleBlurVegetarian}
+              variant="outlined"
+              helperText={errorLastname ? 'Champ requis' : null}
+            >
+              {presence.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              error={!!errorBrunch}
+              className={classes.textfield}
+              id="outlined-select-currency"
+              select
+              label="Présence au brunch"
+              name="presentBrunch"
+              defaultValue=""
+              value={guest.presentBrunch}
+              onChange={handleChange}
+              onBlur={handleBlurBrunch}
+              variant="outlined"
+              helperText={errorLastname ? 'Champ requis' : null}
+            >
+              {presence.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            {errorText && (
+              <Typography className={classes.textError}>{errorText}</Typography>
+            )}
+            <Button text="Valider" onClick={handleChangeSubmit} />
+          </FormControl>
+        </div>
       </Modal>
     </div>
   );
