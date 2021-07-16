@@ -69,15 +69,21 @@ const ConfirmPresence = () => {
     setOpenDialog(true);
   };
 
-  const deleteGuest = () => {
-    axios
-      .put(
+  const deleteGuest = async () => {
+    try {
+      const {data} = await axios.put(
         `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/delete/guest`,
-        guest
-      )
-      .then((res) => console.log(res))
-      .catch((err) => err);
+        allGuests[index]
+      );
+      dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
+      setAllGuests(data.guests);
+    } catch ({response}) {
+      setErrorSaveAllGuests(response);
+    }
     handleCloseDialog();
+    setTimeout(() => {
+      setErrorSaveAllGuests();
+    }, 3000);
   };
 
   const handleOpenForm = () => {
