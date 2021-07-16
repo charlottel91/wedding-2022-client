@@ -18,7 +18,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 import Notification from '../component/Notification';
 
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
