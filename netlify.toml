@@ -1,7 +1,3 @@
 [build]
- command = "CI= npm run build"
+ command= "CI= npm run build"
  commandOrigin = "ui"
- [environment]
-  - REACT_APP_SERVER_URL
-  publish = "/opt/build/repo/build"
-  publishOrigin = "config"
