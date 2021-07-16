@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import {AuthProvider} from './context';
 import PrivateRoute from './routing/PrivateRoute';
-import {SignIn, Home, ConfirmPresence} from './pages';
+import {SignIn, Home, ConfirmPresence} from './pages/index';
 
 const App = () => {
   return (
