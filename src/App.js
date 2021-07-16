@@ -1,9 +1,11 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {AuthProvider} from './context';
-import ConfirmPresence from './page2/ConfirmPresence';
-import Home from './page2/Home';
-import SignIn from './page2/SignIn';
+
+import ConfirmPresence from './pages/ConfirmPresence';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
 import PrivateRoute from './routing/PrivateRoute';
+
 import './App.css';
 
 const App = () => {

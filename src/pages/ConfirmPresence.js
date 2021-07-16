@@ -1,11 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react';
+import {AuthContext} from '../context';
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+
 import {makeStyles} from '@material-ui/core/styles';
 import {ArrowBack, AddCircle} from '@material-ui/icons';
 import {Typography} from '@material-ui/core';
-import axios from 'axios';
-import {Link} from 'react-router-dom';
-import {Notification, ResponsiveDialog, SimpleCard, SpringModal} from '../components';
-import {AuthContext} from '../context';
+
+import Notification from '../components/Notification';
+import ResponsiveDialog from '../components/ResponsiveDialog';
+import SimpleCard from '../components/SimpleCard';
+import SpringModal from '../components/SpringModal';
 
 const useStyles = makeStyles((theme) => ({
   container: {

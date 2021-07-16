@@ -1,5 +1,8 @@
 import React, {useState, useContext} from 'react';
+import axios from 'axios';
 import {AuthContext} from '../context';
+import jwtDecode from 'jwt-decode';
+
 import {
   Avatar,
   Button,
@@ -12,9 +15,9 @@ import {
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
-import axios from 'axios';
-import {Notification} from '../components';
-import jwtDecode from 'jwt-decode';
+
+import Notification from '../components/Notification';
+
 
 function Copyright() {
   return (

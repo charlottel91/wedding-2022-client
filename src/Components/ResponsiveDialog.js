@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   Dialog,
   DialogActions,
@@ -7,7 +8,8 @@ import {
   useMediaQuery,
 } from '@material-ui/core';
 import {useTheme} from '@material-ui/core/styles';
-import {Button} from './index';
+
+import Button from './Button';
 
 export default function ResponsiveDialog({
   open,

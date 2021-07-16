@@ -1,5 +1,8 @@
 import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
+import {AuthContext} from '../context';
 import PropTypes from 'prop-types';
+
 import {
   AppBar,
   Container,
@@ -10,9 +13,9 @@ import {
   Slide,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
-import {Button, Header} from '../components';
-import {AuthContext} from '../context';
+
+import Button from '../components/Button';
+import Header from '../components/Header';
 
 const useStyles = makeStyles({
   toolbar: {

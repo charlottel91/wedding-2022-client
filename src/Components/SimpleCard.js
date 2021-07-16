@@ -1,8 +1,10 @@
 import React from 'react';
+
 import {makeStyles} from '@material-ui/core/styles';
 import {Card, CardActions, CardContent, Typography} from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
-import {Button} from './index';
+
+import Button from './Button';
 
 const useStyles = makeStyles({
   root: {
