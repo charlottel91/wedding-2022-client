@@ -1,16 +1,17 @@
-import {BrowserRouter as Router, Switch} from 'react-router-dom';
-import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {AuthProvider} from './context';
-// import PrivateRoute from './routing/PrivateRoute';
+import {ConfirmPresence, Home, SignIn} from './pages';
+import PrivateRoute from './routing/PrivateRoute';
+import './App.css';
 
 const App = () => {
   return (
     <Router>
       <AuthProvider>
         <Switch>
-          {/* <Route exact path="/login" component={SignIn} />
+          <Route exact path="/login" component={SignIn} />
           <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute exact path="/register" component={ConfirmPresence} /> */}
+          <PrivateRoute exact path="/register" component={ConfirmPresence} />
         </Switch>
       </AuthProvider>
     </Router>
