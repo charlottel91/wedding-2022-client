@@ -68,6 +68,7 @@ export default function SignIn({history}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      axios.defaults.timeout = 50000;
       const {data} = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/signin`,
         user
