@@ -1,9 +1,18 @@
 [build]
  command= "CI= npm run build"
  commandOrigin = "ui"
+
 [[redirects]]
   from = "/login"
   to = "https://charlotteetflorian.netlify.app"
   status = 200
   force = true
-  headers = {X-From = "Netlify"}
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
