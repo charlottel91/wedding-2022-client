@@ -8,7 +8,9 @@ const PrivateRoute = ({component: Component, ...rest}) => {
   return (
     <Route
       {...rest}
-      render={(props) => (!token ? <Redirect to="/login" /> : <Component {...props} />)}
+      render={(props) =>
+        !token ? <Redirect to="/connexion" /> : <Component {...props} />
+      }
     />
   );
 };
