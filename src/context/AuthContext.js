@@ -4,6 +4,7 @@ import jwtDecode from 'jwt-decode';
 
 let initialState = {
   user: null,
+  loading: false,
 };
 
 if (localStorage.getItem('token')) {
