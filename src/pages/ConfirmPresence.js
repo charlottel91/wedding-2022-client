@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {AuthContext} from '../context';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 
 import {makeStyles} from '@material-ui/core/styles';
-import {ArrowBack, AddCircle} from '@material-ui/icons';
+import {AddCircle} from '@material-ui/icons';
 import {Typography} from '@material-ui/core';
 
 import Notification from '../component/Notification';
@@ -25,20 +24,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     paddingBottom: '3rem',
   },
-  back: {
-    position: 'fixed',
-    color: 'black',
-    display: 'flex',
-  },
   containerUsers: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     flexWrap: 'wrap',
     backgroundColor: 'orange',
-  },
-  icon: {
-    // fontSize: 60,
   },
 }));
 
@@ -217,11 +208,6 @@ const ConfirmPresence = () => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.back}>
-        <Link to="/">
-          <ArrowBack />
-        </Link>
-      </div>
       <Typography variant="h4" className={classes.title}>
         Confirmer votre présence
       </Typography>
