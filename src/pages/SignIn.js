@@ -6,6 +6,7 @@ import jwtDecode from 'jwt-decode';
 import {
   Avatar,
   Button,
+  CircularProgress,
   CssBaseline,
   TextField,
   Link,
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({history}) {
   const classes = useStyles();
-  const {dispatch} = useContext(AuthContext);
+  const {dispatch, state} = useContext(AuthContext);
   const [user, setUser] = useState({
     name: '',
     password: '',
@@ -67,6 +68,7 @@ export default function SignIn({history}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch({type: 'LOADING_START'});
     try {
       axios.defaults.timeout = 50000;
       const {data} = await axios.post(
@@ -81,6 +83,7 @@ export default function SignIn({history}) {
       setError(response.data);
     }
     setTimeout(() => {
+      dispatch({type: 'LOADING_STOP'});
       setError();
     }, 3000);
   };
@@ -127,7 +130,7 @@ export default function SignIn({history}) {
             color="primary"
             className={classes.submit}
           >
-            Se connecter
+            {state.loading ? <CircularProgress /> : 'Se connecter'}
           </Button>
         </form>
         {error && <Notification type="error" text={error} />}
