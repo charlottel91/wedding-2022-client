@@ -65,8 +65,8 @@ const Home = (props) => {
   const handleLogOut = () => {
     dispatch({type: 'LOGOUT'});
     localStorage.removeItem('token');
-    // history.push('/login');
-  }; //clearing the context
+    props.history.push('/login');
+  };
 
   return (
     <React.Fragment>
