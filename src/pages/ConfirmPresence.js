@@ -10,6 +10,7 @@ import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
+import CarpoolingForm from '../component/CarpoolingForm';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -207,26 +208,29 @@ const ConfirmPresence = () => {
   }, []);
 
   return (
-    <div className={classes.container}>
-      <Typography variant="h4" className={classes.title}>
-        Confirmer votre présence
-      </Typography>
-      <div className={classes.containerUsers}>
-        {allGuests &&
-          allGuests.map((el, i) => (
-            <div key={i}>
-              <SimpleCard
-                title={el.firstname}
-                child={el.isChild ? 'Enfant' : 'Adulte'}
-                vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
-                brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
-                onClickModify={() => handleModifyGuest(i)}
-                deleteGuest={() => handleOpenDialog(i)}
-                registered={el.registered}
-              />
-            </div>
-          ))}
-        <AddCircle className={classes.icon} onClick={handleOpenForm} />
+    <div>
+      <div className={classes.container}>
+        <Typography variant="h4" className={classes.title}>
+          Confirmer votre présence
+        </Typography>
+        <div className={classes.containerUsers}>
+          {allGuests &&
+            allGuests.map((el, i) => (
+              <div key={i}>
+                <SimpleCard
+                  title={el.firstname}
+                  child={el.isChild ? 'Enfant' : 'Adulte'}
+                  vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
+                  brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
+                  onClickModify={() => handleModifyGuest(i)}
+                  deleteGuest={() => handleOpenDialog(i)}
+                  registered={el.registered}
+                />
+              </div>
+            ))}
+          <AddCircle className={classes.icon} onClick={handleOpenForm} />
+        </div>
+        <CarpoolingForm />
       </div>
       <SpringModal
         open={openForm}
