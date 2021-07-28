@@ -3,7 +3,7 @@
  commandOrigin = "ui"
 
 [[redirects]]
-  from = "/login"
+  from = "/connexion"
   to = "https://charlotteetflorian.netlify.app"
   status = 200
   force = true
