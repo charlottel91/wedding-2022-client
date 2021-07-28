@@ -249,7 +249,6 @@ const ConfirmPresence = () => {
   }, []);
 
   return (
-<<<<<<< HEAD
     <div>
       <div className={classes.container}>
         <Typography variant="h4" className={classes.title}>
@@ -279,28 +278,6 @@ const ConfirmPresence = () => {
           handleSubmit={handleSubmitCarpooling}
           error={errorCarpooling}
         />
-=======
-    <div className={classes.container}>
-      <Typography variant="h4" className={classes.title}>
-        Confirmer votre présence
-      </Typography>
-      <div className={classes.containerUsers}>
-        {allGuests &&
-          allGuests.map((el, i) => (
-            <div key={i}>
-              <SimpleCard
-                title={el.firstname}
-                child={el.isChild ? 'Enfant' : 'Adulte'}
-                vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
-                brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
-                onClickModify={() => handleModifyGuest(i)}
-                deleteGuest={() => handleOpenDialog(i)}
-                registered={el.registered}
-              />
-            </div>
-          ))}
-        <AddCircle className={classes.icon} onClick={handleOpenForm} />
->>>>>>> staging
       </div>
       <SpringModal
         open={openForm}
