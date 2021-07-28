@@ -44,6 +44,13 @@ const ConfirmPresence = () => {
     isVegetarian: '',
     presentBrunch: '',
   });
+  const [carpooling, setCarpooling] = useState({
+    role: '',
+    city: '',
+    nb_seat: '',
+  });
+  const [modifyCarpooling, setModifyCarpooling] = useState(false);
+  const [errorCarpooling, setErrorCarpooling] = useState('');
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -163,6 +170,7 @@ const ConfirmPresence = () => {
         guest
       );
       dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
+      dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
       setAllGuests(data.guests);
     } catch ({response}) {
       setErrorSaveAllGuests(response.data);
@@ -195,13 +203,42 @@ const ConfirmPresence = () => {
     }, 3000);
   };
 
+  const handleChangeCarpooling = (e) => {
+    setErrorCarpooling('');
+    setModifyCarpooling(true);
+    if (e.target.name === 'city') {
+      setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
+    } else {
+      setCarpooling({...carpooling, [e.target.name]: e.target.value});
+    }
+  };
+
+  const handleSubmitCarpooling = async (e) => {
+    e.preventDefault();
+    setModifyCarpooling(false);
+    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
+      try {
+        const {data} = await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
+          carpooling
+        );
+        dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
+        setCarpooling(...data.isCarpooling);
+      } catch (err) {
+        return err;
+      }
+    } else setErrorCarpooling('Tous les champs sont requis.');
+  };
+
   useEffect(async () => {
     try {
       const {data} = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}`
       );
       dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
+      dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
       setAllGuests(data.guests);
+      setCarpooling(...data.isCarpooling);
     } catch (err) {
       return err;
     }
@@ -230,7 +267,13 @@ const ConfirmPresence = () => {
             ))}
           <AddCircle className={classes.icon} onClick={handleOpenForm} />
         </div>
-        <CarpoolingForm />
+        <CarpoolingForm
+          modifyCarpooling={modifyCarpooling}
+          carpooling={carpooling}
+          handleChange={handleChangeCarpooling}
+          handleSubmit={handleSubmitCarpooling}
+          error={errorCarpooling}
+        />
       </div>
       <SpringModal
         open={openForm}
