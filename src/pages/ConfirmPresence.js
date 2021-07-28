@@ -205,7 +205,7 @@ const ConfirmPresence = () => {
 
   const handleChangeCarpooling = (e) => {
     setErrorCarpooling('');
-    setModifyCarpooling(true);
+    setModifyCarpooling(false);
     if (e.target.name === 'city') {
       setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
     } else {
@@ -215,7 +215,7 @@ const ConfirmPresence = () => {
 
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
-    setModifyCarpooling(false);
+    setModifyCarpooling(true);
     if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
       try {
         const {data} = await axios.post(
