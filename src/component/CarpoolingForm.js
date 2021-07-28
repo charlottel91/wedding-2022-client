@@ -2,14 +2,14 @@ import React from 'react';
 
 import {
   Card,
-  FormControl,
-  InputLabel,
+  FormGroup,
   MenuItem,
   Select,
   TextField,
   Typography,
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import Button from './Button';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,26 +21,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CarpoolingForm = () => {
+const CarpoolingForm = ({
+  carpooling,
+  error,
+  handleChange,
+  handleSubmit,
+  modifyCarpooling,
+}) => {
   const classes = useStyles();
 
   return (
     <Card>
-      <FormControl className={classes.formControl}>
+      <FormGroup className={classes.formControl} noValidate autoComplete="off">
         <Typography>Je souhaite faire du covoiturage en tant que </Typography>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          // value={age}
-          // onChange={handleChange}
-        >
-          <MenuItem value={1}>conducteur</MenuItem>
-          <MenuItem value={20}>passager</MenuItem>
+        <Select name="role" value={carpooling.role} onChange={handleChange}>
+          <MenuItem value={'DRIVER'}>conducteur</MenuItem>
+          <MenuItem value={'PASSENGER'}>passager</MenuItem>
         </Select>
         <Typography>au départ de </Typography>
-        <TextField id="standard-basic" label="Ville" />
-      </FormControl>
+        <TextField
+          name="city"
+          label="Ville"
+          value={carpooling.city}
+          onChange={handleChange}
+        />
+        <Typography>Nombre de places dont vous avez besoin ou de disponible :</Typography>
+        <Select name="nb_seat" value={carpooling.nb_seat} onChange={handleChange}>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+          <MenuItem value={4}>4</MenuItem>
+          <MenuItem value={5}>5</MenuItem>
+        </Select>
+        {error ? <Typography>{error}</Typography> : null}
+        <Button
+          disabled={modifyCarpooling}
+          text={carpooling._id && !modifyCarpooling ? 'Modifier' : 'Valider'}
+          onClick={handleSubmit}
+        />
+      </FormGroup>
     </Card>
   );
 };

@@ -24,6 +24,11 @@ export const AuthReducer = (state, action) => {
         ...state,
         user: {...state.user, guests: action.payload},
       };
+    case 'UPDATE_CARPOOLING':
+      return {
+        ...state,
+        user: {...state.user, isCarpooling: action.payload},
+      };
     default:
       state;
   }
