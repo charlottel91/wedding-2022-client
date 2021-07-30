@@ -49,7 +49,7 @@ const ConfirmPresence = () => {
     city: '',
     nb_seat: '',
   });
-  const [modifyCarpooling, setModifyCarpooling] = useState(false);
+  const [modifyCarpooling, setModifyCarpooling] = useState(true);
   const [errorCarpooling, setErrorCarpooling] = useState('');
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
@@ -216,7 +216,12 @@ const ConfirmPresence = () => {
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
     setModifyCarpooling(true);
-    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
+
+    if (
+      carpooling.role.length > 0 &&
+      carpooling.city.length > 0 &&
+      typeof carpooling.nb_seat === 'number'
+    ) {
       try {
         const {data} = await axios.post(
           `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,

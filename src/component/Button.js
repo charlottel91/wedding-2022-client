@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Button({text, onClick}) {
+export default function Button({disabled, text, onClick}) {
   const classes = useStyles();
 
   return (
@@ -19,6 +19,7 @@ export default function Button({text, onClick}) {
         focusRipple
         focusVisibleClassName={classes.focusVisible}
         onClick={onClick}
+        disabled={disabled}
       >
         <Typography component="span" variant="subtitle1" color="inherit">
           {text}
