@@ -13,9 +13,7 @@ import Sleep from '../pages/Sleep';
 
 const useStyles = makeStyles({
   toolbar: {
-    shaddow: 'none',
     backgroundColor: '#F4EDDE',
-    color: 'white',
     display: 'flex',
     justifyContent: 'flex-end',
   },
@@ -27,8 +25,8 @@ const useStyles = makeStyles({
   },
   section: {
     paddingRight: '2rem',
-    fontSize: '1em',
     color: 'brown',
+    textDecoration: 'none',
   },
 });
 
@@ -44,19 +42,46 @@ export default function HideAppBar() {
     <React.Fragment>
       <AppBar position="static" className="appBar">
         <Toolbar className={classes.toolbar}>
-          <NavLink to="/" className={classes.section}>
-            Accueil
-          </NavLink>
-          <NavLink to="/programme" className={classes.section}>
-            Programme
-          </NavLink>
-          <NavLink to="/confirmation" className={classes.section}>
-            Confirmer ma venue
-          </NavLink>
-          <NavLink to="/oùdormir" className={classes.section} variant="h2">
-            Se loger
-          </NavLink>
-          <Typography className={classes.section} variant="h2" onClick={handleLogOut}>
+          <Typography variant="h5">
+            <NavLink
+              exact
+              to="/"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              Accueil
+            </NavLink>
+            <NavLink
+              to="/programme"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              Programme
+            </NavLink>
+            <NavLink
+              to="/confirmation"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              Confirmer ma venue
+            </NavLink>
+            <NavLink
+              to="/oùdormir"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              Se loger
+            </NavLink>
+          </Typography>
+          <Typography className={classes.section} onClick={handleLogOut} variant="button">
             Se déconnecter
           </Typography>
         </Toolbar>

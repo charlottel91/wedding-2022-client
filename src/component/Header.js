@@ -1,19 +1,19 @@
 import React from 'react';
 
-import {makeStyles} from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 import Countdown from './Countdown';
 
 const useStyles = makeStyles({
   container: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
-  typography: {
-    marginRight: '10rem',
+  title: {
     textAlign: 'right',
-    fontSize: '3em',
   },
 });
 
@@ -21,14 +21,12 @@ export default function Header() {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Typography className={classes.typography}>
-        Charlotte
-        <br />
-        et
-        <br />
-        Florian
+      <Typography className={classes.title} variant="h1">
+        Charlotte et Florian
       </Typography>
-      <Countdown />
+      <div className={classes.countdown}>
+        <Countdown />
+      </div>
     </div>
   );
 }
