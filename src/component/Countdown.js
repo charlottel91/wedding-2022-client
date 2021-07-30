@@ -6,10 +6,10 @@ import '../style/countdown.css';
 
 const useStyles = makeStyles({
   root: {
+    width: '100%',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     textAlign: 'center',
-    paddingTop: '40px',
   },
 });
 
@@ -51,44 +51,42 @@ export default function Countdown() {
     <div className={classes.root}>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#7E2E84']]}
+        colors={[['#000']]}
         duration={daysDuration}
         initialRemainingTime={remainingTime}
       >
-        {({elapsedTime}) => renderTime('days', getTimeDays(daysDuration - elapsedTime))}
+        {({elapsedTime}) => renderTime('jrs', getTimeDays(daysDuration - elapsedTime))}
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#D14081']]}
+        colors={[['#000']]}
         duration={daySeconds}
         initialRemainingTime={remainingTime % daySeconds}
         onComplete={(totalElapsedTime) => [
           remainingTime - totalElapsedTime > hourSeconds,
         ]}
       >
-        {({elapsedTime}) => renderTime('hours', getTimeHours(daySeconds - elapsedTime))}
+        {({elapsedTime}) => renderTime('h', getTimeHours(daySeconds - elapsedTime))}
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#EF798A']]}
+        colors={[['#000']]}
         duration={hourSeconds}
         initialRemainingTime={remainingTime % hourSeconds}
         onComplete={(totalElapsedTime) => [
           remainingTime - totalElapsedTime > minuteSeconds,
         ]}
       >
-        {({elapsedTime}) =>
-          renderTime('minutes', getTimeMinutes(hourSeconds - elapsedTime))
-        }
+        {({elapsedTime}) => renderTime('mn', getTimeMinutes(hourSeconds - elapsedTime))}
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#218380']]}
+        colors={[['#000']]}
         duration={minuteSeconds}
         initialRemainingTime={remainingTime % minuteSeconds}
         onComplete={(totalElapsedTime) => [remainingTime - totalElapsedTime > 0]}
       >
-        {({elapsedTime}) => renderTime('seconds', getTimeSeconds(elapsedTime))}
+        {({elapsedTime}) => renderTime('s', getTimeSeconds(elapsedTime))}
       </CountdownCircleTimer>
     </div>
   );

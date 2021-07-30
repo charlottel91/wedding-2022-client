@@ -216,6 +216,7 @@ const ConfirmPresence = () => {
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
     setModifyCarpooling(true);
+
     if (
       carpooling.role.length > 0 &&
       carpooling.city.length > 0 &&

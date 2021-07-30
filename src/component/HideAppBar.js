@@ -1,59 +1,57 @@
 import React, {useContext} from 'react';
-import {NavLink} from 'react-router-dom';
 import {AuthContext} from '../context';
-import PropTypes from 'prop-types';
-
+import {NavLink} from 'react-router-dom';
 import PrivateRoute from '../routing/PrivateRoute';
+
+import {AppBar, Toolbar, Typography} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import HotelIcon from '@material-ui/icons/Hotel';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import ConfirmPresence from '../pages/ConfirmPresence';
 import Home from '../pages/Home';
-
-import {
-  AppBar,
-  Container,
-  CssBaseline,
-  Slide,
-  Toolbar,
-  Typography,
-  useScrollTrigger,
-} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-
-function HideOnScroll(props) {
-  const {children, window} = props;
-  const trigger = useScrollTrigger({target: window ? window() : undefined});
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
-
-HideOnScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-  window: PropTypes.func,
-};
+import Program from '../pages/Program';
+import Sleep from '../pages/Sleep';
 
 const useStyles = makeStyles({
+  appBarDesktop: {
+    ['@media (max-width:781px)']: {
+      display: 'none',
+    },
+  },
+  appBarMobile: {
+    top: 'auto',
+    bottom: '0',
+    ['@media (min-width:780px)']: {
+      display: 'none',
+    },
+  },
   toolbar: {
-    background: 'linear-gradient(45deg, #EFF9ED 10%, #1a6c09 60%)',
-    color: 'white',
+    backgroundColor: '#F4EDDE',
     display: 'flex',
-    justifyContent: 'flex-end',
+    ['@media (min-width:780px)']: {
+      justifyContent: 'flex-end',
+    },
+    ['@media (max-width:780px)']: {
+      justifyContent: 'space-between',
+    },
+  },
+  container: {
+    margin: 0,
+    backgroundColor: '#F4EDDE',
+    boxShadow: '0px 2px 0px #F4EDDE',
+    width: '100%',
   },
   section: {
     paddingRight: '2rem',
-    fontSize: '1.5em',
-  },
-  container: {
-    border: 'solid 2px black',
-    width: '100%',
-    padding: 50,
+    color: 'brown',
+    textDecoration: 'none',
   },
 });
 
-export default function HideAppBar(props) {
+export default function HideAppBar() {
   const classes = useStyles();
   const {dispatch} = useContext(AuthContext);
 
@@ -63,30 +61,93 @@ export default function HideAppBar(props) {
   };
   return (
     <React.Fragment>
-      <CssBaseline />
-      <HideOnScroll {...props}>
-        <AppBar>
-          <Toolbar className={classes.toolbar}>
-            <NavLink to="/" className={classes.section}>
+      <AppBar position="static" className={classes.appBarDesktop}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h5">
+            <NavLink
+              exact
+              to="/"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
+              Accueil
+            </NavLink>
+            <NavLink
+              to="/programme"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
               Programme
             </NavLink>
-            <NavLink to="/confirmation" className={classes.section}>
+            <NavLink
+              to="/confirmation"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
               Confirmer ma venue
             </NavLink>
-            <Typography className={classes.section} variant="h6">
+            <NavLink
+              to="/oùdormir"
+              className={classes.section}
+              activeStyle={{
+                fontWeight: 'bold',
+              }}
+            >
               Se loger
-            </Typography>
-            <Typography className={classes.section} variant="h6" onClick={handleLogOut}>
-              Se déconnecter
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </HideOnScroll>
-      <Toolbar />
-      <Container>
-        <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute exact path="/confirmation" component={ConfirmPresence} />
-      </Container>
+            </NavLink>
+          </Typography>
+          <Typography className={classes.section} onClick={handleLogOut} variant="button">
+            Se déconnecter
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <AppBar position="fixed" className={classes.appBarMobile}>
+        <Toolbar className={classes.toolbar}>
+          <NavLink
+            exact
+            to="/"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <HomeIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/programme"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <ReceiptIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/confirmation"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <CheckCircleOutlineIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/oùdormir"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <HotelIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+        </Toolbar>
+      </AppBar>
+      <PrivateRoute exact path="/" component={Home} />
+      <PrivateRoute exact path="/confirmation" component={ConfirmPresence} />
+      <PrivateRoute exact path="/program" component={Program} />
+      <PrivateRoute exact path="/program" component={Sleep} />
     </React.Fragment>
   );
 }
