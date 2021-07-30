@@ -5,6 +5,10 @@ import PrivateRoute from '../routing/PrivateRoute';
 
 import {AppBar, Toolbar, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import HotelIcon from '@material-ui/icons/Hotel';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import ConfirmPresence from '../pages/ConfirmPresence';
 import Home from '../pages/Home';
@@ -12,10 +16,27 @@ import Program from '../pages/Program';
 import Sleep from '../pages/Sleep';
 
 const useStyles = makeStyles({
+  appBarDesktop: {
+    ['@media (max-width:781px)']: {
+      display: 'none',
+    },
+  },
+  appBarMobile: {
+    top: 'auto',
+    bottom: '0',
+    ['@media (min-width:780px)']: {
+      display: 'none',
+    },
+  },
   toolbar: {
     backgroundColor: '#F4EDDE',
     display: 'flex',
-    justifyContent: 'flex-end',
+    ['@media (min-width:780px)']: {
+      justifyContent: 'flex-end',
+    },
+    ['@media (max-width:780px)']: {
+      justifyContent: 'space-between',
+    },
   },
   container: {
     margin: 0,
@@ -40,7 +61,7 @@ export default function HideAppBar() {
   };
   return (
     <React.Fragment>
-      <AppBar position="static" className="appBar">
+      <AppBar position="static" className={classes.appBarDesktop}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h5">
             <NavLink
@@ -84,6 +105,43 @@ export default function HideAppBar() {
           <Typography className={classes.section} onClick={handleLogOut} variant="button">
             Se déconnecter
           </Typography>
+        </Toolbar>
+      </AppBar>
+      <AppBar position="fixed" className={classes.appBarMobile}>
+        <Toolbar className={classes.toolbar}>
+          <NavLink
+            exact
+            to="/"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <HomeIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/programme"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <ReceiptIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/confirmation"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <CheckCircleOutlineIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
+          <NavLink
+            to="/oùdormir"
+            activeStyle={{
+              fontWeight: 'bold',
+            }}
+          >
+            <HotelIcon style={{fontSize: '2.5em'}} />
+          </NavLink>
         </Toolbar>
       </AppBar>
       <PrivateRoute exact path="/" component={Home} />

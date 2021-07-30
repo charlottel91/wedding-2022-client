@@ -96,6 +96,9 @@ const theme = createTheme({
       '&:hover': {
         fontFamily: '"BrandonBlack", sans-serif',
       },
+      ['@media (max-width:780px)']: {
+        display: 'none',
+      },
     },
     button: {
       fontSize: '0.8em',
