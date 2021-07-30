@@ -1,19 +1,25 @@
 import React from 'react';
 
-import {Container} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Header from '../component/Header';
+import Saul from '../assets/saul_pleureur.png';
 
 const useStyles = makeStyles({
-  section: {
-    paddingRight: '2rem',
-    fontSize: '1.5em',
-  },
-  container: {
-    border: 'solid 2px black',
+  containerHeader: {
+    position: 'fixed',
+    backgroundColor: '#F4EDDE',
     width: '100%',
-    padding: 50,
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  image: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+    width: 's',
   },
 });
 
@@ -22,12 +28,10 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <Container className={classes.container}>
+      <img src={Saul} className={classes.image} />
+      <div className={classes.containerHeader}>
         <Header />
-      </Container>
-      <Container className={classes.container}>
-        Programme bsjhkvvdklcn:ejbchjvekdh,bcevgrvfckaebfcnjaksgdjcvj sjdb
-      </Container>
+      </div>
     </React.Fragment>
   );
 };
