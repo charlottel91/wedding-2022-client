@@ -8,14 +8,16 @@ import './App.css';
 
 const App = () => {
   return (
-    <Router>
-      <AuthProvider>
-        <Switch>
-          <Route exact path="/connexion" component={SignIn} />
-          <HideAppBar />
-        </Switch>
-      </AuthProvider>
-    </Router>
+    <div className="App">
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <Route exact path="/connexion" component={SignIn} />
+            <HideAppBar />
+          </Switch>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 };
 
