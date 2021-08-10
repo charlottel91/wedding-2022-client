@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     textAlign: 'center',
   },
 });

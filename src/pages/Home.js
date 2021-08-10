@@ -2,8 +2,8 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 
 import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
+
 import {makeStyles} from '@material-ui/core/styles';
-// import {} from '@material-ui/core';
 
 import Countdown from '../component/Countdown';
 import ImgWeb from '../assets/home_web.jpg';
@@ -87,6 +87,7 @@ const Home = () => {
   const theme = useTheme();
   const showImgWeb = useMediaQuery(theme.breakpoints.up('lg'));
   const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
+
   const {dispatch} = useContext(AuthContext);
 
   const handleLogOut = () => {

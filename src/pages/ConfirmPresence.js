@@ -62,7 +62,7 @@ const ConfirmPresence = () => {
     city: '',
     nb_seat: '',
   });
-  const [modifyCarpooling, setModifyCarpooling] = useState(false);
+  const [modifyCarpooling, setModifyCarpooling] = useState(true);
   const [errorCarpooling, setErrorCarpooling] = useState('');
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);

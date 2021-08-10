@@ -64,6 +64,8 @@ const brandonLightItalic = {
 
 const brandonLight = {
   fontFamily: 'BrandonLight',
+
+
   fontDisplay: 'swap',
   fontWeight: 50,
   src: `

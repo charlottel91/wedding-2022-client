@@ -9,7 +9,12 @@ import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import HotelIcon from '@material-ui/icons/Hotel';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+
 import {makeStyles} from '@material-ui/core/styles';
+import HomeIcon from '@material-ui/icons/Home';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import HotelIcon from '@material-ui/icons/Hotel';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import ConfirmPresence from '../pages/ConfirmPresence';
 import Home from '../pages/Home';
@@ -64,7 +69,6 @@ export default function HideAppBar() {
   return (
     <React.Fragment>
       <div className={classes.appBarDesktop}>
-        {/* <HideOnScroll {...props}> */}
         <AppBar position="fixed" className={classes.appBarDesktopContainer}>
           <Toolbar className={classes.toolbar}>
             <Typography className={classes.section} variant="h5">
@@ -123,7 +127,6 @@ export default function HideAppBar() {
             </Typography>
           </Toolbar>
         </AppBar>
-        {/* </HideOnScroll> */}
         <div id="accueil">
           <Home />
         </div>
