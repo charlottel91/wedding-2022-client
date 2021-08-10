@@ -9,6 +9,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import HotelIcon from '@material-ui/icons/Hotel';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import MailIcon from '@material-ui/icons/Mail';
 import {makeStyles} from '@material-ui/core/styles';
 
 import ConfirmPresence from '../pages/ConfirmPresence';
@@ -47,9 +48,20 @@ const useStyles = makeStyles({
     },
   },
   section: {
-    paddingRight: '2rem',
+    paddingRight: '0.5em',
     color: '#F2F2F2',
     textDecoration: 'none',
+  },
+  logout: {
+    position: 'absolute',
+    right: '2rem',
+  },
+  icon: {
+    color: '#F2F2F2',
+    opacity: '0.7',
+    '&:hover': {
+      opacity: '1',
+    },
   },
 });
 
@@ -66,55 +78,55 @@ export default function HideAppBar() {
       <div className={classes.appBarDesktop}>
         <AppBar position="fixed" className={classes.appBarDesktopContainer}>
           <Toolbar className={classes.toolbar}>
-            <Typography className={classes.section} variant="h5">
-              <NavHashLink
-                smooth
-                to="/#accueil"
-                className={classes.section}
-                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-              >
+            <NavHashLink
+              smooth
+              to="/#accueil"
+              className={classes.section}
+              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+            >
+              <Typography className={classes.section} variant="h5">
                 Accueil
-              </NavHashLink>
-            </Typography>
-            <Typography className={classes.section} variant="h5">
-              <NavHashLink
-                smooth
-                to="/#programme"
-                className={classes.section}
-                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-              >
+              </Typography>
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              to="/#programme"
+              className={classes.section}
+              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+            >
+              <Typography className={classes.section} variant="h5">
                 Programme
-              </NavHashLink>
-            </Typography>
-            <Typography className={classes.section} variant="h5">
-              <NavHashLink
-                smooth
-                to="/#confirmation-présence"
-                className={classes.section}
-                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-              >
+              </Typography>
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              to="/#confirmation-présence"
+              className={classes.section}
+              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+            >
+              <Typography className={classes.section} variant="h5">
                 Confirmer ma venue
-              </NavHashLink>
-            </Typography>
-            <Typography className={classes.section} variant="h5">
-              <NavHashLink
-                smooth
-                to="/#où-dormir"
-                className={classes.section}
-                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-              >
+              </Typography>
+            </NavHashLink>
+            <NavHashLink
+              smooth
+              to="/#où-dormir"
+              className={classes.section}
+              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+            >
+              <Typography className={classes.section} variant="h5">
                 Se loger
-              </NavHashLink>
-            </Typography>
+              </Typography>
+            </NavHashLink>
             <Typography className={classes.section} variant="h5">
               <a href="#urne">Urne</a>
             </Typography>
             <Typography
-              className={classes.section}
+              className={classes.logout}
               onClick={handleLogOut}
               variant="button"
             >
@@ -139,37 +151,45 @@ export default function HideAppBar() {
         <AppBar position="fixed" className={classes.appBarMobileContainer}>
           <Toolbar className={classes.toolbar}>
             <NavLink
-              exact
-              to="/"
-              activeStyle={{
-                fontWeight: 'bold',
-              }}
-            >
-              <HomeIcon style={{fontSize: '2.5em'}} />
-            </NavLink>
-            <NavLink
               to="/programme"
               activeStyle={{
-                fontWeight: 'bold',
+                opacity: 1,
               }}
             >
-              <ReceiptIcon style={{fontSize: '2.5em'}} />
+              <ReceiptIcon className={classes.icon} />
             </NavLink>
             <NavLink
               to="/confirmation-présence"
               activeStyle={{
-                fontWeight: 'bold',
+                opacity: 1,
               }}
             >
-              <CheckCircleOutlineIcon style={{fontSize: '2.5em'}} />
+              <CheckCircleOutlineIcon className={classes.icon} />
+            </NavLink>
+            <NavLink
+              exact
+              to="/"
+              activeStyle={{
+                opacity: 1,
+              }}
+            >
+              <HomeIcon className={classes.icon} />
             </NavLink>
             <NavLink
               to="/où-dormir"
               activeStyle={{
-                fontWeight: 'bold',
+                opacity: 1,
               }}
             >
-              <HotelIcon style={{fontSize: '2.5em'}} />
+              <HotelIcon className={classes.icon} />
+            </NavLink>
+            <NavLink
+              to="/**"
+              activeStyle={{
+                opacity: 1,
+              }}
+            >
+              <MailIcon className={classes.icon} />
             </NavLink>
           </Toolbar>
         </AppBar>
