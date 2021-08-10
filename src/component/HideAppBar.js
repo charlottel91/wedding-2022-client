@@ -5,11 +5,6 @@ import PrivateRoute from '../routing/PrivateRoute';
 import {NavHashLink} from 'react-router-hash-link';
 
 import {AppBar, Toolbar, Typography} from '@material-ui/core';
-import HomeIcon from '@material-ui/icons/Home';
-import ReceiptIcon from '@material-ui/icons/Receipt';
-import HotelIcon from '@material-ui/icons/Hotel';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-
 import {makeStyles} from '@material-ui/core/styles';
 import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
