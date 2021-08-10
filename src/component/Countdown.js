@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     textAlign: 'center',
   },
 });
@@ -19,8 +19,8 @@ const daySeconds = 86400;
 
 const timerProps = {
   isPlaying: true,
-  size: 120,
-  strokeWidth: 6,
+  size: 80,
+  strokeWidth: 5,
 };
 
 const renderTime = (dimension, time) => {

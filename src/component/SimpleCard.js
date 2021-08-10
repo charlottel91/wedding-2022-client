@@ -1,28 +1,15 @@
 import React from 'react';
 
 import {makeStyles} from '@material-ui/core/styles';
-import {Card, CardActions, CardContent, Typography} from '@material-ui/core';
+import {Card, CardContent, Typography} from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 import Button from './Button';
 
 const useStyles = makeStyles({
   root: {
-    padding: '1rem',
-    // width: '100%',
-    // height: '100%'
-    // maxWidth: 500,
-    // flexBasis: 'calc(33.33333% - 0.83333rem)',
-    // minHeight: '5rem',
-    // margin: '0.625rem 0'
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  pos: {
-    marginBottom: 12,
+    marginRight: '2rem',
+    maxWidth: '10rem',
   },
   crossIcon: {
     float: 'right',
@@ -30,7 +17,8 @@ const useStyles = makeStyles({
 });
 
 export default function SimpleCard({
-  title,
+  fistname,
+  lastname,
   child,
   vegetarian,
   brunch,
@@ -43,8 +31,9 @@ export default function SimpleCard({
     <Card className={classes.root}>
       <CancelIcon className={classes.crossIcon} onClick={deleteGuest} />
       <CardContent>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {title}
+        <Typography variant="h5">
+          {fistname.charAt(0).toUpperCase() + fistname.slice(1)}{' '}
+          {lastname.charAt(0).toUpperCase() + lastname.slice(1)}
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           {child}
@@ -56,9 +45,7 @@ export default function SimpleCard({
           {brunch}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button text="Modifier" onClick={onClickModify} />
-      </CardActions>
+      <Button text="Modifier" onClick={onClickModify} />
     </Card>
   );
 }

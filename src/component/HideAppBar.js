@@ -2,11 +2,9 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import PrivateRoute from '../routing/PrivateRoute';
-
-import PropTypes from 'prop-types';
 import {NavHashLink} from 'react-router-hash-link';
 
-import {AppBar, Toolbar, Typography, Slide, useScrollTrigger} from '@material-ui/core';
+import {AppBar, Toolbar, Typography} from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import HotelIcon from '@material-ui/icons/Hotel';
@@ -31,7 +29,6 @@ const useStyles = makeStyles({
   },
   appBarDesktopContainer: {
     width: '100%',
-    // position: 'fixed',
     backgroundColor: 'rgba(1, 1, 1, 0)',
   },
   appBarMobileContainer: {
@@ -56,23 +53,7 @@ const useStyles = makeStyles({
   },
 });
 
-function HideOnScroll(props) {
-  const {children, window} = props;
-  const trigger = useScrollTrigger({target: window ? window() : undefined});
-
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
-
-HideOnScroll.propTypes = {
-  children: PropTypes.element.isRequired,
-  window: PropTypes.func,
-};
-
-export default function HideAppBar(props) {
+export default function HideAppBar() {
   const classes = useStyles();
   const {dispatch} = useContext(AuthContext);
 
@@ -83,66 +64,66 @@ export default function HideAppBar(props) {
   return (
     <React.Fragment>
       <div className={classes.appBarDesktop}>
-        <HideOnScroll {...props}>
-          <AppBar position="fixed" className={classes.appBarDesktopContainer}>
-            <Toolbar className={classes.toolbar}>
-              <Typography className={classes.section} variant="h5">
-                <NavHashLink
-                  smooth
-                  to="/#accueil"
-                  className={classes.section}
-                  activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                  activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-                >
-                  Accueil
-                </NavHashLink>
-              </Typography>
-              <Typography className={classes.section} variant="h5">
-                <NavHashLink
-                  smooth
-                  to="/#programme"
-                  className={classes.section}
-                  activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                  activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-                >
-                  Programme
-                </NavHashLink>
-              </Typography>
-              <Typography className={classes.section} variant="h5">
-                <NavHashLink
-                  smooth
-                  to="/#confirmation-présence"
-                  className={classes.section}
-                  activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                  activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-                >
-                  Confirmer ma venue
-                </NavHashLink>
-              </Typography>
-              <Typography className={classes.section} variant="h5">
-                <NavHashLink
-                  smooth
-                  to="/#où-dormir"
-                  className={classes.section}
-                  activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
-                  activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-                >
-                  Se loger
-                </NavHashLink>
-              </Typography>
-              <Typography className={classes.section} variant="h5">
-                <a href="#urne">Urne</a>
-              </Typography>
-              <Typography
+        {/* <HideOnScroll {...props}> */}
+        <AppBar position="fixed" className={classes.appBarDesktopContainer}>
+          <Toolbar className={classes.toolbar}>
+            <Typography className={classes.section} variant="h5">
+              <NavHashLink
+                smooth
+                to="/#accueil"
                 className={classes.section}
-                onClick={handleLogOut}
-                variant="button"
+                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
               >
-                Se déconnecter
-              </Typography>
-            </Toolbar>
-          </AppBar>
-        </HideOnScroll>
+                Accueil
+              </NavHashLink>
+            </Typography>
+            <Typography className={classes.section} variant="h5">
+              <NavHashLink
+                smooth
+                to="/#programme"
+                className={classes.section}
+                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+              >
+                Programme
+              </NavHashLink>
+            </Typography>
+            <Typography className={classes.section} variant="h5">
+              <NavHashLink
+                smooth
+                to="/#confirmation-présence"
+                className={classes.section}
+                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+              >
+                Confirmer ma venue
+              </NavHashLink>
+            </Typography>
+            <Typography className={classes.section} variant="h5">
+              <NavHashLink
+                smooth
+                to="/#où-dormir"
+                className={classes.section}
+                activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
+                activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+              >
+                Se loger
+              </NavHashLink>
+            </Typography>
+            <Typography className={classes.section} variant="h5">
+              <a href="#urne">Urne</a>
+            </Typography>
+            <Typography
+              className={classes.section}
+              onClick={handleLogOut}
+              variant="button"
+            >
+              Se déconnecter
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        {/* </HideOnScroll> */}
         <div id="accueil">
           <Home />
         </div>

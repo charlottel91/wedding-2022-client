@@ -7,6 +7,15 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    paddingTop: '5px',
+    paddingBottom: '5px',
+    backgroundColor: '#BF8969',
+    borderRadius: '3px',
+    color: '#F2F2F2',
+    '&:hover, &$focusVisible': {
+      opacity: 0.5,
+      fontWeight: 'bold',
+    },
   },
 }));
 
@@ -15,11 +24,7 @@ export default function Button({text, onClick}) {
 
   return (
     <div className={classes.root}>
-      <ButtonBase
-        focusRipple
-        focusVisibleClassName={classes.focusVisible}
-        onClick={onClick}
-      >
+      <ButtonBase onClick={onClick}>
         <Typography component="span" variant="subtitle1" color="inherit">
           {text}
         </Typography>
