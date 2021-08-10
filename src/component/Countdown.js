@@ -19,8 +19,8 @@ const daySeconds = 86400;
 
 const timerProps = {
   isPlaying: true,
-  size: 120,
-  strokeWidth: 6,
+  size: 80,
+  strokeWidth: 5,
 };
 
 const renderTime = (dimension, time) => {
@@ -51,7 +51,7 @@ export default function Countdown() {
     <div className={classes.root}>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#000']]}
+        colors={[['#F2F2F2']]}
         duration={daysDuration}
         initialRemainingTime={remainingTime}
       >
@@ -59,7 +59,7 @@ export default function Countdown() {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#000']]}
+        colors={[['#F2F2F2']]}
         duration={daySeconds}
         initialRemainingTime={remainingTime % daySeconds}
         onComplete={(totalElapsedTime) => [
@@ -70,7 +70,7 @@ export default function Countdown() {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#000']]}
+        colors={[['#F2F2F2']]}
         duration={hourSeconds}
         initialRemainingTime={remainingTime % hourSeconds}
         onComplete={(totalElapsedTime) => [
@@ -81,7 +81,7 @@ export default function Countdown() {
       </CountdownCircleTimer>
       <CountdownCircleTimer
         {...timerProps}
-        colors={[['#000']]}
+        colors={[['#F2F2F2']]}
         duration={minuteSeconds}
         initialRemainingTime={remainingTime % minuteSeconds}
         onComplete={(totalElapsedTime) => [remainingTime - totalElapsedTime > 0]}

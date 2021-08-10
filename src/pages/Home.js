@@ -1,18 +1,19 @@
 import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 
-import {Typography} from '@material-ui/core';
+import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
+
 import {makeStyles} from '@material-ui/core/styles';
 
 import Countdown from '../component/Countdown';
-import Saul from '../assets/saul_pleureur.png';
+import ImgWeb from '../assets/home_web.jpg';
+import ImgIpad from '../assets/home_iPad.jpg';
+import ImgPhone from '../assets/home_phone.jpg';
 
 const useStyles = makeStyles({
   container: {
-    position: 'fixed',
-    backgroundColor: '#F4EDDE',
-    width: '100%',
-    minHeight: '100vh',
+    backgroundColor: 'black',
+    height: '100vh',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -21,22 +22,48 @@ const useStyles = makeStyles({
       minHeight: '100%',
     },
   },
-  image: {
-    zIndex: 1,
-    ['@media (min-width:780px)']: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-    },
-    ['@media (max-width:780px)']: {
-      display: 'flex',
-      position: 'absolute',
-    },
+  image_desktop: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+    // ['@media (min-width:780px)']: {
+    //   display: 'none',
+    // },
+  },
+  image_ipad: {
+    // ['@media (max-width:780px && min-width:375px)']: {
+    //   display: 'none',
+    // },
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  image_phone: {
+    // ['@media (max-width:375px)']: {
+    //   display: 'none',
+    // },
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
   },
   title: {
+    zIndex: 1,
     flex: '3',
     display: 'flex',
     alignItems: 'center',
+    color: '#F2F2F2',
   },
   countdown: {
     flex: '1',
@@ -57,6 +84,10 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const showImgWeb = useMediaQuery(theme.breakpoints.up('lg'));
+  const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
+
   const {dispatch} = useContext(AuthContext);
 
   const handleLogOut = () => {
@@ -66,7 +97,11 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <img src={Saul} className={classes.image} />
+      {showImgWeb && <img src={ImgWeb} className={classes.image_desktop} />}
+      {!showImgPhone && !showImgWeb ? (
+        <img src={ImgIpad} className={classes.image_ipad} />
+      ) : null}
+      {showImgPhone && <img src={ImgPhone} className={classes.image_phone} />}
       <div className={classes.container}>
         <Typography className={classes.title} variant="h1">
           Charlotte et Florian

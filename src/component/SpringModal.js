@@ -19,20 +19,30 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
+    ['@media (min-width:780px)']: {
+      width: '40%',
+    },
+    width: '90%',
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
   root: {
     display: 'flex',
     flexDirection: 'column',
+    padding: 25,
+    paddingBottom: 50,
   },
   textfield: {
-    margin: 5,
+    margin: 10,
   },
   textError: {
     color: 'red',
+  },
+  button: {
+    position: 'absolute',
+    width: '100%',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 }));
 
@@ -168,7 +178,9 @@ export default function SpringModal({
             {errorText && (
               <Typography className={classes.textError}>{errorText}</Typography>
             )}
-            <Button text="Valider" onClick={handleChangeSubmit} />
+            <div className={classes.button}>
+              <Button text="Valider" onClick={handleChangeSubmit} />
+            </div>
           </FormControl>
         </div>
       </Modal>

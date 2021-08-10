@@ -11,26 +11,39 @@ import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
 import CarpoolingForm from '../component/CarpoolingForm';
+import picture from '../assets/home_web.jpg';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    margin: '2rem',
+const useStyles = makeStyles(() => ({
+  containerPage: {
+    width: '100%',
+    minHeight: '100vh',
+    backgroundImage: `url(${picture})`,
+    display: 'flex',
+    flexDirection: 'column',
   },
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
+  container: {
+    flex: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    padding: '2em',
   },
   title: {
-    paddingBottom: '3rem',
+    paddingTop: '1.5em',
+    color: '#F2F2F2',
+    fontWeight: 'bold',
   },
   containerUsers: {
+    marginBottom: '1em',
+    padding: '1em',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    flexWrap: 'wrap',
-    backgroundColor: 'orange',
+    backgroundColor: '#F2F2F2',
+  },
+  iconAdd: {
+    width: 60,
+    height: 60,
   },
 }));
 
@@ -216,12 +229,7 @@ const ConfirmPresence = () => {
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
     setModifyCarpooling(true);
-
-    if (
-      carpooling.role.length > 0 &&
-      carpooling.city.length > 0 &&
-      typeof carpooling.nb_seat === 'number'
-    ) {
+    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
       try {
         const {data} = await axios.post(
           `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
@@ -250,17 +258,18 @@ const ConfirmPresence = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.containerPage}>
+      <Typography variant="h4" className={classes.title}>
+        Confirmer votre présence
+      </Typography>
       <div className={classes.container}>
-        <Typography variant="h4" className={classes.title}>
-          Confirmer votre présence
-        </Typography>
         <div className={classes.containerUsers}>
           {allGuests &&
             allGuests.map((el, i) => (
               <div key={i}>
                 <SimpleCard
-                  title={el.firstname}
+                  fistname={el.firstname}
+                  lastname={el.lastname}
                   child={el.isChild ? 'Enfant' : 'Adulte'}
                   vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
                   brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
@@ -270,7 +279,7 @@ const ConfirmPresence = () => {
                 />
               </div>
             ))}
-          <AddCircle className={classes.icon} onClick={handleOpenForm} />
+          <AddCircle className={classes.iconAdd} onClick={handleOpenForm} />
         </div>
         <CarpoolingForm
           modifyCarpooling={modifyCarpooling}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import {createTheme} from '@material-ui/core/styles';
 import Allison from '../fonts/Allison_Script.ttf';
@@ -8,7 +9,7 @@ import BrandonLight from '../fonts/brandon-grotesque-light.ttf';
 
 const allison = {
   fontFamily: 'Allison',
-  fontStyle: 'normal',
+  // fontStyle: '#7D593F',
   fontDisplay: 'swap',
   fontWeight: 100,
   src: `
@@ -50,9 +51,8 @@ const brandonBlack = {
 
 const brandonLightItalic = {
   fontFamily: 'BrandonLightItalic',
-  // fontStyle: 'black',
+  fontStyle: 'italic',
   fontDisplay: 'swap',
-  // fontWeight: 100,
   src: `
    local('BrandonLightItalic'),
    local('BrandonLightItalic'),
@@ -64,7 +64,8 @@ const brandonLightItalic = {
 
 const brandonLight = {
   fontFamily: 'BrandonLight',
-  // fontStyle: 'black',
+
+
   fontDisplay: 'swap',
   fontWeight: 50,
   src: `
@@ -84,10 +85,14 @@ const theme = createTheme({
       'Allison',
       'BrandonBlack',
       'BrandonLight',
+      'BrandonLightItalic',
       'sans-serif',
     ].join(','),
     h1: {
-      fontSize: '9em',
+      ['@media (min-width:780px)']: {
+        fontSize: '9em',
+      },
+      fontSize: '6em',
       fontFamily: '"Allison", Open Sans',
     },
     h5: {
@@ -99,6 +104,14 @@ const theme = createTheme({
       ['@media (max-width:780px)']: {
         display: 'none',
       },
+    },
+    h4: {
+      fontSize: '3em',
+      fontFamily: '"BrandonBlack", Open Sans',
+    },
+    body2: {
+      fontSize: '1.2em',
+      fontFamily: '"BrandonLightItalic", sans-serif',
     },
     button: {
       fontSize: '0.8em',
