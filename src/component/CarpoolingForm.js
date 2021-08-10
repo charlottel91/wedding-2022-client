@@ -54,11 +54,7 @@ const CarpoolingForm = ({
           <MenuItem value={5}>5</MenuItem>
         </Select>
         {error ? <Typography>{error}</Typography> : null}
-        <Button
-          disabled={modifyCarpooling}
-          text={carpooling._id && !modifyCarpooling ? 'Modifier' : 'Valider'}
-          onClick={handleSubmit}
-        />
+        <Button disabled={modifyCarpooling} text="Valider" onClick={handleSubmit} />
       </FormGroup>
     </Card>
   );
