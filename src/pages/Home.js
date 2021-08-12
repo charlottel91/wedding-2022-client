@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 
-import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
-
+import {Button, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Countdown from '../component/Countdown';
@@ -64,6 +64,9 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     color: '#F2F2F2',
+    ['@media (max-width:780px)']: {
+      flex: '2',
+    },
   },
   countdown: {
     flex: '1',
@@ -80,6 +83,17 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
+  logout: {
+    ['@media (min-width:780px)']: {
+      display: 'none',
+    },
+    ['@media (max-width:780px)']: {
+      position: 'absolute',
+      top: '1.5rem',
+      right: '0.5rem',
+      color: '#F2F2F2',
+    },
+  },
 });
 
 const Home = () => {
@@ -90,7 +104,8 @@ const Home = () => {
 
   const {dispatch} = useContext(AuthContext);
 
-  const handleLogOut = () => {
+  const handleLogOut = (e) => {
+    e.preventDefault();
     dispatch({type: 'LOGOUT'});
     localStorage.removeItem('token');
   };
@@ -109,9 +124,9 @@ const Home = () => {
         <div className={classes.countdown}>
           <Countdown />
         </div>
-        <Typography className={classes.section} onClick={handleLogOut} variant="button">
-          Se déconnecter
-        </Typography>
+        <Button className={classes.logout} onClick={(e) => handleLogOut(e)}>
+          <ExitToAppIcon />
+        </Button>
       </div>
     </React.Fragment>
   );
