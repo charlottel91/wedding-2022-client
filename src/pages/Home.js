@@ -8,7 +8,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Countdown from '../component/Countdown';
 import ImgWeb from '../assets/home_web.jpg';
 import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_phone.jpg';
+import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles({
   container: {
