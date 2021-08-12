@@ -88,6 +88,7 @@ const useStyles = makeStyles({
       display: 'none',
     },
     ['@media (max-width:780px)']: {
+      zIndex: 1,
       position: 'absolute',
       top: '1.5rem',
       right: '0.5rem',
