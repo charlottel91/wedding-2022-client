@@ -19,7 +19,7 @@ import Sleep from '../pages/Sleep';
 
 const useStyles = makeStyles({
   appBarDesktop: {
-    ['@media (max-width:781px)']: {
+    ['@media (max-width:780px)']: {
       display: 'none',
     },
   },
