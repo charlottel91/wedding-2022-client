@@ -10,28 +10,25 @@ import Plates from '../assets/plate.svg';
 
 const useStyles = makeStyles({
   container: {
-    backgroundColor: '#FFF',
+    backgroundColor: '#FEFEFE',
     width: '100%',
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     ['@media (min-width:780px)']: {
-      padding: '7rem 0',
+      padding: '6rem 0',
     },
     ['@media (max-width:780px)']: {
       padding: '1rem',
     },
   },
-  title: {
-    flex: 1,
-  },
   containerPage: {
     ['@media (max-width:780px)']: {
       flex: 3,
       paddingBottom: '1.5rem',
+      justifyContent: 'center',
     },
-    flex: 6,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',

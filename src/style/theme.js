@@ -40,12 +40,7 @@ const theme = createTheme({
       fontSize: '1.5em',
     },
     h5: {
-      ['@media (min-width:1280px)']: {
-        fontSize: '1.3em',
-      },
-      ['@media (max-width:1280px)']: {
-        fontSize: '1.1em',
-      },
+      fontSize: '1rem',
       fontFamily: 'Montserrat, sans-serif',
       '&:hover': {
         fontFamily: 'Montserrat, sans-serif',
@@ -60,18 +55,11 @@ const theme = createTheme({
       fontFamily: '"Allison", Open Sans',
     },
     body1: {
-      ['@media (min-width:1280px)']: {
-        fontSize: '1.5em',
-      },
-      ['@media (max-width:1280px && min-width:380px)']: {
-        fontSize: '1.1em',
-        padding: '1rem',
-      },
-      ['@media (max-width:380px)']: {
+      ['@media (max-width:370px)']: {
         fontSize: '0.7em',
         padding: '1rem',
       },
-      fontSize: '1em',
+      fontSize: '1rem',
       fontFamily: 'Montserrat, sans-serif',
     },
     body2: {
