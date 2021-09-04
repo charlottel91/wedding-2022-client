@@ -12,12 +12,10 @@ import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles({
   container: {
-    backgroundColor: 'black',
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     ['@media (max-width:780px)']: {
       minHeight: '100%',
     },
@@ -30,14 +28,8 @@ const useStyles = makeStyles({
     left: 0,
     right: 0,
     margin: 'auto',
-    // ['@media (min-width:780px)']: {
-    //   display: 'none',
-    // },
   },
   image_ipad: {
-    // ['@media (max-width:780px && min-width:375px)']: {
-    //   display: 'none',
-    // },
     zIndex: 0,
     width: '100%',
     height: '100%',
@@ -47,9 +39,6 @@ const useStyles = makeStyles({
     margin: 'auto',
   },
   image_phone: {
-    // ['@media (max-width:375px)']: {
-    //   display: 'none',
-    // },
     zIndex: 0,
     width: '100%',
     height: '100%',
@@ -59,17 +48,13 @@ const useStyles = makeStyles({
     margin: 'auto',
   },
   title: {
+    margin: 'auto',
     zIndex: 1,
-    flex: '3',
-    display: 'flex',
-    alignItems: 'center',
+    textAlign: 'center',
     color: '#F2F2F2',
-    ['@media (max-width:780px)']: {
-      flex: '2',
-    },
   },
   countdown: {
-    flex: '1',
+    margin: 'auto',
     ['@media (min-width:780px)']: {
       width: '40%',
     },
