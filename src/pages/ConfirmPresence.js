@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F2F2F2',
+    backgroundColor: 'rgb(0, 0, 0, 0.6)',
   },
   iconAdd: {
     width: 60,
