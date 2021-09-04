@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     ['@media (min-width:780px)']: {
-      padding: '6rem 0',
+      padding: '6rem 1rem',
     },
     ['@media (max-width:780px)']: {
       padding: '1rem',
@@ -43,9 +43,12 @@ const useStyles = makeStyles({
   },
   section: {
     flex: '50%',
+    display: 'flex',
+    flexDirection: 'column',
   },
   img: {
     width: '60%',
+    margin: 'auto',
   },
   line: {
     margin: '2rem 15rem',
@@ -88,9 +91,11 @@ const Program = () => {
         <Typography variant="body1">
           Nous vous invitons à nous rejoindre à 15h pour célébrer la cérémonie religieuse
           en l&apos;
-          <Box style={{color: '#1A8205', display: 'inline'}}>Eglise de Bellac</Box>. Nous
-          nous dirigerons ensuite vers le{' '}
-          <Box style={{color: '#1A8205', display: 'inline'}}>
+          <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
+            Eglise de Bellac
+          </Box>
+          . Nous nous dirigerons ensuite vers le{' '}
+          <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
             Domaine du Grand Echérat{' '}
           </Box>
           (commune de Blond - 87300) pour le cocktail, suivi par le dîner. Nous
