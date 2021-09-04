@@ -38,6 +38,7 @@ const theme = createTheme({
         fontFamily: 'Montserrat, sans-serif',
       },
       fontSize: '1.5em',
+      textAlign: 'center',
     },
     h5: {
       fontSize: '1rem',
@@ -53,6 +54,7 @@ const theme = createTheme({
     h4: {
       fontSize: '3em',
       fontFamily: '"Allison", Open Sans',
+      textAlign: 'center',
     },
     body1: {
       ['@media (max-width:370px)']: {

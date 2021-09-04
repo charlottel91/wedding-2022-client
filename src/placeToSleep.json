@@ -1,0 +1,18 @@
+{
+ "placeToSleep": [
+ {
+  "name": "Airbnb",
+  "url": "../assets/airbnbLogo.svg",
+  "link": "https://www.airbnb.fr/s/Bellac/homes?tab_id=home_tab&refinement_paths%5B%5D=%2Fhomes&flexible_trip_dates%5B%5D=october&flexible_trip_dates%5B%5D=september&flexible_trip_lengths%5B%5D=weekend_trip&date_picker_type=calendar&query=Bellac&place_id=ChIJ8ZbnFCOk_kcRVb5kP71J8ao&checkin=2022-07-01&checkout=2022-07-03&adults=2&source=structured_search_input_header&search_type=autocomplete_click"
+ },
+ {
+  "name": "Booking",
+  "url": "../assets/bookingLogo.svg",
+  "link": "https://www.booking.com/searchresults.fr.html?aid=816135&label=gorges-du-tarn-RI6soiv4GUE_aoXUk4CRGgS390075707643%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-386988963021%3Alp9056477%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9Ybz4KBg0DTFCvOi0A8IfSkM&sid=b10c18c2c471198792f7b99bd69f8c6c&sb=1&src=searchresults&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Fsearchresults.fr.html%3Faid%3D816135%3Blabel%3Dgorges-du-tarn-RI6soiv4GUE_aoXUk4CRGgS390075707643%253Apl%253Ata%253Ap1%253Ap2%253Aac%253Aap%253Aneg%253Afi%253Atikwd-386988963021%253Alp9056477%253Ali%253Adec%253Adm%253Appccp%253DUmFuZG9tSVYkc2RlIyh9Ybz4KBg0DTFCvOi0A8IfSkM%3Bsid%3Db10c18c2c471198792f7b99bd69f8c6c%3Btmpl%3Dsearchresults%3Bac_click_type%3Db%3Bac_position%3D0%3Bcheckin_month%3D7%3Bcheckin_monthday%3D1%3Bcheckin_year%3D2022%3Bcheckout_month%3D7%3Bcheckout_monthday%3D3%3Bcheckout_year%3D2022%3Bclass_interval%3D1%3Bdest_id%3D-1411554%3Bdest_type%3Dcity%3Bdtdisc%3D0%3Bfrom_sf%3D1%3Bgroup_adults%3D2%3Bgroup_children%3D0%3Binac%3D0%3Bindex_postcard%3D0%3Blabel_click%3Dundef%3Bno_rooms%3D1%3Boffset%3D0%3Bpostcard%3D0%3Braw_dest_type%3Dcity%3Broom1%3DA%252CA%3Bsb_price_type%3Dtotal%3Bsearch_selected%3D1%3Bshw_aparth%3D1%3Bslp_r_match%3D0%3Bsrc%3Dsearchresults%3Bsrc_elem%3Dsb%3Bsrpvid%3Db99692c6bd580182%3Bss%3DBellac%252C%2520Limousin%252C%2520France%3Bss_all%3D0%3Bss_raw%3Dbellac%3Bssb%3Dempty%3Bsshis%3D0%3Bssne%3DGorges%2520du%2520Verdon%3Bssne_untouched%3DGorges%2520du%2520Verdon%3Btop_ufis%3D1%26%3B&ss=Bellac&is_ski_area=0&ssne=Bellac&ssne_untouched=Bellac&city=-1411554&checkin_year=2022&checkin_month=7&checkin_monthday=1&checkout_year=2022&checkout_month=7&checkout_monthday=3&group_adults=2&group_children=0&no_rooms=1&from_sf=1"
+ },
+ {
+  "name": "Camping",
+  "url": "../assets/tent_white.svg",
+  "link": "https://fr.fonclaireholidays.com/"
+ }
+]}
