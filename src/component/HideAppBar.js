@@ -16,6 +16,7 @@ import ConfirmPresence from '../pages/ConfirmPresence';
 import Home from '../pages/Home';
 import Program from '../pages/Program';
 import Sleep from '../pages/Sleep';
+import BulletBox from '../pages/BulletBox';
 
 const useStyles = makeStyles({
   appBarDesktop: {
@@ -118,9 +119,16 @@ export default function HideAppBar() {
                 Se loger
               </Typography>
             </NavHashLink>
-            <Typography className={classes.section} variant="h5">
-              <a href="#urne">Urne</a>
-            </Typography>
+            <NavHashLink
+              smooth
+              to="/#urne"
+              className={classes.section}
+              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+            >
+              <Typography className={classes.section} variant="h5">
+                Urne
+              </Typography>
+            </NavHashLink>
             <Typography
               className={classes.logout}
               onClick={handleLogOut}
@@ -141,6 +149,9 @@ export default function HideAppBar() {
         </div>
         <div id="où-dormir">
           <Sleep />
+        </div>
+        <div id="urne">
+          <BulletBox />
         </div>
       </div>
       <div className={classes.appBarMobile}>
@@ -180,7 +191,7 @@ export default function HideAppBar() {
               <HotelIcon className={classes.icon} />
             </NavLink>
             <NavLink
-              to="/**"
+              to="/urne"
               activeStyle={{
                 opacity: 1,
               }}
@@ -193,6 +204,7 @@ export default function HideAppBar() {
         <PrivateRoute exact path="/confirmation-présence" component={ConfirmPresence} />
         <PrivateRoute exact path="/programme" component={Program} />
         <PrivateRoute exact path="/où-dormir" component={Sleep} />
+        <PrivateRoute exact path="/urne" component={BulletBox} />
       </div>
     </React.Fragment>
   );
