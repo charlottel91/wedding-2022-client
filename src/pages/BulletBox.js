@@ -4,13 +4,12 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import PiggyBank from '../assets/piggy_bank.svg';
-import ImgWeb from '../assets/home_web.jpg';
+import ImgWeb from '../assets/sleep_web.jpeg';
 import ImgIpad from '../assets/home_iPad.jpg';
 import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles({
   container: {
-    backgroundColor: '#FEFEFE',
     width: '100%',
     minHeight: '100vh',
     display: 'flex',
@@ -45,13 +44,11 @@ const useStyles = makeStyles({
   },
   title: {
     zIndex: 1,
-    marginBottom: '1rem',
+    marginBottom: '4rem',
     color: '#F2F2F2',
-    ['@media (min-width:780px)']: {
-      paddingTop: '6rem',
-    },
     ['@media (max-width:780px)']: {
       padding: '1rem',
+      marginBottom: '1rem',
     },
   },
   containerPage: {
@@ -59,6 +56,14 @@ const useStyles = makeStyles({
     margin: 'auto',
     padding: '1rem',
     backgroundColor: 'rgb(0, 0, 0, 0.6)',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    ['@media (max-width:780px)']: {
+      height: '80vh',
+      marginBottom: '5rem',
+      justifyContent: 'space-around',
+    },
   },
   text: {
     color: '#F2F2F2',
@@ -82,14 +87,14 @@ const BulletBox = () => {
         <img src={ImgIpad} className={classes.image_ipad} />
       ) : null}
       {showImgPhone && <img src={ImgPhone} className={classes.image_phone} />}
-      <Typography className={classes.title} variant="h2">
-        Urne
-      </Typography>
       <Container className={classes.containerPage}>
+        <Typography className={classes.title} variant="h2">
+          Urne
+        </Typography>
         <Typography className={classes.text} variant="body1">
           Si vous souhaitez participer à notre voyage de noce dont la destination
           n&apos;est pas encore connue mais sera évidemment dépaysante, une urne digitale
-          est à votre disposition en cliquant sur l&apos;icone ci-dessus.
+          est à votre disposition en cliquant sur l&apos;icône ci-dessus.
         </Typography>
         <Container className={classes.link}>
           <a href="">
