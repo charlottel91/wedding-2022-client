@@ -82,7 +82,6 @@ export default function HideAppBar() {
               smooth
               to="/#accueil"
               className={classes.section}
-              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
               <Typography className={classes.section} variant="h5">
@@ -93,7 +92,6 @@ export default function HideAppBar() {
               smooth
               to="/#programme"
               className={classes.section}
-              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
               <Typography className={classes.section} variant="h5">
@@ -104,7 +102,6 @@ export default function HideAppBar() {
               smooth
               to="/#confirmation-présence"
               className={classes.section}
-              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
               <Typography className={classes.section} variant="h5">
@@ -115,7 +112,6 @@ export default function HideAppBar() {
               smooth
               to="/#où-dormir"
               className={classes.section}
-              activeClassName={{color: '#F2F2F2', fontWeight: 'bold'}}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
               <Typography className={classes.section} variant="h5">
