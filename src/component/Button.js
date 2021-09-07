@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: '3px',
     color: '#F2F2F2',
     '&:hover, &$focusVisible': {
-      opacity: 0.5,
+      backgroundColor: '#D99C79',
       fontWeight: 'bold',
     },
   },
