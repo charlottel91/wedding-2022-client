@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: '#595622',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -49,6 +49,13 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    padding: theme.spacing(2, 0, 2),
+    color: '#F2F2F2',
+    backgroundColor: '#BF8969',
+    '&:hover, &$focusVisible': {
+      backgroundColor: '#D99C79',
+      fontWeight: 'bold',
+    },
   },
 }));
 
@@ -128,9 +135,14 @@ export default function SignIn({history}) {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={state.loading}
             className={classes.submit}
           >
-            {state.loading ? <CircularProgress /> : 'Se connecter'}
+            {state.loading ? (
+              <CircularProgress style={{color: '#595622'}} />
+            ) : (
+              'Se connecter'
+            )}
           </Button>
         </form>
         {error && <Notification type="error" text={error} />}
