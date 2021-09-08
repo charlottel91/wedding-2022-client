@@ -4,7 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import PiggyBank from '../assets/piggy_bank.svg';
-import ImgWeb from '../assets/sleep_web.jpeg';
+import ImgWeb from '../assets/bulletBox_web.jpeg';
 import ImgIpad from '../assets/home_iPad.jpg';
 import ImgPhone from '../assets/home_iPhone.jpg';
 
