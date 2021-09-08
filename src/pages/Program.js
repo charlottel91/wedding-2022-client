@@ -33,6 +33,7 @@ const useStyles = makeStyles({
       paddingBottom: '1.5rem',
       justifyContent: 'center',
     },
+    zIndex: 1,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-around',
@@ -63,6 +64,7 @@ const useStyles = makeStyles({
     },
   },
   containerImage: {
+    zIndex: 0,
     position: 'absolute',
     bottom: '-97vh',
     right: 0,

@@ -3,56 +3,42 @@ import axios from 'axios';
 import {AuthContext} from '../context';
 import jwtDecode from 'jwt-decode';
 
-import {
-  Avatar,
-  Button,
-  CircularProgress,
-  CssBaseline,
-  TextField,
-  Link,
-  Box,
-  Typography,
-  Container,
-} from '@material-ui/core';
+import {Avatar, Button, CssBaseline, TextField, Typography} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Notification from '../component/Notification';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
+  container: {
+    height: '100vh',
+    backgroundColor: 'rgb(0, 0, 0, 0.6)',
+    display: 'flex',
+    flexDirection: 'column',
+  },
   paper: {
-    marginTop: theme.spacing(8),
+    padding: theme.spacing(4),
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    backgroundColor: '#F2F2F2',
+    borderRadius: '5px',
   },
   avatar: {
-    margin: theme.spacing(1),
     backgroundColor: '#595622',
+    margin: 'auto',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
+    padding: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     padding: theme.spacing(2, 0, 2),
     color: '#F2F2F2',
     backgroundColor: '#BF8969',
-    '&:hover, &$focusVisible': {
+    '&:hover': {
       backgroundColor: '#D99C79',
       fontWeight: 'bold',
     },
@@ -96,7 +82,7 @@ export default function SignIn({history}) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <div component="main" maxWidth="lg" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -138,18 +124,11 @@ export default function SignIn({history}) {
             disabled={state.loading}
             className={classes.submit}
           >
-            {state.loading ? (
-              <CircularProgress style={{color: '#595622'}} />
-            ) : (
-              'Se connecter'
-            )}
+            {state.loading ? 'Chargement...' : 'Se connecter'}
           </Button>
         </form>
         {error && <Notification type="error" text={error} />}
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+    </div>
   );
 }
