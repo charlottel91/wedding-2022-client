@@ -35,6 +35,7 @@ const CarpoolingForm = ({
       <FormGroup className={classes.formControl} noValidate autoComplete="off">
         <Typography>Je souhaite faire du covoiturage en tant que </Typography>
         <Select name="role" value={carpooling.role} onChange={handleChange}>
+          <MenuItem value={''}></MenuItem>
           <MenuItem value={'DRIVER'}>conducteur</MenuItem>
           <MenuItem value={'PASSENGER'}>passager</MenuItem>
         </Select>
@@ -47,6 +48,7 @@ const CarpoolingForm = ({
         />
         <Typography>Nombre de places dont vous avez besoin ou de disponible :</Typography>
         <Select name="nb_seat" value={carpooling.nb_seat} onChange={handleChange}>
+          <MenuItem value={0}>0</MenuItem>
           <MenuItem value={1}>1</MenuItem>
           <MenuItem value={2}>2</MenuItem>
           <MenuItem value={3}>3</MenuItem>
