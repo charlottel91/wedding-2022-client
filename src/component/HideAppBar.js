@@ -101,7 +101,7 @@ export default function HideAppBar() {
             </NavHashLink>
             <NavHashLink
               smooth
-              to="/#confirmation-présence"
+              to="/#confirmation-presence"
               className={classes.section}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
@@ -111,7 +111,7 @@ export default function HideAppBar() {
             </NavHashLink>
             <NavHashLink
               smooth
-              to="/#où-dormir"
+              to="/#ou-dormir"
               className={classes.section}
               activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
             >
@@ -144,10 +144,10 @@ export default function HideAppBar() {
         <div id="programme">
           <Program />
         </div>
-        <div id="confirmation-présence">
+        <div id="confirmation-presence">
           <ConfirmPresence />
         </div>
-        <div id="où-dormir">
+        <div id="ou-dormir">
           <Sleep />
         </div>
         <div id="urne">
@@ -166,7 +166,7 @@ export default function HideAppBar() {
               <ReceiptIcon className={classes.icon} />
             </NavLink>
             <NavLink
-              to="/confirmation-présence"
+              to="/confirmation-presence"
               activeStyle={{
                 opacity: 1,
               }}
@@ -183,7 +183,7 @@ export default function HideAppBar() {
               <HomeIcon className={classes.icon} />
             </NavLink>
             <NavLink
-              to="/où-dormir"
+              to="/ou-dormir"
               activeStyle={{
                 opacity: 1,
               }}
@@ -201,9 +201,9 @@ export default function HideAppBar() {
           </Toolbar>
         </AppBar>
         <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute exact path="/confirmation-présence" component={ConfirmPresence} />
+        <PrivateRoute exact path="/confirmation-presence" component={ConfirmPresence} />
         <PrivateRoute exact path="/programme" component={Program} />
-        <PrivateRoute exact path="/où-dormir" component={Sleep} />
+        <PrivateRoute exact path="/ou-dormir" component={Sleep} />
         <PrivateRoute exact path="/urne" component={BulletBox} />
       </div>
     </React.Fragment>

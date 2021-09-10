@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {AddCircle} from '@material-ui/icons';
-import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
@@ -69,7 +69,6 @@ const useStyles = makeStyles(() => ({
   title: {
     zIndex: 1,
     color: '#F2F2F2',
-    fontWeight: 'bold',
   },
   text: {
     color: '#F2F2F2',
@@ -77,26 +76,31 @@ const useStyles = makeStyles(() => ({
   addUser: {
     display: 'flex',
     flexDirection: 'row',
+    marginBottom: '1rem',
+    justifyContent: 'start',
     ['@media (max-width:380px)']: {
       flexDirection: 'column',
     },
   },
   containerUsers: {
-    margin: 'auto',
+    margin: 'auto 0',
     padding: '1em',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'start',
     overflow: 'auto',
     // ['@media (max-width:380px)']: {
     //   overflow: 'scroll',
     // },
   },
   iconAdd: {
-    margin: 'auto',
+    margin: 'auto 1rem',
     width: 60,
     height: 60,
     color: '#F2F2F2',
+  },
+  containerCarpooling: {
+    marginTop: '1rem',
   },
 }));
 
@@ -325,7 +329,7 @@ const ConfirmPresence = () => {
           Confirmer votre présence
         </Typography>
         <Typography variant="body1" className={classes.text}>
-          Pour Confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
+          Pour confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
           accompagnants.
         </Typography>
         <div className={classes.addUser}>
@@ -348,13 +352,15 @@ const ConfirmPresence = () => {
               ))}
           </div>
         </div>
-        <CarpoolingForm
-          modifyCarpooling={modifyCarpooling}
-          carpooling={carpooling}
-          handleChange={handleChangeCarpooling}
-          handleSubmit={handleSubmitCarpooling}
-          error={errorCarpooling}
-        />
+        <Container className={classes.containerCarpooling}>
+          <CarpoolingForm
+            modifyCarpooling={modifyCarpooling}
+            carpooling={carpooling}
+            handleChange={handleChangeCarpooling}
+            handleSubmit={handleSubmitCarpooling}
+            error={errorCarpooling}
+          />
+        </Container>
       </div>
       <SpringModal
         open={openForm}
