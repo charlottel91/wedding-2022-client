@@ -56,10 +56,10 @@ const useStyles = makeStyles(() => ({
     width: '95%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: 'rgb(0, 0, 0, 0.6)',
     ['@media (min-width:780px)']: {
-      margin: '5rem auto',
+      margin: 'auto auto',
     },
     ['@media (max-width:780px)']: {
       width: '90%',
@@ -78,7 +78,7 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     marginBottom: '1rem',
     justifyContent: 'start',
-    ['@media (max-width:380px)']: {
+    ['@media (max-width:500px)']: {
       flexDirection: 'column',
     },
   },
@@ -98,6 +98,9 @@ const useStyles = makeStyles(() => ({
     width: 60,
     height: 60,
     color: '#F2F2F2',
+    ['@media (max-width:500px)']: {
+      margin: 'auto',
+    },
   },
   containerCarpooling: {
     marginTop: '1rem',
@@ -289,18 +292,20 @@ const ConfirmPresence = () => {
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
     setModifyCarpooling(true);
-    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
-      try {
-        const {data} = await axios.post(
-          `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
-          carpooling
-        );
-        dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
-        setCarpooling(...data.isCarpooling);
-      } catch (err) {
-        return err;
-      }
-    } else setErrorCarpooling('Tous les champs sont requis.');
+    try {
+      const {data} = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
+        carpooling
+      );
+      dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
+      setCarpooling(...data.isCarpooling);
+      setErrorText('Modifications enregistrées.');
+    } catch (err) {
+      return err;
+    }
+    setTimeout(() => {
+      setErrorText();
+    }, 3000);
   };
 
   useEffect(async () => {
@@ -386,6 +391,7 @@ const ConfirmPresence = () => {
         openDialogToDeleteGuest={deleteGuest}
         text={`Êtes-vous sûr de vouloir supprimer ${allGuests[index]?.firstname} ?`}
       />
+      {errorText && <Notification text={errorText} type="success" />}
       {errorSaveAllGuests && <Notification text={errorSaveAllGuests} type="error" />}
     </div>
   );
