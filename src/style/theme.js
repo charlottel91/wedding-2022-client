@@ -40,6 +40,17 @@ const theme = createTheme({
       fontSize: '1.5em',
       textAlign: 'center',
     },
+    h3: {
+      fontSize: '1rem',
+      fontFamily: 'Montserrat, sans-serif',
+      color: '#595622',
+      fontWeight: 'bold',
+    },
+    h4: {
+      fontSize: '3em',
+      fontFamily: '"Allison", Open Sans',
+      textAlign: 'center',
+    },
     h5: {
       fontSize: '1rem',
       fontFamily: 'Montserrat, sans-serif',
@@ -51,11 +62,6 @@ const theme = createTheme({
         display: 'none',
       },
     },
-    h4: {
-      fontSize: '3em',
-      fontFamily: '"Allison", Open Sans',
-      textAlign: 'center',
-    },
     body1: {
       ['@media (max-width:370px)']: {
         fontSize: '0.7em',
@@ -65,8 +71,8 @@ const theme = createTheme({
       fontFamily: 'Montserrat, sans-serif',
     },
     body2: {
-      fontSize: '1.2em',
-      fontFamily: '"Brandon", sans-serif',
+      fontSize: '0.9rem',
+      fontFamily: 'Montserrat, sans-serif',
     },
     button: {
       fontSize: '0.6em',

@@ -4,51 +4,107 @@ import axios from 'axios';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {AddCircle} from '@material-ui/icons';
-import {Typography} from '@material-ui/core';
+import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
 import CarpoolingForm from '../component/CarpoolingForm';
-import picture from '../assets/home_web.jpg';
+
+import ImgWeb from '../assets/bulletBox_web.jpeg';
+import ImgIpad from '../assets/home_iPad.jpg';
+import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles(() => ({
-  containerPage: {
+  container: {
     width: '100%',
     minHeight: '100vh',
-    backgroundImage: `url(${picture})`,
     display: 'flex',
     flexDirection: 'column',
   },
-  container: {
-    flex: 2,
+  image_desktop: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  image_ipad: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  image_phone: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  containerPage: {
+    zIndex: 1,
+    padding: '1rem',
+    width: '95%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    padding: '2em',
+    justifyContent: 'space-between',
+    backgroundColor: 'rgb(0, 0, 0, 0.6)',
+    ['@media (min-width:780px)']: {
+      margin: '5rem auto',
+    },
+    ['@media (max-width:780px)']: {
+      width: '90%',
+      margin: '1rem auto 1rem auto',
+    },
   },
   title: {
-    paddingTop: '1.5em',
+    zIndex: 1,
     color: '#F2F2F2',
     fontWeight: 'bold',
   },
+  text: {
+    color: '#F2F2F2',
+  },
+  addUser: {
+    display: 'flex',
+    flexDirection: 'row',
+    ['@media (max-width:380px)']: {
+      flexDirection: 'column',
+    },
+  },
   containerUsers: {
-    marginBottom: '1em',
+    margin: 'auto',
     padding: '1em',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgb(0, 0, 0, 0.6)',
+    overflow: 'auto',
+    // ['@media (max-width:380px)']: {
+    //   overflow: 'scroll',
+    // },
   },
   iconAdd: {
+    margin: 'auto',
     width: 60,
     height: 60,
+    color: '#F2F2F2',
   },
 }));
 
 const ConfirmPresence = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const showImgWeb = useMediaQuery(theme.breakpoints.up('lg'));
+  const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
   const {dispatch, state} = useContext(AuthContext);
   const [guest, setGuest] = useState({
     firstname: '',
@@ -258,28 +314,39 @@ const ConfirmPresence = () => {
   }, []);
 
   return (
-    <div className={classes.containerPage}>
-      <Typography variant="h4" className={classes.title}>
-        Confirmer votre présence
-      </Typography>
-      <div className={classes.container}>
-        <div className={classes.containerUsers}>
-          {allGuests &&
-            allGuests.map((el, i) => (
-              <div key={i}>
-                <SimpleCard
-                  fistname={el.firstname}
-                  lastname={el.lastname}
-                  child={el.isChild ? 'Enfant' : 'Adulte'}
-                  vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
-                  brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
-                  onClickModify={() => handleModifyGuest(i)}
-                  deleteGuest={() => handleOpenDialog(i)}
-                  registered={el.registered}
-                />
-              </div>
-            ))}
+    <div className={classes.container}>
+      {showImgWeb && <img src={ImgWeb} className={classes.image_desktop} />}
+      {!showImgPhone && !showImgWeb ? (
+        <img src={ImgIpad} className={classes.image_ipad} />
+      ) : null}
+      {showImgPhone && <img src={ImgPhone} className={classes.image_phone} />}
+      <div className={classes.containerPage}>
+        <Typography variant="h2" className={classes.title}>
+          Confirmer votre présence
+        </Typography>
+        <Typography variant="body1" className={classes.text}>
+          Pour Confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
+          accompagnants.
+        </Typography>
+        <div className={classes.addUser}>
           <AddCircle className={classes.iconAdd} onClick={handleOpenForm} />
+          <div className={classes.containerUsers}>
+            {allGuests &&
+              allGuests.map((el, i) => (
+                <div key={i}>
+                  <SimpleCard
+                    fistname={el.firstname}
+                    lastname={el.lastname}
+                    child={el.isChild ? 'Enfant' : 'Adulte'}
+                    vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
+                    brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
+                    onClickModify={() => handleModifyGuest(i)}
+                    deleteGuest={() => handleOpenDialog(i)}
+                    registered={el.registered}
+                  />
+                </div>
+              ))}
+          </div>
         </div>
         <CarpoolingForm
           modifyCarpooling={modifyCarpooling}
