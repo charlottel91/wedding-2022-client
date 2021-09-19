@@ -73,6 +73,9 @@ const theme = createTheme({
     body2: {
       fontSize: '0.9rem',
       fontFamily: 'Montserrat, sans-serif',
+      ['@media (max-width:370px)']: {
+        fontSize: '0.7em',
+      },
     },
     button: {
       fontSize: '0.6em',

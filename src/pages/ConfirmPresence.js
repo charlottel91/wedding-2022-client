@@ -19,7 +19,13 @@ import ImgPhone from '../assets/home_iPhone.jpg';
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
-    minHeight: '100vh',
+    height: '100%',
+    ['@media (min-width:780px)']: {
+      minHeight: '100vh',
+    },
+    ['@media (max-width:780px)']: {
+      marginBottom: '3rem',
+    },
     display: 'flex',
     flexDirection: 'column',
   },
@@ -44,7 +50,9 @@ const useStyles = makeStyles(() => ({
   image_phone: {
     zIndex: 0,
     width: '100%',
-    height: '100%',
+    ['@media (min-width:780px)']: {
+      height: '100%',
+    },
     position: 'absolute',
     left: 0,
     right: 0,
@@ -63,12 +71,13 @@ const useStyles = makeStyles(() => ({
     },
     ['@media (max-width:780px)']: {
       width: '90%',
-      margin: '1rem auto 1rem auto',
+      margin: '1rem auto',
     },
   },
   title: {
     zIndex: 1,
     color: '#F2F2F2',
+    padding: '1rem',
   },
   text: {
     color: '#F2F2F2',
@@ -89,9 +98,6 @@ const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     justifyContent: 'start',
     overflow: 'auto',
-    // ['@media (max-width:380px)']: {
-    //   overflow: 'scroll',
-    // },
   },
   iconAdd: {
     margin: 'auto 1rem',
@@ -103,6 +109,9 @@ const useStyles = makeStyles(() => ({
     },
   },
   containerCarpooling: {
+    ['@media (min-width:780px)']: {
+      marginTop: '1rem',
+    },
     marginTop: '1rem',
   },
 }));

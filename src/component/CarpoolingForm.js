@@ -19,6 +19,36 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  select: {
+    ['@media (min-width:780px)']: {
+      margin: '1rem',
+      width: '130px',
+      textAlign: 'center',
+    },
+    ['@media (max-width:780px)']: {
+      margin: '1rem',
+      width: '110px',
+      height: '20px',
+    },
+  },
+  selectSeat: {
+    margin: '0 1rem 1rem 0',
+    width: '40px',
+    // textAlign: 'center',
+    ['@media (min-width:780px)']: {
+      width: '80px',
+    },
+  },
+  textFieldCity: {
+    ['@media (min-width:780px)']: {
+      marginBottom: '1rem',
+      marginLeft: '1rem',
+    },
+    ['@media (max-width:780px)']: {
+      width: '110px',
+      marginBottom: '1rem',
+    },
+  },
 }));
 
 const CarpoolingForm = ({
@@ -33,13 +63,13 @@ const CarpoolingForm = ({
   return (
     <Card>
       <FormGroup className={classes.formControl} noValidate autoComplete="off">
-        <Typography>
+        <Typography variant="body2">
           Je souhaite faire du covoiturage en tant que{' '}
           <Select
             name="role"
             value={carpooling.role}
             onChange={handleChange}
-            style={{margin: '1rem', width: '130px', textAlign: 'center'}}
+            className={classes.select}
           >
             <MenuItem value={'--'}>--</MenuItem>
             <MenuItem value={'DRIVER'}>conducteur</MenuItem>
@@ -58,20 +88,17 @@ const CarpoolingForm = ({
                 textAlign: 'center',
               },
             }}
-            style={{
-              marginBottom: '1rem',
-              marginLeft: '1rem',
-            }}
+            className={classes.textFieldCity}
           />
           .
         </Typography>
-        <Typography>
+        <Typography variant="body2">
           Nombre de places dont vous avez besoin ou de disponible :{' '}
           <Select
             name="nb_seat"
             value={carpooling.nb_seat}
             onChange={handleChange}
-            style={{margin: '1rem', width: '80px', textAlign: 'center'}}
+            className={classes.selectSeat}
           >
             <MenuItem value={0}>0</MenuItem>
             <MenuItem value={1}>1</MenuItem>
