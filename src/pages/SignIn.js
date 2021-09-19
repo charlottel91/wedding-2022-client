@@ -82,7 +82,7 @@ export default function SignIn({history}) {
   };
 
   return (
-    <div component="main" maxWidth="lg" className={classes.container}>
+    <div component="main" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

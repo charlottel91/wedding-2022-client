@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {AddCircle} from '@material-ui/icons';
-import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
@@ -19,7 +19,13 @@ import ImgPhone from '../assets/home_iPhone.jpg';
 const useStyles = makeStyles(() => ({
   container: {
     width: '100%',
-    minHeight: '100vh',
+    height: '100%',
+    ['@media (min-width:780px)']: {
+      minHeight: '100vh',
+    },
+    ['@media (max-width:780px)']: {
+      marginBottom: '3rem',
+    },
     display: 'flex',
     flexDirection: 'column',
   },
@@ -44,7 +50,9 @@ const useStyles = makeStyles(() => ({
   image_phone: {
     zIndex: 0,
     width: '100%',
-    height: '100%',
+    ['@media (min-width:780px)']: {
+      height: '100%',
+    },
     position: 'absolute',
     left: 0,
     right: 0,
@@ -56,20 +64,20 @@ const useStyles = makeStyles(() => ({
     width: '95%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     backgroundColor: 'rgb(0, 0, 0, 0.6)',
     ['@media (min-width:780px)']: {
-      margin: '5rem auto',
+      margin: 'auto auto',
     },
     ['@media (max-width:780px)']: {
       width: '90%',
-      margin: '1rem auto 1rem auto',
+      margin: '1rem auto',
     },
   },
   title: {
     zIndex: 1,
     color: '#F2F2F2',
-    fontWeight: 'bold',
+    padding: '1rem',
   },
   text: {
     color: '#F2F2F2',
@@ -77,26 +85,34 @@ const useStyles = makeStyles(() => ({
   addUser: {
     display: 'flex',
     flexDirection: 'row',
-    ['@media (max-width:380px)']: {
+    marginBottom: '1rem',
+    justifyContent: 'start',
+    ['@media (max-width:500px)']: {
       flexDirection: 'column',
     },
   },
   containerUsers: {
-    margin: 'auto',
+    margin: 'auto 0',
     padding: '1em',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'start',
     overflow: 'auto',
-    // ['@media (max-width:380px)']: {
-    //   overflow: 'scroll',
-    // },
   },
   iconAdd: {
-    margin: 'auto',
+    margin: 'auto 1rem',
     width: 60,
     height: 60,
     color: '#F2F2F2',
+    ['@media (max-width:500px)']: {
+      margin: 'auto',
+    },
+  },
+  containerCarpooling: {
+    ['@media (min-width:780px)']: {
+      marginTop: '1rem',
+    },
+    marginTop: '1rem',
   },
 }));
 
@@ -285,18 +301,20 @@ const ConfirmPresence = () => {
   const handleSubmitCarpooling = async (e) => {
     e.preventDefault();
     setModifyCarpooling(true);
-    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
-      try {
-        const {data} = await axios.post(
-          `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
-          carpooling
-        );
-        dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
-        setCarpooling(...data.isCarpooling);
-      } catch (err) {
-        return err;
-      }
-    } else setErrorCarpooling('Tous les champs sont requis.');
+    try {
+      const {data} = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
+        carpooling
+      );
+      dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
+      setCarpooling(...data.isCarpooling);
+      setErrorText('Modifications enregistrées.');
+    } catch (err) {
+      return err;
+    }
+    setTimeout(() => {
+      setErrorText();
+    }, 3000);
   };
 
   useEffect(async () => {
@@ -325,7 +343,7 @@ const ConfirmPresence = () => {
           Confirmer votre présence
         </Typography>
         <Typography variant="body1" className={classes.text}>
-          Pour Confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
+          Pour confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
           accompagnants.
         </Typography>
         <div className={classes.addUser}>
@@ -348,13 +366,15 @@ const ConfirmPresence = () => {
               ))}
           </div>
         </div>
-        <CarpoolingForm
-          modifyCarpooling={modifyCarpooling}
-          carpooling={carpooling}
-          handleChange={handleChangeCarpooling}
-          handleSubmit={handleSubmitCarpooling}
-          error={errorCarpooling}
-        />
+        <Container className={classes.containerCarpooling}>
+          <CarpoolingForm
+            modifyCarpooling={modifyCarpooling}
+            carpooling={carpooling}
+            handleChange={handleChangeCarpooling}
+            handleSubmit={handleSubmitCarpooling}
+            error={errorCarpooling}
+          />
+        </Container>
       </div>
       <SpringModal
         open={openForm}
@@ -380,6 +400,7 @@ const ConfirmPresence = () => {
         openDialogToDeleteGuest={deleteGuest}
         text={`Êtes-vous sûr de vouloir supprimer ${allGuests[index]?.firstname} ?`}
       />
+      {errorText && <Notification text={errorText} type="success" />}
       {errorSaveAllGuests && <Notification text={errorSaveAllGuests} type="error" />}
     </div>
   );
