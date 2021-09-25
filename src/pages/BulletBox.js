@@ -97,7 +97,11 @@ const BulletBox = () => {
           est à votre disposition en cliquant sur l&apos;icône ci-dessous.
         </Typography>
         <Container className={classes.link}>
-          <a href="">
+          <a
+            href="https://www.petit-mariage-entre-amis.fr/mariage-charlotte-et-florian/liste-de-mariage"
+            target="_blank"
+            rel="noreferrer"
+          >
             <img src={PiggyBank} />
           </a>
         </Container>
