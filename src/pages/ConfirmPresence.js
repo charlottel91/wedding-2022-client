@@ -10,7 +10,7 @@ import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
-import CarpoolingForm from '../component/CarpoolingForm';
+// import CarpoolingForm from '../component/CarpoolingForm';
 
 import ImgWeb from '../assets/bulletBox_web.jpeg';
 import ImgIpad from '../assets/home_iPad.jpg';
@@ -129,13 +129,13 @@ const ConfirmPresence = () => {
     isVegetarian: '',
     presentBrunch: '',
   });
-  const [carpooling, setCarpooling] = useState({
-    role: '',
-    city: '',
-    nb_seat: '',
-  });
-  const [modifyCarpooling, setModifyCarpooling] = useState(true);
-  const [errorCarpooling, setErrorCarpooling] = useState('');
+  // const [carpooling, setCarpooling] = useState({
+  //   role: '',
+  //   city: '',
+  //   nb_seat: '',
+  // });
+  // const [modifyCarpooling, setModifyCarpooling] = useState(true);
+  // const [errorCarpooling, setErrorCarpooling] = useState('');
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -288,34 +288,34 @@ const ConfirmPresence = () => {
     }, 3000);
   };
 
-  const handleChangeCarpooling = (e) => {
-    setErrorCarpooling('');
-    setModifyCarpooling(false);
-    if (e.target.name === 'city') {
-      setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
-    } else {
-      setCarpooling({...carpooling, [e.target.name]: e.target.value});
-    }
-  };
+  // const handleChangeCarpooling = (e) => {
+  //   setErrorCarpooling('');
+  //   setModifyCarpooling(false);
+  //   if (e.target.name === 'city') {
+  //     setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
+  //   } else {
+  //     setCarpooling({...carpooling, [e.target.name]: e.target.value});
+  //   }
+  // };
 
-  const handleSubmitCarpooling = async (e) => {
-    e.preventDefault();
-    setModifyCarpooling(true);
-    try {
-      const {data} = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
-        carpooling
-      );
-      dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
-      setCarpooling(...data.isCarpooling);
-      setErrorText('Modifications enregistrées.');
-    } catch (err) {
-      return err;
-    }
-    setTimeout(() => {
-      setErrorText();
-    }, 3000);
-  };
+  // const handleSubmitCarpooling = async (e) => {
+  //   e.preventDefault();
+  //   setModifyCarpooling(true);
+  //   try {
+  //     const {data} = await axios.post(
+  //       `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
+  //       carpooling
+  //     );
+  //     dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
+  //     setCarpooling(...data.isCarpooling);
+  //     setErrorText('Modifications enregistrées.');
+  //   } catch (err) {
+  //     return err;
+  //   }
+  //   setTimeout(() => {
+  //     setErrorText();
+  //   }, 3000);
+  // };
 
   useEffect(async () => {
     try {
@@ -325,7 +325,7 @@ const ConfirmPresence = () => {
       dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
       dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
       setAllGuests(data.guests);
-      setCarpooling(...data.isCarpooling);
+      // setCarpooling(...data.isCarpooling);
     } catch (err) {
       return err;
     }
@@ -367,13 +367,13 @@ const ConfirmPresence = () => {
           </div>
         </div>
         <Container className={classes.containerCarpooling}>
-          <CarpoolingForm
+          {/* <CarpoolingForm
             modifyCarpooling={modifyCarpooling}
             carpooling={carpooling}
             handleChange={handleChangeCarpooling}
             handleSubmit={handleSubmitCarpooling}
             error={errorCarpooling}
-          />
+          /> */}
         </Container>
       </div>
       <SpringModal
