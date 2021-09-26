@@ -4,7 +4,7 @@
 
 [[redirects]]
   from = "/connexion"
-  to = "https://charlotteetflorian.netlify.app"
+  to = "https://charlotteetflorian-staging.netlify.app"
   status = 200
   force = true
 
