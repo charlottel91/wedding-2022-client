@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {AuthProvider} from './context';
+
+import {ThemeProvider} from '@material-ui/core/styles';
+
+import HideAppBar from './component/HideAppBar';
+import SignIn from './pages/SignIn';
+
+import theme from './style/theme';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <AuthProvider>
+          <Switch>
+            <Route exact path="/connexion" component={SignIn} />
+            <ThemeProvider theme={theme}>
+              <HideAppBar />
+            </ThemeProvider>
+          </Switch>
+        </AuthProvider>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;
