@@ -4,51 +4,123 @@ import axios from 'axios';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {AddCircle} from '@material-ui/icons';
-import {Typography} from '@material-ui/core';
+import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import Notification from '../component/Notification';
 import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
-import CarpoolingForm from '../component/CarpoolingForm';
-import picture from '../assets/home_web.jpg';
+// import CarpoolingForm from '../component/CarpoolingForm';
+
+import ImgWeb from '../assets/bulletBox_web.jpeg';
+import ImgIpad from '../assets/home_iPad.jpg';
+import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles(() => ({
-  containerPage: {
+  container: {
     width: '100%',
-    minHeight: '100vh',
-    backgroundImage: `url(${picture})`,
+    height: '100%',
+    ['@media (min-width:780px)']: {
+      minHeight: '100vh',
+    },
+    ['@media (max-width:780px)']: {
+      marginBottom: '3rem',
+    },
     display: 'flex',
     flexDirection: 'column',
   },
-  container: {
-    flex: 2,
+  image_desktop: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  image_ipad: {
+    zIndex: 0,
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  image_phone: {
+    zIndex: 0,
+    width: '100%',
+    ['@media (min-width:780px)']: {
+      height: '100%',
+    },
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+  },
+  containerPage: {
+    zIndex: 1,
+    padding: '1rem',
+    width: '95%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    padding: '2em',
+    justifyContent: 'center',
+    backgroundColor: 'rgb(0, 0, 0, 0.6)',
+    ['@media (min-width:780px)']: {
+      margin: 'auto auto',
+    },
+    ['@media (max-width:780px)']: {
+      width: '90%',
+      margin: '1rem auto',
+    },
   },
   title: {
-    paddingTop: '1.5em',
+    zIndex: 1,
     color: '#F2F2F2',
-    fontWeight: 'bold',
+    padding: '1rem',
+  },
+  text: {
+    color: '#F2F2F2',
+  },
+  addUser: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginBottom: '1rem',
+    justifyContent: 'start',
+    ['@media (max-width:500px)']: {
+      flexDirection: 'column',
+    },
   },
   containerUsers: {
-    marginBottom: '1em',
+    margin: 'auto 0',
     padding: '1em',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#F2F2F2',
+    justifyContent: 'start',
+    overflow: 'auto',
   },
   iconAdd: {
+    margin: 'auto 1rem',
     width: 60,
     height: 60,
+    color: '#F2F2F2',
+    ['@media (max-width:500px)']: {
+      margin: 'auto',
+    },
+  },
+  containerCarpooling: {
+    ['@media (min-width:780px)']: {
+      marginTop: '1rem',
+    },
+    marginTop: '1rem',
   },
 }));
 
 const ConfirmPresence = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const showImgWeb = useMediaQuery(theme.breakpoints.up('lg'));
+  const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
   const {dispatch, state} = useContext(AuthContext);
   const [guest, setGuest] = useState({
     firstname: '',
@@ -57,13 +129,13 @@ const ConfirmPresence = () => {
     isVegetarian: '',
     presentBrunch: '',
   });
-  const [carpooling, setCarpooling] = useState({
-    role: '',
-    city: '',
-    nb_seat: '',
-  });
-  const [modifyCarpooling, setModifyCarpooling] = useState(true);
-  const [errorCarpooling, setErrorCarpooling] = useState('');
+  // const [carpooling, setCarpooling] = useState({
+  //   role: '',
+  //   city: '',
+  //   nb_seat: '',
+  // });
+  // const [modifyCarpooling, setModifyCarpooling] = useState(true);
+  // const [errorCarpooling, setErrorCarpooling] = useState('');
   const [allGuests, setAllGuests] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -216,32 +288,34 @@ const ConfirmPresence = () => {
     }, 3000);
   };
 
-  const handleChangeCarpooling = (e) => {
-    setErrorCarpooling('');
-    setModifyCarpooling(false);
-    if (e.target.name === 'city') {
-      setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
-    } else {
-      setCarpooling({...carpooling, [e.target.name]: e.target.value});
-    }
-  };
+  // const handleChangeCarpooling = (e) => {
+  //   setErrorCarpooling('');
+  //   setModifyCarpooling(false);
+  //   if (e.target.name === 'city') {
+  //     setCarpooling({...carpooling, [e.target.name]: e.target.value.trim()});
+  //   } else {
+  //     setCarpooling({...carpooling, [e.target.name]: e.target.value});
+  //   }
+  // };
 
-  const handleSubmitCarpooling = async (e) => {
-    e.preventDefault();
-    setModifyCarpooling(true);
-    if (carpooling.role.length > 0 && carpooling.city.length > 0 && carpooling.seat > 0) {
-      try {
-        const {data} = await axios.post(
-          `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
-          carpooling
-        );
-        dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
-        setCarpooling(...data.isCarpooling);
-      } catch (err) {
-        return err;
-      }
-    } else setErrorCarpooling('Tous les champs sont requis.');
-  };
+  // const handleSubmitCarpooling = async (e) => {
+  //   e.preventDefault();
+  //   setModifyCarpooling(true);
+  //   try {
+  //     const {data} = await axios.post(
+  //       `${process.env.REACT_APP_SERVER_URL}/user/${state.user._id}/carpooling`,
+  //       carpooling
+  //     );
+  //     dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
+  //     setCarpooling(...data.isCarpooling);
+  //     setErrorText('Modifications enregistrées.');
+  //   } catch (err) {
+  //     return err;
+  //   }
+  //   setTimeout(() => {
+  //     setErrorText();
+  //   }, 3000);
+  // };
 
   useEffect(async () => {
     try {
@@ -251,43 +325,56 @@ const ConfirmPresence = () => {
       dispatch({type: 'UPDATE_GUESTS', payload: data.guests});
       dispatch({type: 'UPDATE_CARPOOLING', payload: data.isCarpooling});
       setAllGuests(data.guests);
-      setCarpooling(...data.isCarpooling);
+      // setCarpooling(...data.isCarpooling);
     } catch (err) {
       return err;
     }
   }, []);
 
   return (
-    <div className={classes.containerPage}>
-      <Typography variant="h4" className={classes.title}>
-        Confirmer votre présence
-      </Typography>
-      <div className={classes.container}>
-        <div className={classes.containerUsers}>
-          {allGuests &&
-            allGuests.map((el, i) => (
-              <div key={i}>
-                <SimpleCard
-                  fistname={el.firstname}
-                  lastname={el.lastname}
-                  child={el.isChild ? 'Enfant' : 'Adulte'}
-                  vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
-                  brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
-                  onClickModify={() => handleModifyGuest(i)}
-                  deleteGuest={() => handleOpenDialog(i)}
-                  registered={el.registered}
-                />
-              </div>
-            ))}
+    <div className={classes.container}>
+      {showImgWeb && <img src={ImgWeb} className={classes.image_desktop} />}
+      {!showImgPhone && !showImgWeb ? (
+        <img src={ImgIpad} className={classes.image_ipad} />
+      ) : null}
+      {showImgPhone && <img src={ImgPhone} className={classes.image_phone} />}
+      <div className={classes.containerPage}>
+        <Typography variant="h2" className={classes.title}>
+          Confirmer votre présence
+        </Typography>
+        <Typography variant="body1" className={classes.text}>
+          Pour confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de vos
+          accompagnants.
+        </Typography>
+        <div className={classes.addUser}>
           <AddCircle className={classes.iconAdd} onClick={handleOpenForm} />
+          <div className={classes.containerUsers}>
+            {allGuests &&
+              allGuests.map((el, i) => (
+                <div key={i}>
+                  <SimpleCard
+                    fistname={el.firstname}
+                    lastname={el.lastname}
+                    child={el.isChild ? 'Enfant' : 'Adulte'}
+                    vegetarian={el.isVegetarian ? 'Repas végétarien' : 'Repas normal'}
+                    brunch={el.presentBrunch ? 'Présent au brunch' : 'Absent au brunch'}
+                    onClickModify={() => handleModifyGuest(i)}
+                    deleteGuest={() => handleOpenDialog(i)}
+                    registered={el.registered}
+                  />
+                </div>
+              ))}
+          </div>
         </div>
-        <CarpoolingForm
-          modifyCarpooling={modifyCarpooling}
-          carpooling={carpooling}
-          handleChange={handleChangeCarpooling}
-          handleSubmit={handleSubmitCarpooling}
-          error={errorCarpooling}
-        />
+        <Container className={classes.containerCarpooling}>
+          {/* <CarpoolingForm
+            modifyCarpooling={modifyCarpooling}
+            carpooling={carpooling}
+            handleChange={handleChangeCarpooling}
+            handleSubmit={handleSubmitCarpooling}
+            error={errorCarpooling}
+          /> */}
+        </Container>
       </div>
       <SpringModal
         open={openForm}
@@ -313,6 +400,7 @@ const ConfirmPresence = () => {
         openDialogToDeleteGuest={deleteGuest}
         text={`Êtes-vous sûr de vouloir supprimer ${allGuests[index]?.firstname} ?`}
       />
+      {errorText && <Notification text={errorText} type="success" />}
       {errorSaveAllGuests && <Notification text={errorSaveAllGuests} type="error" />}
     </div>
   );

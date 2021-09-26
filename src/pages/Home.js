@@ -1,23 +1,21 @@
 import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 
-import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
-
+import {Button, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {makeStyles} from '@material-ui/core/styles';
 
 import Countdown from '../component/Countdown';
 import ImgWeb from '../assets/home_web.jpg';
 import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_phone.jpg';
+import ImgPhone from '../assets/home_iPhone.jpg';
 
 const useStyles = makeStyles({
   container: {
-    backgroundColor: 'black',
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     ['@media (max-width:780px)']: {
       minHeight: '100%',
     },
@@ -30,14 +28,8 @@ const useStyles = makeStyles({
     left: 0,
     right: 0,
     margin: 'auto',
-    // ['@media (min-width:780px)']: {
-    //   display: 'none',
-    // },
   },
   image_ipad: {
-    // ['@media (max-width:780px && min-width:375px)']: {
-    //   display: 'none',
-    // },
     zIndex: 0,
     width: '100%',
     height: '100%',
@@ -47,9 +39,6 @@ const useStyles = makeStyles({
     margin: 'auto',
   },
   image_phone: {
-    // ['@media (max-width:375px)']: {
-    //   display: 'none',
-    // },
     zIndex: 0,
     width: '100%',
     height: '100%',
@@ -59,14 +48,13 @@ const useStyles = makeStyles({
     margin: 'auto',
   },
   title: {
+    margin: 'auto',
     zIndex: 1,
-    flex: '3',
-    display: 'flex',
-    alignItems: 'center',
+    textAlign: 'center',
     color: '#F2F2F2',
   },
   countdown: {
-    flex: '1',
+    margin: 'auto',
     ['@media (min-width:780px)']: {
       width: '40%',
     },
@@ -80,6 +68,18 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
+  logout: {
+    ['@media (min-width:780px)']: {
+      display: 'none',
+    },
+    ['@media (max-width:780px)']: {
+      zIndex: 1,
+      position: 'absolute',
+      top: '1.5rem',
+      right: '0.5rem',
+      color: '#F2F2F2',
+    },
+  },
 });
 
 const Home = () => {
@@ -90,7 +90,8 @@ const Home = () => {
 
   const {dispatch} = useContext(AuthContext);
 
-  const handleLogOut = () => {
+  const handleLogOut = (e) => {
+    e.preventDefault();
     dispatch({type: 'LOGOUT'});
     localStorage.removeItem('token');
   };
@@ -109,9 +110,9 @@ const Home = () => {
         <div className={classes.countdown}>
           <Countdown />
         </div>
-        <Typography className={classes.section} onClick={handleLogOut} variant="button">
-          Se déconnecter
-        </Typography>
+        <Button className={classes.logout} onClick={(e) => handleLogOut(e)}>
+          <ExitToAppIcon />
+        </Button>
       </div>
     </React.Fragment>
   );
