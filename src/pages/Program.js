@@ -11,40 +11,37 @@ import Place from '../assets/bg_grandEcherat.png';
 
 const useStyles = makeStyles({
   container: {
-    backgroundColor: '#FEFEFE',
     width: '100%',
-    minHeight: '100vh',
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
     ['@media (min-width:780px)']: {
-      padding: '6rem 1rem',
+      minHeight: '100vh',
     },
     ['@media (max-width:780px)']: {
-      padding: '1rem',
-      marginBottom: '3rem',
+      height: 'calc(100vh - 3.5rem)',
     },
-  },
-  title: {
-    marginBottom: '1rem',
   },
   containerPage: {
-    ['@media (max-width:780px)']: {
-      flex: 3,
-      paddingBottom: '1.5rem',
-      justifyContent: 'center',
-    },
     zIndex: 1,
+    height: '80vh',
+    width: '90%',
+    margin: 'auto',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
+  },
+  title: {
+    padding: '1rem',
+  },
+  content: {
+    margin: 'auto',
+    ['@media (min-width:780px)']: {
+      padding: '2rem',
+    },
   },
   containerIcons: {
     display: 'flex',
     flexDirection: 'row',
     ['@media (max-width:780px)']: {
       flexWrap: 'wrap',
-      flexDirection: 'row',
     },
   },
   section: {
@@ -52,11 +49,12 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
   },
-  img: {
+  icon: {
     width: '100%',
     margin: 'auto',
   },
   line: {
+    zIndex: 1,
     margin: '2rem 15rem',
     height: '4px',
     backgroundColor: '#595622',
@@ -64,7 +62,7 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
-  containerImage: {
+  imagePlace: {
     zIndex: 0,
     position: 'absolute',
     bottom: '-97vh',
@@ -80,27 +78,27 @@ const Program = () => {
   const classes = useStyles();
 
   return (
-    <div>
-      <Container className={classes.container}>
+    <div className={classes.container}>
+      <div className={classes.containerPage}>
         <Typography className={classes.title} variant="h2">
           Programme
         </Typography>
-        <div className={classes.containerPage}>
+        <Container className={classes.content}>
           <div className={classes.containerIcons}>
             <Container className={classes.section}>
-              <img src={Church} className={classes.img} alt="Eglise" />
+              <img src={Church} className={classes.icon} alt="Eglise" />
               <Typography variant="h4">15h00</Typography>
             </Container>
             <Container className={classes.section}>
-              <img src={Cocktail} className={classes.img} alt="Toast" />
+              <img src={Cocktail} className={classes.icon} alt="Toast" />
               <Typography variant="h4">17h00</Typography>
             </Container>
             <Container className={classes.section}>
-              <img src={Dinner} className={classes.img} alt="Toast" />
+              <img src={Dinner} className={classes.icon} alt="Toast" />
               <Typography variant="h4">20h00</Typography>
             </Container>
             <Container className={classes.section}>
-              <img src={Party} className={classes.img} alt="Toast" />
+              <img src={Party} className={classes.icon} alt="Toast" />
               <Typography variant="h4">23h00</Typography>
             </Container>
           </div>
@@ -120,9 +118,9 @@ const Program = () => {
             <br />
             Le lendemain, un brunch vous sera servi à partir de 12h.
           </Typography>
-        </div>
-      </Container>
-      <img src={Place} className={classes.containerImage} />
+        </Container>
+      </div>
+      <img src={Place} className={classes.imagePlace} />
     </div>
   );
 };

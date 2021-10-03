@@ -33,7 +33,8 @@ export default function SimpleCard({
       <CancelIcon className={classes.crossIcon} onClick={deleteGuest} />
       <CardContent>
         <Typography variant="h3">
-          {fistname.charAt(0).toUpperCase() + fistname.slice(1)}{' '}
+          {fistname.charAt(0).toUpperCase() + fistname.slice(1)}
+          <br />
           {lastname.charAt(0).toUpperCase() + lastname.slice(1)}
         </Typography>
         <Typography variant="body2" className={classes.pos} color="textSecondary">
