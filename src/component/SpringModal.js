@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   paper: {
-    ['@media (min-width:780px)']: {
-      width: '40%',
+    ['@media (min-width:600px)']: {
+      width: '40vw',
     },
-    width: '90%',
+    width: '80%',
     backgroundColor: theme.palette.background.paper,
   },
   root: {

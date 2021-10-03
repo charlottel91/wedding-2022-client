@@ -63,7 +63,7 @@ const theme = createTheme({
       },
     },
     body1: {
-      ['@media (max-width:370px)']: {
+      ['@media (max-width:415px)']: {
         fontSize: '0.7em',
         padding: '1rem',
       },
