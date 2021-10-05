@@ -27,7 +27,6 @@ const useStyles = makeStyles({
     position: 'absolute',
     left: 0,
     right: 0,
-    margin: 'auto',
   },
   image_ipad: {
     zIndex: 0,
@@ -36,7 +35,6 @@ const useStyles = makeStyles({
     position: 'absolute',
     left: 0,
     right: 0,
-    margin: 'auto',
   },
   image_phone: {
     zIndex: 0,
@@ -45,7 +43,6 @@ const useStyles = makeStyles({
     position: 'absolute',
     left: 0,
     right: 0,
-    margin: 'auto',
   },
   title: {
     margin: 'auto',
