@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import {CSVLink} from 'react-csv';
+import moment from 'moment';
 
 import {Button, Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
@@ -7,8 +9,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import UsersTable from '../component/UsersTable';
 import SignUp from '../component/SignUp';
 import ImgWeb from '../assets/home_web.jpg';
-import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_iPhone.jpg';
+import ImgIpad from '../assets/home_pad.jpg';
+import ImgPhone from '../assets/home_phone.jpg';
 
 const useStyles = makeStyles({
   container: {
@@ -50,13 +52,12 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   title: {
-    padding: '1rem',
     textAlign: 'center',
     color: '#FEFEFE',
   },
   button: {
     marginRight: '1rem',
-    padding: '1rem',
+    padding: '0.5rem',
     backgroundColor: '#D99C79',
     color: '#FEFEFE',
     '&:hover, &$focusVisible': {
@@ -69,6 +70,9 @@ const useStyles = makeStyles({
       color: '#FEFEFE',
     },
   },
+  content: {
+    padding: '1rem',
+  },
 });
 
 const BackOffice = () => {
@@ -78,6 +82,39 @@ const BackOffice = () => {
   const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
   const [showTable, setShowTable] = useState(false);
   const [users, setUsers] = useState([]);
+  const createCsvFileName = () => `data_${moment().format()}.csv`;
+
+  const headers = [
+    {label: 'id', key: 'id'},
+    {label: 'Prénom', key: 'fistname'},
+    {label: 'Nom', key: 'lastname'},
+    {label: 'Enfant', key: 'isChild'},
+    {label: 'Repas végétarien', key: 'isVegetarian'},
+    {label: 'Présence brunch', key: 'presentBrunch'},
+  ];
+
+  let data = [];
+  users.forEach((user) => {
+    data.push({
+      id: user.id,
+      firstname: user.guests[0].firstname,
+      lastname: user.guests[0].lastname,
+      isChild: user.guests[0].isChild,
+      isVegetarian: user.guests[0].isVegetarian,
+      presentBrunch: user.guests[0].presentBrunch,
+    });
+    for (let i = 1; i < user.guests.length; i++) {
+      const guest = user.guests[i];
+      data.push({
+        id: '',
+        firstname: guest.firstname,
+        lastname: guest.lastname,
+        isChild: guest.isChild,
+        isVegetarian: guest.isVegetarian,
+        presentBrunch: guest.presentBrunch,
+      });
+    }
+  });
 
   const getUsers = async () => {
     try {
@@ -122,7 +159,7 @@ const BackOffice = () => {
         <Typography className={classes.title} variant="h2">
           Back-office
         </Typography>
-        <Container style={{marginTop: '1rem', marginBottom: '1rem'}}>
+        <Container style={{marginTop: '0.5rem', marginBottom: '0.5rem'}}>
           <Button
             className={classes.button}
             onClick={() => handleClickShowTable(false)}
@@ -137,8 +174,20 @@ const BackOffice = () => {
           >
             Tableau des inscrits
           </Button>
+          {showTable && (
+            <CSVLink
+              headers={headers}
+              data={data && data}
+              filename={createCsvFileName()}
+              style={{textDecoration: 'none', outline: 'none'}}
+            >
+              <Button className={classes.button}>Export CSV</Button>
+            </CSVLink>
+          )}
         </Container>
-        <Container>{showTable ? <UsersTable users={users} /> : <SignUp />}</Container>
+        <div className={classes.content}>
+          {showTable ? <UsersTable users={data && data} /> : <SignUp />}
+        </div>
       </div>
     </div>
   );

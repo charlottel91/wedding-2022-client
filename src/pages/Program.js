@@ -104,8 +104,8 @@ const Program = () => {
           </div>
           <div className={classes.line} />
           <Typography variant="body1">
-            Nous vous invitons à nous rejoindre à 15h pour célébrer la cérémonie
-            religieuse en l&apos;
+            Nous vous invitons à nous rejoindre le 2 juillet 2022 à 15h pour célébrer la
+            cérémonie religieuse en l&apos;
             <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
               Eglise de Bellac
             </Box>
@@ -113,10 +113,10 @@ const Program = () => {
             <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
               Domaine du Grand Echérat{' '}
             </Box>
-            (commune de Blond - 87300) pour le cocktail, suivi par le dîner. Nous
-            continuerons la soirée jusqu&apos;au bout de la nuit.
+            (commune de Blond - 87300) pour le cocktail, suivi du dîner. Nous continuerons
+            la soirée jusqu&apos;au bout de la nuit.
             <br />
-            Le lendemain, un brunch vous sera servi à partir de 12h.
+            Le lendemain, un brunch nous sera servi à partir de 12h.
           </Typography>
         </Container>
       </div>

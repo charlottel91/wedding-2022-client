@@ -7,8 +7,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 import Countdown from '../component/Countdown';
 import ImgWeb from '../assets/home_web.jpg';
-import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_iPhone.jpg';
+import ImgIpad from '../assets/home_pad.jpg';
+import ImgPhone from '../assets/home_phone.jpg';
 
 const useStyles = makeStyles({
   container: {
@@ -16,8 +16,11 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    ['@media (min-width:780px)']: {
+      minHeight: '100vh',
+    },
     ['@media (max-width:780px)']: {
-      minHeight: '100%',
+      height: 'calc(100vh - 3.5rem)',
     },
   },
   image_desktop: {
