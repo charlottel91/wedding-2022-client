@@ -7,8 +7,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import UsersTable from '../component/UsersTable';
 import SignUp from '../component/SignUp';
 import ImgWeb from '../assets/home_web.jpg';
-import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_iPhone.jpg';
+import ImgIpad from '../assets/home_pad.jpg';
+import ImgPhone from '../assets/home_phone.jpg';
 
 const useStyles = makeStyles({
   container: {
