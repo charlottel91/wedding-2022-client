@@ -4,9 +4,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Container, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 
 import PiggyBank from '../assets/piggy_bank.svg';
-import ImgWeb from '../assets/bulletBox_web.jpeg';
-import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_iPhone.jpg';
+import ImgWeb from '../assets/bulletbox_web.jpg';
+import ImgIpad from '../assets/bulletbox_pad.jpg';
+import ImgPhone from '../assets/bulletbox_phone.jpg';
 
 const useStyles = makeStyles({
   container: {

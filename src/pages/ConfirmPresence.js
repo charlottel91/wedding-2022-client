@@ -11,9 +11,9 @@ import ResponsiveDialog from '../component/ResponsiveDialog';
 import SimpleCard from '../component/SimpleCard';
 import SpringModal from '../component/SpringModal';
 
-import ImgWeb from '../assets/bulletBox_web.jpeg';
-import ImgIpad from '../assets/home_iPad.jpg';
-import ImgPhone from '../assets/home_iPhone.jpg';
+import ImgWeb from '../assets/confirmpresence_web.jpg';
+import ImgIpad from '../assets/confirmpresence_pad.jpg';
+import ImgPhone from '../assets/confirmpresence_phone.jpg';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -299,7 +299,7 @@ const ConfirmPresence = () => {
         </Typography>
         <Container className={classes.content}>
           <Typography variant="body1" className={classes.text}>
-            Pour confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de
+            Pour confirmer votre présence, veuillez vous enregistrer ainsi que chacun de
             vos accompagnants.
           </Typography>
           <div className={classes.addUser}>

@@ -78,8 +78,8 @@ const Sleep = () => {
         </Typography>
         <Container className={classes.content}>
           <Typography variant="body1">
-            Vous trouverez, ici, une liste d&apos;hotels ou de logements que vous pouvez
-            réserver le week-end de notre mariage. Le haut Limousin n&apos;étant pas une
+            Vous trouverez ici une liste d&apos;hôtels ou de logements que vous pouvez
+            réserver le week-end de notre mariage. Le Haut Limousin n&apos;étant pas une
             région très touristique, nous vous conseillons de vous y prendre suffisamment
             tôt afin d&apos;être au plus près du lieu de réception.
           </Typography>
@@ -98,7 +98,7 @@ const Sleep = () => {
             Pour celles et ceux qui souhaitent déguster sans modération les alcools
             proposés durant la soirée, vous pourrez planter votre tente sur le terrain du
             domaine le samedi soir (les propriétaires ayant gentillement accepté).
-            Cependant, nous ne garantissont pas l&apos;accès à une douche.
+            Cependant, nous ne garantissons pas l&apos;accès à une douche.
           </Typography>
           <div className={classes.line} />
           <Typography variant="body1">
@@ -109,7 +109,7 @@ const Sleep = () => {
           </Typography>
           <Typography variant="body1">
             La ville de Bellac est accessible en train. Trois possibilités s&apos;offrent
-            à vous de Paris:
+            à vous de Paris :
             <br />-{' '}
             <Box
               style={{

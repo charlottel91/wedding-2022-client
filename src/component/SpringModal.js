@@ -46,7 +46,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const presence = [
+const childOrVege = [
+  {
+    value: false,
+    label: 'NON',
+  },
+  {
+    value: true,
+    label: 'OUI',
+  },
+];
+
+const brunch = [
   {
     value: true,
     label: 'OUI',
@@ -129,7 +140,7 @@ export default function SpringModal({
               variant="outlined"
               helperText={errorLastname ? 'Champ requis' : null}
             >
-              {presence.map((option) => (
+              {childOrVege.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -149,7 +160,7 @@ export default function SpringModal({
               variant="outlined"
               helperText={errorLastname ? 'Champ requis' : null}
             >
-              {presence.map((option) => (
+              {childOrVege.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -169,7 +180,7 @@ export default function SpringModal({
               variant="outlined"
               helperText={errorLastname ? 'Champ requis' : null}
             >
-              {presence.map((option) => (
+              {brunch.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>

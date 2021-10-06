@@ -8,7 +8,6 @@ import Notification from '../component/Notification';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: '4rem',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -79,7 +78,7 @@ export default function SignUp() {
   };
 
   return (
-    <div component="main" className={classes.container}>
+    <div className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
