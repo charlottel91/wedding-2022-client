@@ -16,8 +16,11 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    ['@media (min-width:780px)']: {
+      minHeight: '100vh',
+    },
     ['@media (max-width:780px)']: {
-      minHeight: '100%',
+      height: 'calc(100vh - 3.5rem)',
     },
   },
   image_desktop: {
