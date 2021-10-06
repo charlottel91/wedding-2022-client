@@ -86,7 +86,7 @@ const BackOffice = () => {
 
   const headers = [
     {label: 'id', key: 'id'},
-    {label: 'Prénom', key: 'fistname'},
+    {label: 'Prénom', key: 'firstname'},
     {label: 'Nom', key: 'lastname'},
     {label: 'Enfant', key: 'isChild'},
     {label: 'Repas végétarien', key: 'isVegetarian'},
