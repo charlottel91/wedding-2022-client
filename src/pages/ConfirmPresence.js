@@ -299,7 +299,7 @@ const ConfirmPresence = () => {
         </Typography>
         <Container className={classes.content}>
           <Typography variant="body1" className={classes.text}>
-            Pour confirmer votre présence, veuillez-vous enregistrer ainsi que chacun de
+            Pour confirmer votre présence, veuillez vous enregistrer ainsi que chacun de
             vos accompagnants.
           </Typography>
           <div className={classes.addUser}>
