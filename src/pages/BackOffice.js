@@ -60,7 +60,7 @@ const useStyles = makeStyles({
     padding: '0.5rem',
     backgroundColor: '#D99C79',
     color: '#FEFEFE',
-    '&:hover, &$focusVisible': {
+    '&:hover': {
       backgroundColor: '#BF8969',
       fontWeight: 'bold',
     },
@@ -71,7 +71,9 @@ const useStyles = makeStyles({
     },
   },
   content: {
+    height: '100%',
     padding: '1rem',
+    display: 'flex',
   },
 });
 
@@ -80,8 +82,16 @@ const BackOffice = () => {
   const theme = useTheme();
   const showImgWeb = useMediaQuery(theme.breakpoints.up('lg'));
   const showImgPhone = useMediaQuery(theme.breakpoints.down('sm'));
+  const [loading, setLoading] = useState(false);
   const [showTable, setShowTable] = useState(false);
   const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({
+    name: '',
+    password: '',
+    password_confirmation: '',
+  });
+  const [error, setError] = useState(null);
+  const [text, setText] = useState();
   const createCsvFileName = () => `data_${moment().format()}.csv`;
 
   const headers = [
@@ -93,48 +103,65 @@ const BackOffice = () => {
     {label: 'Présence brunch', key: 'presentBrunch'},
   ];
 
-  let data = [];
-  users.forEach((user) => {
-    data.push({
-      id: user.id,
-      firstname: user.guests[0].firstname,
-      lastname: user.guests[0].lastname,
-      isChild: user.guests[0].isChild,
-      isVegetarian: user.guests[0].isVegetarian,
-      presentBrunch: user.guests[0].presentBrunch,
-    });
-    for (let i = 1; i < user.guests.length; i++) {
-      const guest = user.guests[i];
-      data.push({
-        id: '',
-        firstname: guest.firstname,
-        lastname: guest.lastname,
-        isChild: guest.isChild,
-        isVegetarian: guest.isVegetarian,
-        presentBrunch: guest.presentBrunch,
+  const handleChange = ({target}) => {
+    const {name, value} = target;
+    setUser({...user, [name]: value});
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      axios.defaults.timeout = 50000;
+      const {data} = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/signup`,
+        user
+      );
+      getUsers();
+      setText(data);
+      setUser({
+        name: '',
+        password: '',
+        password_confirmation: '',
       });
+    } catch ({response}) {
+      setError(response.data);
     }
-  });
+    setTimeout(() => {
+      setLoading(false);
+      setText();
+      setError();
+    }, 2000);
+  };
 
   const getUsers = async () => {
     try {
       const {data} = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/users`);
-      setUsers(
-        data.map((user) => {
-          return {
-            id: user.name,
-            guests: user.guests.map((guest) => {
-              return {
-                firstname: guest.firstname,
-                lastname: guest.lastname,
-                isChild: guest.isChild ? 'oui' : 'non',
-                isVegetarian: guest.isVegetarian ? 'oui' : 'non',
-                presentBrunch: guest.presentBrunch ? 'oui' : 'non',
-              };
-            }),
-          };
-        })
-      );
+      let userTemp = [];
+      data.forEach((user) => {
+        userTemp.push({
+          id: user.name,
+          firstname: user.guests[0] ? user.guests[0].firstname : '',
+          lastname: user.guests[0] ? user.guests[0].lastname : '',
+          isChild: user.guests[0] ? user.guests[0].isChild : '',
+          isVegetarian: user.guests[0] ? user.guests[0].isVegetarian : '',
+          presentBrunch: user.guests[0] ? user.guests[0].presentBrunch : '',
+        });
+        if (user.guests.length > 0) {
+          for (let i = 1; i < user.guests.length; i++) {
+            const guest = user.guests[i];
+            userTemp.push({
+              id: '',
+              firstname: guest.firstname,
+              lastname: guest.lastname,
+              isChild: guest.isChild,
+              isVegetarian: guest.isVegetarian,
+              presentBrunch: guest.presentBrunch,
+            });
+          }
+        }
+      });
+      setUsers(userTemp);
     } catch (err) {
       return err;
     }
@@ -146,7 +173,7 @@ const BackOffice = () => {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [loading]);
 
   return (
     <div className={classes.container}>
@@ -177,7 +204,7 @@ const BackOffice = () => {
           {showTable && (
             <CSVLink
               headers={headers}
-              data={data && data}
+              data={users && users}
               filename={createCsvFileName()}
               style={{textDecoration: 'none', outline: 'none'}}
             >
@@ -186,7 +213,18 @@ const BackOffice = () => {
           )}
         </Container>
         <div className={classes.content}>
-          {showTable ? <UsersTable users={data && data} /> : <SignUp />}
+          {showTable ? (
+            <UsersTable users={users && users} />
+          ) : (
+            <SignUp
+              user={user}
+              loading={loading}
+              text={text}
+              error={error}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          )}
         </div>
       </div>
     </div>

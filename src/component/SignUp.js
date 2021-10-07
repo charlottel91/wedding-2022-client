@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 
 import {Button, CssBaseline, TextField} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
@@ -8,8 +7,7 @@ import Notification from '../component/Notification';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: 'flex',
-    flexDirection: 'column',
+    margin: 'auto',
   },
   paper: {
     padding: theme.spacing(4),
@@ -36,49 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp({user, loading, text, error, handleChange, handleSubmit}) {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({
-    name: '',
-    password: '',
-    password_confirmation: '',
-  });
-  const [error, setError] = useState(null);
-  const [text, setText] = useState();
-
-  const handleChange = ({target}) => {
-    const {name, value} = target;
-    setUser({...user, [name]: value});
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      axios.defaults.timeout = 50000;
-      const {data} = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/api/signup`,
-        user
-      );
-      setText(data);
-    } catch ({response}) {
-      setError(response.data);
-    }
-    setTimeout(() => {
-      setLoading(false);
-      setText();
-      setError();
-      setUser({
-        name: '',
-        password: '',
-        password_confirmation: '',
-      });
-    }, 3000);
-  };
 
   return (
-    <div className={classes.container}>
+    <div component="main" className={classes.container}>
       <CssBaseline />
       <div className={classes.paper}>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -92,6 +52,7 @@ export default function SignUp() {
             name="name"
             autoComplete="name"
             autoFocus
+            value={user.name ? user.name : ''}
             onChange={handleChange}
           />
           <TextField
@@ -104,6 +65,7 @@ export default function SignUp() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={user.password ? user.password : ''}
             onChange={handleChange}
           />
           <TextField
@@ -116,6 +78,7 @@ export default function SignUp() {
             type="password"
             id="password_confirmation"
             autoComplete="current-password"
+            value={user.password_confirmation ? user.password_confirmation : ''}
             onChange={handleChange}
           />
           <Button
