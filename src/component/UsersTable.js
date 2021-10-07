@@ -22,10 +22,12 @@ const columns = [
 const useStyles = makeStyles({
   root: {
     width: '90%',
+    maxHeight: '100%',
+    overflowY: 'auto',
     margin: 'auto',
   },
   container: {
-    maxHeight: 440,
+    maxHeight: '60vh',
   },
 });
 
@@ -49,11 +51,11 @@ export default function UsersTable({users}) {
             {users.map((user, i) => (
               <TableRow key={i}>
                 <TableCell>{user.id}</TableCell>
-                <TableCell>{user.firstname}</TableCell>
-                <TableCell>{user.lastname}</TableCell>
-                <TableCell>{user.isChild}</TableCell>
-                <TableCell>{user.isVegetarian}</TableCell>
-                <TableCell>{user.presentBrunch}</TableCell>
+                <TableCell>{user.firstname ? user.firstname : ''}</TableCell>
+                <TableCell>{user.lastname ? user.lastname : ''}</TableCell>
+                <TableCell>{user.isChild ? user.isChild : ''}</TableCell>
+                <TableCell>{user.isVegetarian ? user.isVegetarian : ''}</TableCell>
+                <TableCell>{user.presentBrunch ? user.presentBrunch : ''}</TableCell>
               </TableRow>
             ))}
           </TableBody>
