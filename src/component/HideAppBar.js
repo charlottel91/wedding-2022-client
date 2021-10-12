@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from '../context';
 import {NavLink} from 'react-router-dom';
 import PrivateRoute from '../routing/PrivateRoute';
-import {NavHashLink} from 'react-router-hash-link';
+import {Link} from 'react-scroll';
 
 import {AppBar, Toolbar, Typography} from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
@@ -48,11 +48,6 @@ const useStyles = makeStyles({
       justifyContent: 'space-between',
     },
   },
-  section: {
-    paddingRight: '0.5em',
-    color: '#F2F2F2',
-    textDecoration: 'none',
-  },
   logout: {
     position: 'absolute',
     right: '2rem',
@@ -79,56 +74,27 @@ export default function HideAppBar() {
       <div className={classes.appBarDesktop}>
         <AppBar position="fixed" className={classes.appBarDesktopContainer}>
           <Toolbar className={classes.toolbar}>
-            <NavHashLink
+            <Link activeClass="active" className="section" smooth spy to="accueil">
+              Accueil
+            </Link>
+            <Link activeClass="active" className="section" smooth spy to="programme">
+              Programme
+            </Link>
+            <Link
+              activeClass="active"
+              className="section"
               smooth
-              to="/#accueil"
-              className={classes.section}
-              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
+              spy
+              to="confirmation-presence"
             >
-              <Typography className={classes.section} variant="h5">
-                Accueil
-              </Typography>
-            </NavHashLink>
-            <NavHashLink
-              smooth
-              to="/#programme"
-              className={classes.section}
-              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-            >
-              <Typography className={classes.section} variant="h5">
-                Programme
-              </Typography>
-            </NavHashLink>
-            <NavHashLink
-              smooth
-              to="/#confirmation-presence"
-              className={classes.section}
-              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-            >
-              <Typography className={classes.section} variant="h5">
-                Confirmer ma venue
-              </Typography>
-            </NavHashLink>
-            <NavHashLink
-              smooth
-              to="/#ou-dormir"
-              className={classes.section}
-              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-            >
-              <Typography className={classes.section} variant="h5">
-                Se loger
-              </Typography>
-            </NavHashLink>
-            <NavHashLink
-              smooth
-              to="/#urne"
-              className={classes.section}
-              activeStyle={{color: '#F2F2F2', fontWeight: 'bold'}}
-            >
-              <Typography className={classes.section} variant="h5">
-                Urne
-              </Typography>
-            </NavHashLink>
+              Confirmer ma venue
+            </Link>
+            <Link activeClass="active" className="section" smooth spy to="ou-dormir">
+              Se loger
+            </Link>
+            <Link activeClass="active" className="section" smooth spy to="urne">
+              Urne
+            </Link>
             <Typography
               className={classes.logout}
               onClick={handleLogOut}
