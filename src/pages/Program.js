@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
-import {Box, Container, Typography} from '@material-ui/core';
+import {Container, Typography} from '@material-ui/core';
 
 import Cocktail from '../assets/cocktail.svg';
 import Church from '../assets/church.svg';
@@ -106,13 +106,33 @@ const Program = () => {
           <Typography variant="body1">
             Nous vous invitons à nous rejoindre le 2 juillet 2022 à 15h pour célébrer la
             cérémonie religieuse en l&apos;
-            <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
+            <a
+              href="https://www.google.com/maps/place/%C3%89glise+Notre-Dame/@46.1175363,1.0461444,17z/data=!3m1!4b1!4m5!3m4!1s0x47fea43b270b2c01:0x4bdf4c4d68304c2c!8m2!3d46.1175605!4d1.0484794"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: 'none',
+                color: '#1A8205',
+                display: 'inline',
+                fontWeight: 'bolder',
+              }}
+            >
               Eglise de Bellac
-            </Box>
+            </a>
             . Nous nous dirigerons ensuite vers le{' '}
-            <Box style={{color: '#1A8205', display: 'inline', fontWeight: 'bolder'}}>
+            <a
+              href="https://www.google.com/maps/place/Le+Grand+%C3%89ch%C3%A9rat,+87300+Blond/@46.0581931,0.9614012,15z/data=!3m1!4b1!4m5!3m4!1s0x47fea2d1dd594d0b:0x61c29efa0c0f43f5!8m2!3d46.058194!4d0.970156"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                textDecoration: 'none',
+                color: '#1A8205',
+                display: 'inline',
+                fontWeight: 'bolder',
+              }}
+            >
               Domaine du Grand Echérat{' '}
-            </Box>
+            </a>
             (commune de Blond - 87300) pour le cocktail, suivi du dîner. Nous continuerons
             la soirée jusqu&apos;au bout de la nuit.
             <br />
