@@ -78,10 +78,10 @@ const Sleep = () => {
         </Typography>
         <Container className={classes.content}>
           <Typography variant="body1">
-            Vous trouverez ici une liste d&apos;hôtels ou de logements que vous pouvez
-            réserver le week-end de notre mariage. Le Haut Limousin n&apos;étant pas une
-            région très touristique, nous vous conseillons de vous y prendre suffisamment
-            tôt afin d&apos;être au plus près du lieu de réception.
+            Vous trouverez ci-dessous des liens pour réserver un logement le week-end de
+            notre mariage. Le Haut Limousin n&apos;étant pas une région très touristique,
+            nous vous conseillons de vous y prendre suffisamment tôt afin d&apos;être au
+            plus près du lieu de réception.
           </Typography>
           <Container className={classes.links}>
             {array.placeToSleep.map((el, i) => {
