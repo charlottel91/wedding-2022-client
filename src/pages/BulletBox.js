@@ -89,9 +89,9 @@ const BulletBox = () => {
         </Typography>
         <Container className={classes.content}>
           <Typography className={classes.text} variant="body1">
-            Si vous souhaitez participer à notre voyage de noce dont la destination
-            n&apos;est pas encore connue mais sera évidemment dépaysante, une urne
-            digitale est à votre disposition en cliquant sur l&apos;icône ci-dessous.
+            Si vous souhaitez participer à notre voyage de noces ou notre futur
+            emménagement, une urne digitale est à votre disposition en cliquant sur
+            l&apos;icône ci-dessous.
           </Typography>
           <Container className={classes.link}>
             <a

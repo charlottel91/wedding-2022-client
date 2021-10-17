@@ -72,6 +72,14 @@ const useStyles = makeStyles({
       display: 'none',
     },
   },
+  link: {
+    textDecoration: 'none',
+    color: '#1A8205',
+    display: 'inline',
+    '&:hover': {
+      fontWeight: 'bold',
+    },
+  },
 });
 
 const Program = () => {
@@ -110,12 +118,7 @@ const Program = () => {
               href="https://www.google.com/maps/place/%C3%89glise+Notre-Dame/@46.1175363,1.0461444,17z/data=!3m1!4b1!4m5!3m4!1s0x47fea43b270b2c01:0x4bdf4c4d68304c2c!8m2!3d46.1175605!4d1.0484794"
               target="_blank"
               rel="noreferrer"
-              style={{
-                textDecoration: 'none',
-                color: '#1A8205',
-                display: 'inline',
-                fontWeight: 'bolder',
-              }}
+              className={classes.link}
             >
               Eglise de Bellac
             </a>
@@ -124,17 +127,12 @@ const Program = () => {
               href="https://www.google.com/maps/place/Le+Grand+%C3%89ch%C3%A9rat,+87300+Blond/@46.0581931,0.9614012,15z/data=!3m1!4b1!4m5!3m4!1s0x47fea2d1dd594d0b:0x61c29efa0c0f43f5!8m2!3d46.058194!4d0.970156"
               target="_blank"
               rel="noreferrer"
-              style={{
-                textDecoration: 'none',
-                color: '#1A8205',
-                display: 'inline',
-                fontWeight: 'bolder',
-              }}
+              className={classes.link}
             >
               Domaine du Grand Echérat{' '}
             </a>
             (commune de Blond - 87300) pour le cocktail, suivi du dîner. Nous continuerons
-            la soirée jusqu&apos;au bout de la nuit.
+            la soirée jusqu&apos;au bout de la nuit !
             <br />
             Le lendemain, un brunch nous sera servi à partir de 12h.
           </Typography>
