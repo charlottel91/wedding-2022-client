@@ -51,6 +51,7 @@ const useStyles = makeStyles({
   logout: {
     position: 'absolute',
     right: '2rem',
+    cursor: 'pointer',
   },
   icon: {
     color: '#F2F2F2',
