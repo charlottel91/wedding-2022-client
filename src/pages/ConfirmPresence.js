@@ -97,6 +97,7 @@ const useStyles = makeStyles(() => ({
     width: 60,
     height: 60,
     color: '#F2F2F2',
+    cursor: 'pointer',
     ['@media (max-width:500px)']: {
       margin: 'auto',
     },

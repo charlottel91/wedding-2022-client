@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   },
   crossIcon: {
     float: 'right',
+    cursor: 'pointer',
   },
 });
 

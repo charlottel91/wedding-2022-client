@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    padding: 25,
-    paddingBottom: 50,
+    padding: '2rem',
+    paddingBottom: 10,
   },
   textfield: {
     margin: 10,
@@ -38,11 +38,7 @@ const useStyles = makeStyles((theme) => ({
     color: 'red',
   },
   button: {
-    position: 'absolute',
-    width: '100%',
-    bottom: 0,
-    left: 0,
-    right: 0,
+    margin: '0 2.5rem 2rem 2.5rem',
   },
 }));
 
@@ -189,10 +185,10 @@ export default function SpringModal({
             {errorText && (
               <Typography className={classes.textError}>{errorText}</Typography>
             )}
-            <div className={classes.button}>
-              <Button text="Valider" onClick={handleChangeSubmit} />
-            </div>
           </FormControl>
+          <div className={classes.button}>
+            <Button text="Valider" onClick={handleChangeSubmit} />
+          </div>
         </div>
       </Modal>
     </div>
