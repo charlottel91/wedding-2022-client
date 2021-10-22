@@ -53,9 +53,16 @@ export default function UsersTable({users}) {
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.firstname ? user.firstname : ''}</TableCell>
                 <TableCell>{user.lastname ? user.lastname : ''}</TableCell>
-                <TableCell>{user.isChild ? 'oui' : 'non'}</TableCell>
-                <TableCell>{user.isVegetarian ? 'oui' : 'non'}</TableCell>
-                <TableCell>{user.presentBrunch ? 'oui' : 'non'}</TableCell>
+                <TableCell>
+                  {user.isChild ? 'oui' : user.isChild === false ? 'non' : ''}
+                </TableCell>
+                <TableCell>
+                  {user.isVegetarian ? 'oui' : user.isVegetarian === false ? 'non' : ''}
+                </TableCell>
+                <TableCell>
+                  {' '}
+                  {user.presentBrunch ? 'oui' : user.presentBrunch === false ? 'non' : ''}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
