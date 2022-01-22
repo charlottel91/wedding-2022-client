@@ -96,11 +96,11 @@ const BackOffice = () => {
 
   const headers = [
     {label: 'id', key: 'id'},
-    {label: 'Prénom', key: 'firstname'},
+    {label: 'Prenom', key: 'firstname'},
     {label: 'Nom', key: 'lastname'},
     {label: 'Enfant', key: 'isChild'},
-    {label: 'Repas végétarien', key: 'isVegetarian'},
-    {label: 'Présence brunch', key: 'presentBrunch'},
+    {label: 'Repas vegetarien', key: 'isVegetarian'},
+    {label: 'Presence brunch', key: 'presentBrunch'},
   ];
 
   const handleChange = ({target}) => {
@@ -141,11 +141,19 @@ const BackOffice = () => {
       data.forEach((user) => {
         userTemp.push({
           id: user.name,
-          firstname: user.guests[0] ? user.guests[0].firstname : '',
-          lastname: user.guests[0] ? user.guests[0].lastname : '',
-          isChild: user.guests[0] ? user.guests[0].isChild : '',
-          isVegetarian: user.guests[0] ? user.guests[0].isVegetarian : '',
-          presentBrunch: user.guests[0] ? user.guests[0].presentBrunch : '',
+          firstname: user.guests[0] ? user.guests[0].firstname : null,
+          lastname: user.guests[0] ? user.guests[0].lastname : null,
+          isChild: user.guests[0] ? (user.guests[0].isChild ? 'oui' : 'non') : null,
+          isVegetarian: user.guests[0]
+            ? user.guests[0].isVegetarian === true
+              ? 'oui'
+              : 'non'
+            : null,
+          presentBrunch: user.guests[0]
+            ? user.guests[0].presentBrunch === true
+              ? 'oui'
+              : 'non'
+            : null,
         });
         if (user.guests.length > 0) {
           for (let i = 1; i < user.guests.length; i++) {
@@ -154,9 +162,9 @@ const BackOffice = () => {
               id: '',
               firstname: guest.firstname,
               lastname: guest.lastname,
-              isChild: guest.isChild,
-              isVegetarian: guest.isVegetarian,
-              presentBrunch: guest.presentBrunch,
+              isChild: guest.isChild ? 'oui' : 'non',
+              isVegetarian: guest.isVegetarian ? 'oui' : 'non',
+              presentBrunch: guest.presentBrunch ? 'oui' : 'non',
             });
           }
         }
